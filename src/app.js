@@ -34,7 +34,8 @@ class App extends Component {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: '澳门旅行',
       navigationBarTextStyle: 'black',
-      backgroundColor: "#eeeeee"
+      backgroundColor: "#eeeeee",
+      backgroundTextStyle:"dark"
     },
     tabBar:{
       list:[
