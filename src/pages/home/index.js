@@ -10,7 +10,9 @@ const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/'
 }))
 export default class Home extends Component {
   config = {
-    navigationBarTitleText: '1元购'
+    navigationBarTitleText: '1元购',
+    enablePullDownRefresh:true,
+    
   };
 
   banners = [
@@ -73,9 +75,15 @@ export default class Home extends Component {
           {this.banners.map((item, index) => (<View
             key={index}
             className="item">
-            <View className="tag_shop">
-              <Text className="txt">抢购中</Text>
+
+            <View className="tag_count_down">
+              <Text className="txt">10:35:09</Text>
             </View>
+
+            {/* <View className="tag_shop">
+              <Text className="txt">抢购中</Text>
+            </View> */}
+
             <Image className="cover"
               mode="widthFix"
               src={baseUrl + 'info/fb7f15abf27937b26fa1cedfd602685b.png!md'} />
@@ -90,8 +98,7 @@ export default class Home extends Component {
               <Text>销售量：288</Text>
             </View>
           </View>))}
-
-
+          <View style="margin-bottom:20px;"></View>
         </View>
       </ScrollView>
     )

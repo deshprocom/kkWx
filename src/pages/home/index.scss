@@ -52,6 +52,23 @@
         color:#fff;
       }
     }
+
+    .tag_count_down{
+      height: 50px;
+      width:160px;
+      @include fr(center);
+      justify-content: center;
+      background-color: $_DF1;
+      position: absolute;
+      top: 30px;
+      right: -5px;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+
+      .txt{
+        color:#fff;
+      }
+    }
   
 
     .cover{
