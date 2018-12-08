@@ -62,12 +62,10 @@ export default {
   effects: {
     * effectsDemo(_, { call, put }) {
       const { statusCode, data } = yield call(${dirName}Api.demo, {});
-      if (statusCode === 200) {
-        yield put({ type: 'save',
+      yield put({ type: 'save',
           payload: {
             topData: data,
           } });
-      }
     },
   },
 

@@ -6,6 +6,7 @@ import models from './models'
 import { Provider } from '@tarojs/redux'
 
 import './styles/base.scss'
+import { black } from 'ansi-colors';
 
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -31,8 +32,30 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTitleText: '澳门旅行',
+      navigationBarTextStyle: 'black',
+      backgroundColor: "#eeeeee"
+    },
+    tabBar:{
+      list:[
+        {
+          pagePath: "pages/home/index",
+          text: "1元购",
+          iconPath: "./images/tab/home.png",
+          selectedIconPath: "./images/tab/home-active.png"
+        },
+        {
+          pagePath: "pages/mall/index",
+          text: "折扣",
+          iconPath: "./images/tab/cart.png",
+          selectedIconPath: "./images/tab/cart-active.png"
+        },{
+          pagePath: "pages/index/index",
+          text: "我的",
+          iconPath: "./images/tab/user.png",
+          selectedIconPath: "./images/tab/user-active.png"
+        }
+      ]
     }
   }
 

@@ -2,4 +2,5 @@
 
 .mall-page {
   @include wh(100%, 100%);
+  background: $bg-color-panel;
 }
