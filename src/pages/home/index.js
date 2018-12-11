@@ -41,6 +41,7 @@ export default class Home extends Component {
 
 
   render() {
+    logMsg('home',this)
     let bannerViews = this.banners.map((item, index) => (<SwiperItem key={`banner_${index}`}>
       <View className="banner">
         <Image className="banner"
