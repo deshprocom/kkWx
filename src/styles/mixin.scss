@@ -92,3 +92,15 @@ $tag-dark:#555 !default;
 @mixin flex1($type:1) {
   flex: $type
 }
+
+//距离
+@mixin distance($marginLeft:17px, $marginRight:17px) {
+  margin-left:$marginLeft;
+  margin-right: $marginRight
+}
+
+@mixin distance_padding($paddingLeft:17px, $paddingRight:17px) {
+  padding-left:$paddingLeft;
+  padding-right: $paddingRight
+}
+

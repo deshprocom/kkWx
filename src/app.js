@@ -27,7 +27,8 @@ class App extends Component {
     pages: [
       'pages/home/index',
       'pages/index/index',
-      'pages/mall/index'
+      'pages/mall/index',
+      'pages/ShopDetail/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -51,7 +52,7 @@ class App extends Component {
           iconPath: "./images/tab/cart.png",
           selectedIconPath: "./images/tab/cart-active.png"
         },{
-          pagePath: "pages/index/index",
+          pagePath: "pages/ShopDetail/index",
           text: "我的",
           iconPath: "./images/tab/user.png",
           selectedIconPath: "./images/tab/user-active.png"
