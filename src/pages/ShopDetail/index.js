@@ -1,14 +1,22 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View } from '@tarojs/components';
+import { View,Text, RichText} from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg } from '../../utils/utils';
 
-const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/'
+const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
+let des = "从新修改下答案吧。江苏省gdp最低的城市是宿迁，你自己百度下宿迁的GDP，然后跟你所在的省份的一些城市比比就知道了。苏北落后那是相对于苏南的，全国城市比得上南京镇江无锡苏州的城市有多少个。还真以为是村里刚通网？还没接电线，没用上空调？江苏13个地级市，11个地级市有机场，这叫落后？（包括泰州和扬州城市共用一个机场以及无锡和苏州的无锡苏南硕放机场，虽然苏州在这个机场的存在感太低了）";
+
+
 @connect(({ShopDetail}) => ({
   ...ShopDetail,
 }))
 export default class Shopdetail extends Component {
+
+  state={
+    index:0
+  };
+
   config = {
     navigationBarTitleText: 'ShopDetail',
   };
@@ -33,6 +41,18 @@ export default class Shopdetail extends Component {
     const {dispatch} = this.props;
     dispatch({type:'ShopDetail/effectsDemo'})
   };
+
+
+  onPress1 = ()=>{
+    this.setState({
+      index:1
+    })
+  }
+  onPress2 = ()=>{
+    this.setState({
+      index:1
+    })
+  }
 
   render() {
     logMsg(this)
@@ -66,7 +86,21 @@ export default class Shopdetail extends Component {
             </View>
           </View>
 
-          <Text className="main_info">商家信息</Text>
+          <Text className="main_info">规格选择</Text>
+
+          <View className="spec_view">
+            <View className="spec1_view"  style="margin-right:10px" onClick={this.onPress1}>
+              <Text className="spec1_text">基础版</Text>
+            </View>
+            <View className="spec1_view" onClick={this.onPress2}>
+              <Text className="spec1_text">进阶版</Text>
+            </View>
+          </View>
+
+        <View className="main_info_view">
+          <Text className="main_info_text">商家信息</Text>
+          <Text className="more_info">更多信息</Text>
+        </View>
 
         <View className="main2_view">
           <View className="info_middle_view">
@@ -74,19 +108,23 @@ export default class Shopdetail extends Component {
             <Text className="name2">支持用 React 的开发方式编写一次代码</Text>
           </View>
         </View>
+        <Text className="main_info">详细信息</Text>
 
-        <Text className="main_info">规格选择</Text>
-
-        <View className="spec_view">
-          <View className="spec1_view"  style="margin-right:10px">
-            <Text className="spec1_text">基础版</Text>
+        <View className="des_view">
+          <RichText className="des_text" nodes={des} />
+        </View>
+        
+        <View className="bottom_view">
+          <View className="btn_view">
+            <Text className="btn_text">商城首页</Text>
           </View>
-          <View className="spec1_view">
-            <Text className="spec1_text">进阶版</Text>
+          <View className="btn_view">
+          <Text className="btn_text">咨询客服</Text>
+          </View>
+          <View className="btn_view  btn3_view">
+          <Text className="btn_text">已售罄</Text>
           </View>
         </View>
-
-        ShopDetail
       </View>
     )
   }

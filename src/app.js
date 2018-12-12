@@ -51,7 +51,7 @@ class App extends Component {
           iconPath: "./images/tab/cart.png",
           selectedIconPath: "./images/tab/cart-active.png"
         },{
-          pagePath: "pages/ShopDetail/index",
+          pagePath: "pages/index/index",
           text: "我的",
           iconPath: "./images/tab/user.png",
           selectedIconPath: "./images/tab/user-active.png"
