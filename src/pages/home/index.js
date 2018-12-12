@@ -39,7 +39,11 @@ export default class Home extends Component {
     })
   };
 
+  goDetailPage =(e)=>{
+    logMsg(e)
+    Taro.navigateTo(e.currentTarget.dataset)
 
+  }
 
   render() {
     logMsg('home',this)
@@ -65,7 +69,7 @@ export default class Home extends Component {
           </Swiper>
 
           <View className="top_bar">
-          <View className="btn">
+          <View className="btn" data-url="/pages/ShopDetail/index" onClick={this.goDetailPage}>
           <Text className="active">正在进行</Text>
           </View>
           <View className="div_line"/>
