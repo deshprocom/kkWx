@@ -7,6 +7,8 @@ import { Provider } from '@tarojs/redux'
 
 import './styles/base.scss'
 import { black } from 'ansi-colors';
+import withLogin from './service/WithLogin';
+import { logMsg } from './utils/utils';
 
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -20,7 +22,6 @@ const dvaApp = dva.createApp({
   models: models,
 });
 const store = dvaApp.getStore();
-
 class App extends Component {
 
   config = {
@@ -28,7 +29,8 @@ class App extends Component {
       'pages/home/index',
       'pages/index/index',
       'pages/mall/index',
-      'pages/ShopDetail/index'
+      'pages/ShopDetail/index',
+      'pages/Mine/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -36,10 +38,10 @@ class App extends Component {
       navigationBarTitleText: '澳门旅行',
       navigationBarTextStyle: 'black',
       backgroundColor: "#eeeeee",
-      backgroundTextStyle:"dark"
+      backgroundTextStyle: "dark"
     },
-    tabBar:{
-      list:[
+    tabBar: {
+      list: [
         {
           pagePath: "pages/home/index",
           text: "1元购",
@@ -51,8 +53,8 @@ class App extends Component {
           text: "折扣",
           iconPath: "./images/tab/cart.png",
           selectedIconPath: "./images/tab/cart-active.png"
-        },{
-          pagePath: "pages/ShopDetail/index",
+        }, {
+          pagePath: "pages/Mine/index",
           text: "我的",
           iconPath: "./images/tab/user.png",
           selectedIconPath: "./images/tab/user-active.png"
@@ -61,20 +63,22 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount() {
+    logMsg('当前环境', Taro.getEnv())
+  }
 
-  componentDidShow () {}
+  componentDidShow() { }
 
-  componentDidHide () {}
+  componentDidHide() { }
 
-  componentDidCatchError () {}
+  componentDidCatchError() { }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render () {
+  render() {
     return (<Provider store={store}>
-      <Home/>
-      </Provider>);
+      <Home />
+    </Provider>);
   }
 }
 
