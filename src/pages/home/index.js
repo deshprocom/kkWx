@@ -44,7 +44,7 @@ export default class Home extends Component {
   ]
 
   componentDidMount = () => {
-
+    this.refreshLoad(REFRESH)
   };
 
 
@@ -83,18 +83,18 @@ export default class Home extends Component {
 
   onPullDownRefresh = () => {
     logMsg('下拉刷新')
-    this.refreshLoad()
+    this.refreshLoad(REFRESH)
   }
 
   onReachBottom = () => {
     logMsg('底部刷新')
-    this.refreshLoad("loadmore")
+    this.refreshLoad(LOADMORE)
 
   }
 
 
   render() {
-    logMsg('home', this)
+
     let bannerViews = this.banners.map((item, index) => (<SwiperItem key={`banner_${index}`}>
       <View className="banner">
         <Image className="banner"
@@ -127,8 +127,9 @@ export default class Home extends Component {
             </View>
 
           </View>
-          {this.banners.map((item, index) =>
+          {this.state.goingList.map((item, index) =>
             (<ShopItem
+              style="width:100%;"
               key={`shop_${index}`}
               item={item} />))}
           <View style="margin-bottom:20px;"></View>

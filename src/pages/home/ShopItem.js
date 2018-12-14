@@ -10,6 +10,7 @@ export default class ShopItem extends Component {
   }
 
   render() {
+    const { icon, title, original_price, price, product_id, returnable, saleable_num, sales_volume } = this.props.item;
     return (<View className="item" data-url="/pages/ShopDetail/index" onClick={this.goDetailPage}>
       <View className="content">
         <View className="tag_count_down">
@@ -21,17 +22,17 @@ export default class ShopItem extends Component {
             </View> */}
 
         <Image className="cover"
-          mode="widthFix"
-          src={baseUrl + 'info/fb7f15abf27937b26fa1cedfd602685b.png!md'} />
+          mode="scaleToFill"
+          src={icon} />
 
-        <Text className="title">澳门三天两夜家庭亲子旅游套餐（四人）阿斯顿接口和阿克苏结合地方阿三开的回复阿哈开始剪短发阿什顿饭卡升级换代分阿什顿发生的符合健康</Text>
+        <Text className="title">{title}</Text>
 
         <View className="line" />
         <View className="info">
-          <Text className="price">¥ 89.9</Text>
-          <Text className="price2">门店价:¥189.9</Text>
+          <Text className="price">{`¥ ${price}`}</Text>
+          <Text className="price2">{`门店价:¥${original_price}`}</Text>
           <View className="space" />
-          <Text>销售量：288</Text>
+          <Text>{`销售量：${sales_volume}`}</Text>
         </View>
       </View>
     </View>)
