@@ -55,8 +55,9 @@
     margin-bottom: 15px;
   }
   .main_info_view{
-    @include fr(center);
     @include distance(17px, 17px);
+    @include fr(center);
+    width:95%;
     margin-top: 15px;
     margin-bottom: 15px;
     justify-content: space-between;
@@ -65,7 +66,7 @@
     @include sc(32px,#1C1C1C);
   }
   .more_info{
-    @include sc(32px,#E54A2E);
+    @include sc(26px,#E54A2E);
   }
   .main2_view{
     width:100%;
@@ -150,6 +151,6 @@
     border-right-width: 2px;
     border-color: #DDDDDD;
     border-style: solid;
-    background: #1C1C1C;
+    background: #E54A2E;
   }
 }
