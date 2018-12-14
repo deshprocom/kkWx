@@ -12,8 +12,8 @@ const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/'
 export default class Home extends Component {
   config = {
     navigationBarTitleText: '1元购',
-    enablePullDownRefresh:true,
-    
+    enablePullDownRefresh: true,
+
   };
 
   banners = [
@@ -39,14 +39,10 @@ export default class Home extends Component {
     })
   };
 
-  goDetailPage =(e)=>{
-    logMsg(e)
-    Taro.navigateTo(e.currentTarget.dataset)
 
-  }
 
   render() {
-    logMsg('home',this)
+    logMsg('home', this)
     let bannerViews = this.banners.map((item, index) => (<SwiperItem key={`banner_${index}`}>
       <View className="banner">
         <Image className="banner"
@@ -69,19 +65,19 @@ export default class Home extends Component {
           </Swiper>
 
           <View className="top_bar">
-          <View className="btn" data-url="/pages/ShopDetail/index" onClick={this.goDetailPage}>
-          <Text className="active">正在进行</Text>
+            <View className="btn"ß>
+              <Text className="active">正在进行</Text>
+            </View>
+            <View className="div_line" />
+            <View className="btn">
+              <Text>往前回顾</Text>
+            </View>
+
           </View>
-          <View className="div_line"/>
-          <View className="btn">
-          <Text>往前回顾</Text>
-          </View>
-           
-          </View>
-          {this.banners.map((item, index) => 
-          (<ShopItem 
-            key={`shop_${index}`}
-            item={item}/>))}
+          {this.banners.map((item, index) =>
+            (<ShopItem
+              key={`shop_${index}`}
+              item={item} />))}
           <View style="margin-bottom:20px;"></View>
         </View>
       </ScrollView>
