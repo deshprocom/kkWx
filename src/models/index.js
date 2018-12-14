@@ -7,10 +7,11 @@
  import home from '../pages/home/model'
  import mall from '../pages/mall/model'
  import ShopDetail from '../pages/ShopDetail/model'
-
+ import Mine from '../pages/Mine/model'
 
  export default[
       home,
       mall,
-      ShopDetail
+      ShopDetail,
+      Mine
  ]

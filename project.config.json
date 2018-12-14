@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "kkWx",
 	"description": "澳门旅行小程序",
-	"appid": "wx13f3ba8d797d9249",
+	"appid": "wxc48e51deb0421c5c",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
