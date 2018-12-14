@@ -22,7 +22,7 @@ export default class ShopItem extends Component {
             </View> */}
 
         <Image className="cover"
-          mode="scaleToFill"
+          mode="widthFix"
           src={icon} />
 
         <Text className="title">{title}</Text>
