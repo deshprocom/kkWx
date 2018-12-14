@@ -30,7 +30,7 @@
 
   .tag_count_down{
     height: 50px;
-    width:160px;
+    width:auto;
     @include fr(center);
     justify-content: center;
     background-color: $_DF1;
