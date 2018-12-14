@@ -15,13 +15,13 @@ export default class ShopItem extends Component {
     let minute = 60;
     let hour = minute * 60;
     let day = hour * 24;
-    if(millis<0)
-     return
+    if (millis < 0)
+      return
 
-    let dayC = millis/day
-    let hourC = millis/hour
-    let minC = millis/minute
-    
+    let dayC = millis / day
+    let hourC = millis / hour
+    let minC = millis / minute
+
     logMsg(`${dayC} 天 ${hour} 时 ${minC} 分`)
   }
 
@@ -32,18 +32,18 @@ export default class ShopItem extends Component {
     const { icon, title, original_price, price,
       product_id, returnable, saleable_num, sales_volume,
       end_time, begin_time } = this.props.item;
-      logMsg(`begin_time ${dateFormat(begin_time)}`)
-      logMsg(`end_time ${dateFormat(end_time)}`)
+    logMsg(`begin_time ${dateFormat(begin_time)}`)
+    logMsg(`end_time ${dateFormat(end_time)}`)
     let diff = curTimes - begin_time
     logMsg("当前时间", diff)
     let canBuyStr = "距离结束"
-    if(diff>0){
+    if (diff > 0) {
       canBuyStr = `距离开始`
-    }else{
+    } else {
       diff = curTimes - end_time
-      if(diff>0){
+      if (diff > 0) {
         canBuyStr = `已结束`
-      }else{
+      } else {
         diff = Math.abs(diff)
       }
     }
@@ -52,11 +52,11 @@ export default class ShopItem extends Component {
       <View className="content">
         <View className="tag_count_down">
           <Text style={"color:#fff;"}>{canBuyStr}</Text>
-          <AtCountDown 
-          style={"color:#fff;"}
-          isShowDay
-          format={{ day: '天',hours: '时',minutes: '分',seconds: '秒' }}
-          seconds={diff}/>
+          <AtCountDown
+            style={"color:#fff;"}
+            isShowDay
+            format={{ day: '天', hours: '时', minutes: '分', seconds: '秒' }}
+            seconds={diff} />
         </View>
 
         {/* <View className="tag_shop">
