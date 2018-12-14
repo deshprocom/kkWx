@@ -14,7 +14,8 @@ let des = "从新修改下答案吧。江苏省gdp最低的城市是宿迁，你
 export default class Shopdetail extends Component {
 
   state={
-    index:0
+    index:0,
+    showMore:false
   };
 
   config = {
@@ -54,6 +55,12 @@ export default class Shopdetail extends Component {
     })
   }
 
+  moreMessage=()=>{
+    this.setState({
+      showMore:!this.state.showMore
+    })
+  }
+
   render() {
     logMsg(this)
     let bannerViews = this.banners.map((item, index) => (<SwiperItem key={`banner_${index}`}>
@@ -62,6 +69,13 @@ export default class Shopdetail extends Component {
           src={item.src} />
       </View>
     </SwiperItem>));
+
+    let more_message = [{},{},{}].map((item,index)=>{
+      <View className="info_middle_view">
+        <Text className="name1">快乐的鱼</Text>
+        <Text className="name2">支持用 React 的开发方式编写一次代码</Text>
+      </View>
+    })
 
     return (
       <View className="ShopDetail-page">
@@ -99,7 +113,9 @@ export default class Shopdetail extends Component {
 
         <View className="main_info_view">
           <Text className="main_info_text">商家信息</Text>
-          <Text className="more_info">更多信息</Text>
+          <View onClick={this.moreMessage}>
+            <Text className="more_info">更多信息</Text>
+          </View>
         </View>
 
         <View className="main2_view">
@@ -107,6 +123,7 @@ export default class Shopdetail extends Component {
             <Text className="name1">快乐的鱼</Text>
             <Text className="name2">支持用 React 的开发方式编写一次代码</Text>
           </View>
+          {this.state.showMore ? more_message : null}
         </View>
         <Text className="main_info">详细信息</Text>
 
