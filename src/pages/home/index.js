@@ -5,6 +5,7 @@ import './index.scss';
 import { logMsg } from '../../utils/utils';
 import ShopItem from './ShopItem';
 import { getOneBuysList } from './service'
+import { AtTabs, AtTabsPane } from 'taro-ui'
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/'
 const LOADMORE = "loadmore"
@@ -22,11 +23,13 @@ export default class Home extends Component {
   state = {
     goingPage: 1,
     pastPage: 1,
-    listType: 'going',//going 进行中的列表，past 往期一元购列表
     goingList: [],
-    pastList: []
+    pastList: [],
+    currentTab: 0,//going 0 进行中的列表，past 1 往期一元购列表
   }
 
+  curTab = 0;
+  
   banners = [
     {
       src: baseUrl + 'banner/a427450bfd8d9c1aec3147abf07e3ce5.png'
@@ -50,8 +53,8 @@ export default class Home extends Component {
 
   refreshLoad = (pullType) => {
 
-    let { goingPage, goingList, pastList, pastPage, listType } = this.state
-
+    let { goingPage, goingList, pastList, pastPage } = this.state
+    let listType = this.curTab === 1 ? "past" : "going"
     let params = { page: 1, page_size: 20, type: listType }
     if (pullType === LOADMORE) {
       if (listType === 'past') {
@@ -68,10 +71,20 @@ export default class Home extends Component {
         let list = data.items
         if (pullType === LOADMORE)
           list = goingList.concat(data.items)
-        logMsg('一元购数据List', list)
+        logMsg('正在进行List', list)
         this.setState({
           goingPage,
           goingList: list
+        })
+      } else {
+        pastPage++
+        let list = data.items
+        if (pullType === LOADMORE)
+          list = pastList.concat(data.items)
+        logMsg('往期回顾List', list)
+        this.setState({
+          pastPage,
+          pastList: list
         })
       }
     }, err => {
@@ -89,12 +102,21 @@ export default class Home extends Component {
   onReachBottom = () => {
     logMsg('底部刷新')
     this.refreshLoad(LOADMORE)
-
   }
+  handleClick(stateName, value) {
 
+    this.curTab = value
+    this.setState({
+      [stateName]: value
+    })
+    if (this.state.pastList.length === 0)
+      this.refreshLoad(REFRESH)
+  }
 
   render() {
 
+    const { currentTab, goingList, pastList } = this.state;
+    const tabList = [{ title: '正在进行' }, { title: '往前回顾' }]
     let bannerViews = this.banners.map((item, index) => (<SwiperItem key={`banner_${index}`}>
       <View className="banner">
         <Image className="banner"
@@ -117,21 +139,29 @@ export default class Home extends Component {
             {bannerViews}
           </Swiper>
 
-          <View className="top_bar">
-            <View className="btn" ß>
-              <Text className="active">正在进行</Text>
-            </View>
-            <View className="div_line" />
-            <View className="btn">
-              <Text>往前回顾</Text>
-            </View>
 
-          </View>
-          {this.state.goingList.map((item, index) =>
-            (<ShopItem
-              style="width:100%;"
-              key={`shop_${index}`}
-              item={item} />))}
+          <AtTabs swipeable={false}
+            current={currentTab}
+            tabList={tabList}
+            style="width:100%;"
+            onClick={this.handleClick.bind(this, 'currentTab')}>
+            <AtTabsPane current={currentTab} index={0} >
+              {goingList.map((item, index) =>
+                (<ShopItem
+                  style="width:100%;"
+                  key={`shop_${index}`}
+                  item={item} />))}
+            </AtTabsPane>
+            <AtTabsPane current={currentTab} index={1}>
+              {pastList.map((item, index) =>
+                (<ShopItem
+                  style="width:100%;"
+                  key={`shop_${index}`}
+                  item={item} />))}
+            </AtTabsPane>
+          </AtTabs>
+
+
           <View style="margin-bottom:20px;"></View>
         </View>
       </ScrollView>
