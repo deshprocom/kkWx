@@ -2,13 +2,15 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components';
 import './index.scss';
 import { AtCountDown } from 'taro-ui'
-import { logMsg, dateFormat } from '../../utils/utils';
+import { logMsg, dateFormat, urlEncode } from '../../utils/utils';
 
 
 export default class ShopItem extends Component {
 
-  goDetailPage = (e) => {
-    Taro.navigateTo(e.currentTarget.dataset)
+  goDetailPage(product_id,e){
+    logMsg(e,product_id)
+    let url = e.currentTarget.dataset.url+`?${urlEncode({product_id})}`
+    Taro.navigateTo({url})
   }
 
   dayHour = (millis) => {
@@ -48,7 +50,7 @@ export default class ShopItem extends Component {
       }
     }
 
-    return (<View className="item" data-url="/pages/ShopDetail/index" onClick={this.goDetailPage}>
+    return (<View className="item" data-url="/pages/ShopDetail/index" onClick={this.goDetailPage.bind(this,product_id)}>
       <View className="content">
         <View className="tag_count_down">
           <Text style={"color:#fff;"}>{canBuyStr}</Text>

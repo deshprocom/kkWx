@@ -40,7 +40,8 @@ export default class Shopdetail extends Component {
 
   componentDidMount = () => {
     const {dispatch} = this.props;
-    dispatch({type:'ShopDetail/effectsDemo'})
+    let param = this.$router.params
+    dispatch({type:'ShopDetail/detail',param})
   };
 
 
@@ -62,7 +63,7 @@ export default class Shopdetail extends Component {
   }
 
   render() {
-    logMsg(this)
+    logMsg(this.props)
     let bannerViews = this.banners.map((item, index) => (<SwiperItem key={`banner_${index}`}>
       <View className="banner">
         <Image className="banner"
