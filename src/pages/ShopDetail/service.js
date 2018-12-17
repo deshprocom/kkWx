@@ -1,10 +1,9 @@
 import Request from '../../utils/request';
 import api from '../../config/api'
 
-export const demo = (data) => {
+export const detail = (param) => {
   return Request({
-    url: api.shopCategories,
-    method: 'get',
-    data,
+    url: `${api.shop_product}/${param.product_id}`,
+    method: 'get'
   });
 };

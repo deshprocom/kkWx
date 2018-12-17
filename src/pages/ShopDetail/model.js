@@ -1,17 +1,20 @@
 import * as ShopDetailApi from './service';
+import { logMsg } from '../../utils/utils';
 
 export default {
   namespace: 'ShopDetail',
   state: {
-
+    shopDetail:{}
   },
 
   effects: {
-    * effectsDemo(_, { call, put }) {
-      const { statusCode, data } = yield call(ShopDetailApi.demo, {});
+    * detail(_, { call, put }) {
+      logMsg('商品详情参数',_)
+      let data = yield call(ShopDetailApi.detail, _.param);
+      logMsg('商品详情',data)
       yield put({ type: 'save',
           payload: {
-            topData: data,
+            shopDetail: data,
           } });
     },
   },

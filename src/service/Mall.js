@@ -10,3 +10,5 @@ import api from '../config/api'
 export function getShopCategorios(resolve,reject) {
   　　get(api.shopCategories,{},resolve,reject)
 }
+
+
