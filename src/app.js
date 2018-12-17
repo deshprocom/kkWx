@@ -6,7 +6,14 @@ import models from './models'
 import { Provider } from '@tarojs/redux'
 
 import './styles/base.scss'
-
+import { black } from 'ansi-colors';
+import withLogin from './service/WithLogin';
+import { logMsg } from './utils/utils';
+if (process.env.TARO_ENV === "weapp") {
+  require("taro-ui/dist/weapp/css/index.css")
+} else if (process.env.TARO_ENV === "h5") {
+  require("taro-ui/dist/h5/css/index.css")
+}
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -19,37 +26,63 @@ const dvaApp = dva.createApp({
   models: models,
 });
 const store = dvaApp.getStore();
-
 class App extends Component {
 
   config = {
     pages: [
       'pages/home/index',
       'pages/index/index',
-      'pages/mall/index'
+      'pages/mall/index',
+      'pages/ShopDetail/index',
+      'pages/Mine/index'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTitleText: '澳门旅行',
+      navigationBarTextStyle: 'black',
+      backgroundColor: "#eeeeee",
+      backgroundTextStyle: "dark"
+    },
+    tabBar: {
+      list: [
+        {
+          pagePath: "pages/home/index",
+          text: "1元购",
+          iconPath: "./images/tab/home.png",
+          selectedIconPath: "./images/tab/home-active.png"
+        },
+        {
+          pagePath: "pages/mall/index",
+          text: "折扣",
+          iconPath: "./images/tab/cart.png",
+          selectedIconPath: "./images/tab/cart-active.png"
+        }, {
+          pagePath: "pages/Mine/index",
+          text: "我的",
+          iconPath: "./images/tab/user.png",
+          selectedIconPath: "./images/tab/user-active.png"
+        }
+      ]
     }
   }
 
-  componentDidMount () {}
+  componentDidMount() {
+    logMsg('当前环境', Taro.getEnv())
+  }
 
-  componentDidShow () {}
+  componentDidShow() { }
 
-  componentDidHide () {}
+  componentDidHide() { }
 
-  componentDidCatchError () {}
+  componentDidCatchError() { }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render () {
+  render() {
     return (<Provider store={store}>
-      <Home/>
-      </Provider>);
+      <Home />
+    </Provider>);
   }
 }
 

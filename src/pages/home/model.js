@@ -9,7 +9,7 @@ export default {
 
   effects: {
     * effectsDemo(_, { call, put }) {
-      const { status, data } = yield call(homeApi.demo, {});
+      const { status, data } = yield call(homeApi.demo, {page:1});
       logMsg('Home',data)
       yield put({ type: 'save',
       payload: {
