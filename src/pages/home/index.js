@@ -73,7 +73,7 @@ export default class Home extends Component {
           <Text className="active">正在进行</Text>
           </View>
           <View className="div_line"/>
-          <View className="btn">
+          <View className="btn"  onClick={this.goDetailPage}>
           <Text>往前回顾</Text>
           </View>
            

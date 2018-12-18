@@ -42,7 +42,6 @@ export default class Mine extends Component {
   render() {
     return (
       <View className="Mine-page">
-        Mine
         <Button onClick={this.onPay}>
           支付
          </Button>
