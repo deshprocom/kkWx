@@ -30,7 +30,7 @@
 
   .tag_count_down{
     height: 50px;
-    width:160px;
+    width:auto;
     @include fr(center);
     justify-content: center;
     background-color: $_DF1;
@@ -59,7 +59,7 @@
     overflow: hidden;
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 10px;
+    margin-top: 20px;
   }
   .line{
     height: 1px;

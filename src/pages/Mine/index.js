@@ -21,6 +21,7 @@ export default class Mine extends Component {
   }
 
   onEventPhone = (e) => {
+    
     Taro.getUserInfo({
       success: function (res) {
         logMsg('用户信息', res)
@@ -42,8 +43,12 @@ export default class Mine extends Component {
   render() {
     return (
       <View className="Mine-page">
+
         <Button onClick={this.onPay}>
           支付
+          </Button>
+        <Button openType="getUserInfo" onGetUserInfo={this.onUserInfo}>
+          获取用户信息
          </Button>
         <Button openType="getPhoneNumber" onGetPhoneNumber={this.onEventPhone}>
           获取手机号

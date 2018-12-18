@@ -9,7 +9,11 @@ import './styles/base.scss'
 import { black } from 'ansi-colors';
 import withLogin from './service/WithLogin';
 import { logMsg } from './utils/utils';
-
+if (process.env.TARO_ENV === "weapp") {
+  require("taro-ui/dist/weapp/css/index.css")
+} else if (process.env.TARO_ENV === "h5") {
+  require("taro-ui/dist/h5/css/index.css")
+}
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：

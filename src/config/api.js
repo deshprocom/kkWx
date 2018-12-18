@@ -11,7 +11,9 @@ let production = 'https://kkapi.deshpro.com/v1/'
 export default  {
   noConsole:false,
   baseUrl:test,
-  shopCategories:'shop/categories'
+  shopCategories:'shop/categories',
+  one_yuan_buys:'shop/one_yuan_buys',
+  shop_product:'shop/products'
 }
 
 
