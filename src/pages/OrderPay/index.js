@@ -2,6 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
+import right_img from '../../images/mine/right.png'
 
 @connect(({OrderPay}) => ({
   ...OrderPay,
@@ -27,7 +28,7 @@ export default class Orderpay extends Component {
           <Image
             className="right_image"
             style="width:20px;height:10px"
-            src="../../images/mine/right.png"
+            src={right_img}
           />
         </View>
         <View className="message_view_top">
