@@ -3,6 +3,7 @@ import { View, Text, RichText } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg, isObjEmpty, urlEncode } from '../../utils/utils'
+import { AtModal } from 'taro-ui'
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
 
@@ -10,7 +11,8 @@ export default class Shopdetail extends Component {
 
       state = {
             index: 0,
-            showMore: false
+            showMore: false,
+            isOpened: false
       };
 
 
@@ -35,7 +37,7 @@ export default class Shopdetail extends Component {
 
       onPress1 = () => {
             this.setState({
-                  index: 1
+                  isOpened: !this.state.isOpened
             })
       }
       onPress2 = () => {
@@ -43,6 +45,8 @@ export default class Shopdetail extends Component {
                   index: 1
             })
       }
+
+
 
       goOrderPay(id, e) {
             let url = e.currentTarget.dataset.url + `?${urlEncode({ id })}`
@@ -142,6 +146,16 @@ export default class Shopdetail extends Component {
                                     <Text className="btn_text">已售罄</Text>
                               </View>
                         </View>
+
+                        <AtModal isOpened={this.state.isOpened}>
+                              <AtModalContent>
+                                    <View className='at-col at-col-1 model'>
+                                          <Text>路上看见对方</Text>
+                                    </View>
+                              </AtModalContent>
+
+
+                        </AtModal>
                   </View>
             )
       }

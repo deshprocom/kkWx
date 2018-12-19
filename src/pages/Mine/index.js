@@ -3,6 +3,7 @@ import { View, Button, FunctionalPageNavigator } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg } from '../../utils/utils';
+import right_img from '../../images/mine/right.png'
 
 @connect(({ Mine }) => ({
   ...Mine,
@@ -53,7 +54,7 @@ export default class Mine extends Component {
           <View style='display:flex;flex:1'/>
           <Image
             className="right_image"
-            src="../../images/mine/right.png"
+            src={right_img}
           />
         </View>
 

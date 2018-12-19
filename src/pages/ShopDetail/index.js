@@ -1,9 +1,9 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text, RichText } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg, isObjEmpty, urlEncode } from '../../utils/utils';
-import { AtActivityIndicator, AtAti } from 'taro-ui'
+import { AtActivityIndicator } from 'taro-ui'
 import Detail from './detail'
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
