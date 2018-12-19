@@ -8,10 +8,16 @@
  import mall from '../pages/mall/model'
  import ShopDetail from '../pages/ShopDetail/model'
  import Mine from '../pages/Mine/model'
+ import OrderPay from '../pages/OrderPay/model'
+ import OrderList from '../pages/OrderList/model'
+ import OrderDetail from '../pages/OrderDetail/model'
 
  export default[
       home,
       mall,
       ShopDetail,
-      Mine
+      Mine,
+      OrderPay,
+      OrderList,
+      OrderDetail
  ]
