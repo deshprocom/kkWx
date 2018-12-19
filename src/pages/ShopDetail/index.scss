@@ -153,4 +153,11 @@
     border-style: solid;
     background: #E54A2E;
   }
+
+  .model{
+    background-color: #fff;
+    @include wh(100%,50%);
+  }
+  
+
 }

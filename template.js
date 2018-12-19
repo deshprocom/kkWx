@@ -23,7 +23,7 @@ import './index.scss';
 @connect(({${dirName}}) => ({
   ...${dirName},
 }))
-export default class ${titleCase(dirName)} extends Component {
+export default class ${dirName} extends Component {
   config = {
     navigationBarTitleText: '${dirName}',
   };
