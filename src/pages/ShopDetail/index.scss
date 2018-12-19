@@ -117,11 +117,11 @@
     padding-top: 25px;
     padding-bottom: 25px;
     margin-bottom: 180px;
+    width:100%;
   }
   .des_text{
     font-size:28px;
     line-height: 46px;
-    font-family: 微软雅黑, sans-serif;
   }
   .bottom_view{
     @include fr(flex-start);

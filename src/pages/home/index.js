@@ -29,7 +29,7 @@ export default class Home extends Component {
   }
 
   curTab = 0;
-  
+
   banners = [
     {
       src: baseUrl + 'banner/a427450bfd8d9c1aec3147abf07e3ce5.png'
@@ -146,14 +146,14 @@ export default class Home extends Component {
             style="width:100%;"
             onClick={this.handleClick.bind(this, 'currentTab')}>
             <AtTabsPane current={currentTab} index={0} >
-              {goingList.map((item, index) =>
+              {goingList.length > 0 && goingList.map((item, index) =>
                 (<ShopItem
                   style="width:100%;"
                   key={`shop_${index}`}
                   item={item} />))}
             </AtTabsPane>
             <AtTabsPane current={currentTab} index={1}>
-              {pastList.map((item, index) =>
+              {pastList.length > 0 && pastList.map((item, index) =>
                 (<ShopItem
                   style="width:100%;"
                   key={`shop_${index}`}

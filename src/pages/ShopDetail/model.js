@@ -4,18 +4,21 @@ import { logMsg } from '../../utils/utils';
 export default {
   namespace: 'ShopDetail',
   state: {
-    shopDetail:{}
+    shopDetail: {}
   },
 
   effects: {
     * detail(_, { call, put }) {
-      logMsg('商品详情参数',_)
-      let data = yield call(ShopDetailApi.detail, _.param);
-      logMsg('商品详情',data)
-      yield put({ type: 'save',
+      logMsg('商品详情参数', _)
+      const { data, statusCode } = yield call(ShopDetailApi.detail, _.param);
+      if (statusCode === 200 && data){
+        yield put({
+          type: 'save',
           payload: {
-            shopDetail: data,
-          } });
+            shopDetail: data.data,
+          }
+        });
+      }
     },
   },
 
