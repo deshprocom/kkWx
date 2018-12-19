@@ -2,4 +2,131 @@
 
 .Mine-page {
   @include wh(100%, 100%);
+  @include fc(center);
+
+  .mine_top_view{
+    @include fr(center);
+    background-color: white;
+    width:100%;
+    margin-top: 2px;
+    padding-top: 26px;
+    padding-bottom:26px;
+  }
+  .top_name{
+    @include sc(32px,#1c1c1c);
+    
+  }
+  .per_image{
+    @include wh(100px, 100px);
+    border-radius: 50px;
+    @include distance(20px,10px)
+  }
+  .right_image{
+    @include wh(30px, 20px);
+    margin-right: 20px;
+  }
+  .mine_orders_view{
+    @include fr(center);
+    background-color: white;
+    width:100%;
+    margin-top: 5px;
+    padding-top: 13px;
+    padding-bottom:13px;
+  }
+  .order_text{
+    @include sc(32px,#1c1c1c);
+    margin-left: 20px;
+  }
+  .allOrder_text{
+    @include sc(30px,#1c1c1c);
+    margin-right: 12px;
+  }
+  .orders_view{
+    @include fr(center);
+    background-color: white;
+    width:100%;
+    margin-top: 1px;
+    padding-top: 16px;
+    padding-bottom:16px;
+  }
+  .order_btn_view{
+    display: flex;
+    flex:1;
+    width:100px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn_text{
+    @include sc(26px,#1c1c1c);
+  }
+  .btn_img{
+    width:100px;
+    height:100px;
+  }
+  .unused_view{
+    width:100%;
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-bottom:20px;
+    background-color: white;
+  }
+  .order_list_view{
+    margin-top: 2px;
+    width:100%;
+    background-color: white;
+  }
+  .list_view{
+    @include fr(center);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .list_btn_img{
+    width:300px;
+    height:100px;
+    margin-right: 6px;
+  }
+  .list_view_right{
+    @include fc(flex-start);
+  }
+  .intro_text{
+    @include sc(32px,#1c1c1c);
+  }
+  .right_view_middle{
+    @include fr(center);
+    width:100%;
+    margin-top: 5px;
+  }
+  .price_text{
+    @include sc(32px,#E54A2E);
+    margin-right: 25px;
+  }
+  .origin_price_text{
+    @include sc(32px,#1c1c1c);
+    text-decoration-line: line-through
+  }
+  .count_text{
+    @include sc(32px,#1c1c1c);
+    font-weight: bold;
+  }
+  .use_btn_view{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+    border-radius: 2px;
+    background-color: #E54A2E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25px;
+  }
+  .use_text{
+    @include sc(28px,white);
+  }
+  .freight_text{
+    @include sc(32px,#1c1c1c);
+  }
+ 
 }
