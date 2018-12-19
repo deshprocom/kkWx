@@ -22,7 +22,7 @@
     @include distance(20px,10px)
   }
   .right_image{
-    @include wh(30px, 20px);
+    @include wh(20px, 30px);
     margin-right: 20px;
   }
   .mine_orders_view{
@@ -99,8 +99,9 @@
     margin-top: 5px;
   }
   .price_text{
-    @include sc(32px,#E54A2E);
+    @include sc(30px,#E54A2E);
     margin-right: 25px;
+    font-weight: bold;
   }
   .origin_price_text{
     @include sc(32px,#1c1c1c);
@@ -110,13 +111,17 @@
     @include sc(32px,#1c1c1c);
     font-weight: bold;
   }
+  .count_text1{
+    @include sc(36px,#1c1c1c);
+    font-weight: bold;
+  }
   .use_btn_view{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 18px;
-    padding-right: 18px;
+    padding-right: 25px;
     border-radius: 2px;
-    background-color: #E54A2E;
+    background-color: #F78181;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,7 +131,7 @@
     @include sc(28px,white);
   }
   .freight_text{
-    @include sc(32px,#1c1c1c);
+    @include sc(28px,#1c1c1c);
   }
  
 }
