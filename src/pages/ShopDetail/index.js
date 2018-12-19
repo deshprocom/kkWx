@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg, isObjEmpty, urlEncode } from '../../utils/utils';
-import { AtActivityIndicator } from 'taro-ui'
+import { AtActivityIndicator,AtActionSheet } from 'taro-ui'
 import Detail from './detail'
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';

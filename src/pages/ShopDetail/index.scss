@@ -5,6 +5,41 @@
   @include fc(flex-start);
   overflow-y: scroll;
 
+
+  .at-action-sheet {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: $zindex-modal;
+    visibility: hidden;
+    transition: visibility $action-sheet-timer $timing-func;
+  
+    &__overlay {
+      @include overlay;
+  
+      opacity: 0;
+      transition: opacity $action-sheet-timer ease-in;
+    }
+  }
+
+  .at-action-sheet--active {
+    visibility: visible;
+  
+    .at-action-sheet__overlay {
+      opacity: 1;
+    }
+  
+    .at-action-sheet__container {
+      transform: translate3d(0, 0, 0);
+      @include wh(100%,70%);
+      background-color: #ffffff;
+      bottom: 0;
+      position: fixed;
+    }
+  }
+  
   .banner{
     @include wh(100%,400px);
     background-color: white
@@ -153,11 +188,5 @@
     border-style: solid;
     background: #E54A2E;
   }
-
-  .model{
-    background-color: #fff;
-    @include wh(100%,50%);
-  }
-  
 
 }

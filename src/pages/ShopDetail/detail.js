@@ -3,7 +3,7 @@ import { View, Text, RichText } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg, isObjEmpty, urlEncode } from '../../utils/utils'
-import { AtModal } from 'taro-ui'
+import classNames from 'classnames'
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
 
@@ -33,7 +33,9 @@ export default class Shopdetail extends Component {
       ]
 
 
-
+      handleTouchMove = e => {
+            e.stopPropagation()
+          }
 
       onPress1 = () => {
             this.setState({
@@ -79,6 +81,13 @@ export default class Shopdetail extends Component {
                   </View>
             })
 
+            let rootClass = classNames(
+                  'at-action-sheet',
+                  {
+                        'at-action-sheet--active': this.state.isOpened,
+                  }
+            )
+
             return (
                   <View className="ShopDetail-page">
                         <Swiper
@@ -106,7 +115,7 @@ export default class Shopdetail extends Component {
 
                         <View className="spec_view">
                               <View className="spec1_view" style="margin-right:10px" onClick={this.onPress1}>
-                                    <Text className="spec1_text">基础版</Text>
+                                    <Text className="spec1_text">点击这里弹窗</Text>
                               </View>
                               <View className="spec1_view" onClick={this.onPress2}>
                                     <Text className="spec1_text">进阶版</Text>
@@ -147,15 +156,11 @@ export default class Shopdetail extends Component {
                               </View>
                         </View>
 
-                        <AtModal isOpened={this.state.isOpened}>
-                              <AtModalContent>
-                                    <View className='at-col at-col-1 model'>
-                                          <Text>路上看见对方</Text>
-                                    </View>
-                              </AtModalContent>
-
-
-                        </AtModal>
+                        <View className={rootClass} onTouchMove={this.handleTouchMove}>
+                              <View onClick={this.onPress1} className='at-action-sheet__overlay' />
+                              <View className='at-action-sheet__container'>
+                              </View>
+                        </View>
                   </View>
             )
       }
