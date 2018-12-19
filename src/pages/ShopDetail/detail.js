@@ -3,7 +3,9 @@ import { View, Text, RichText } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg, isObjEmpty, urlEncode } from '../../utils/utils'
-import classNames from 'classnames'
+import classNames from 'classnames';
+import default_img from '../../images/mine/default_img.png';
+import close_img from '../../images/mine/close.png';
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
 
@@ -87,6 +89,11 @@ export default class Shopdetail extends Component {
                         'at-action-sheet--active': this.state.isOpened,
                   }
             )
+            let select_message = [{}, {}, {}].map((item, index) => {
+                  <View className="name1_text_view">
+                        <Text className="name1_text">免坐</Text>
+                  </View>
+            })
 
             return (
                   <View className="ShopDetail-page">
@@ -159,6 +166,21 @@ export default class Shopdetail extends Component {
                         <View className={rootClass} onTouchMove={this.handleTouchMove}>
                               <View onClick={this.onPress1} className='at-action-sheet__overlay' />
                               <View className='at-action-sheet__container'>
+                                    <Image  className="default_img"  src={default_img}/>
+                                    <View className="top_right_view">
+                                          <Text className="top_price_text">3125.0</Text>
+                                          <Text className="kucun_text">库存15件</Text>
+                                    </View>
+                                    <Image onClick={this.onPress1} className="close_img"  src={close_img}/>
+                                    <View style="width:100%;height:2px;background-color:#F3F3F3;margin-top:20px;"/>
+                                    <Text className="name1_text">阿尔法七座商务车</Text>
+                                    <View className="name1_view">
+                                          {select_message}
+                                    </View>
+
+                                    <View className="confirm_btn">
+                                          <Text className="confirm_text">确认</Text>
+                                    </View>
                               </View>
                         </View>
                   </View>
