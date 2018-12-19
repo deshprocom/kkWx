@@ -27,7 +27,7 @@ export default class Orderpay extends Component {
           <View style='display:flex;flex:1'/>
           <Image
             className="right_image"
-            style="width:20px;height:10px"
+            style="width:10px;height:15px"
             src={right_img}
           />
         </View>

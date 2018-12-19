@@ -64,7 +64,7 @@ export default class Mine extends Component {
           <Text className="allOrder_text">查看全部</Text>
           <Image
             className="right_image"
-            style="width:20px;height:10px"
+            style="width:10px;height:15px"
             src="../../images/mine/right.png"
           />
         </View>

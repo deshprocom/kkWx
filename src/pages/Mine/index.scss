@@ -22,7 +22,7 @@
     @include distance(20px,10px)
   }
   .right_image{
-    @include wh(30px, 20px);
+    @include wh(20px, 30px);
     margin-right: 20px;
   }
   .mine_orders_view{
