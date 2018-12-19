@@ -3,7 +3,7 @@ import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components'
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg } from '../../utils/utils';
-import ShopItem from './ShopItem';
+import ShopItem from '../../components/shopItem/ShopItem';
 import { getOneBuysList } from './service'
 import { AtTabs, AtTabsPane } from 'taro-ui'
 

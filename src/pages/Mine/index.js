@@ -4,6 +4,11 @@ import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg } from '../../utils/utils';
 import right_img from '../../images/mine/right.png'
+import img_all from '../../images/mine/all.png'
+import img_dgh from '../../images/mine/dgh.png'
+import img_dsh from '../../images/mine/dsh.png'
+import img_dzf from '../../images/mine/dzf.png'
+import OrderItem from '../../components/order/OrderItem'
 
 @connect(({ Mine }) => ({
   ...Mine,
@@ -73,28 +78,28 @@ export default class Mine extends Component {
           <View className="order_btn_view" style="margin-left:25px">
             <Image
               className="btn_img"
-              src="../../images/tab/user.png"
+              src={img_dzf}
             />
             <Text className="btn_text">待付款</Text>
           </View>
           <View className="order_btn_view">
             <Image
               className="btn_img"
-              src="../../images/tab/user.png"
+              src={img_dgh}
             />
             <Text className="btn_text">待使用</Text>  
           </View>
           <View className="order_btn_view">
             <Image
                 className="btn_img"
-                src="../../images/tab/user.png"
+                src={img_dsh}
               />
             <Text className="btn_text">已完成</Text>
           </View>
           <View className="order_btn_view" style="margin-right:25px">
             <Image
               className="btn_img"
-              src="../../images/tab/user.png"
+              src={img_all}
             />
             <Text className="btn_text">全部订单</Text>
           </View>
@@ -104,29 +109,7 @@ export default class Mine extends Component {
           <Text className="order_text">待使用订单</Text>
         </View>
 
-        <View className="order_list_view">
-          <View className="list_view">
-            <Image
-              className="list_btn_img"
-              src="../../images/tab/cart-active.png"
-            />
-            <View className="list_view_right">
-              <Text className="intro_text">新概念短线蓝牙耳机 立体声音低声智能降噪</Text>
-              <View className="right_view_middle">
-                <Text className="price_text">¥39.9</Text>
-                <Text className="origin_price_text">¥69.9</Text>
-                <View style='display:flex;flex:1'/>
-                <Text className="count_text"><Text className="count_text1">X</Text>1</Text>
-              </View>
-              <View className="right_view_middle">
-                <View className="use_btn_view">
-                  <Text className="use_text">待使用</Text>
-                </View>
-                <Text className="freight_text">运费：¥39</Text>
-              </View>
-            </View>
-          </View>
-        </View>
+        <OrderItem/>
 
         {/* <Button onClick={this.onPay}>
           支付
