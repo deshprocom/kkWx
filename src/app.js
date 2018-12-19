@@ -34,7 +34,10 @@ class App extends Component {
       'pages/index/index',
       'pages/mall/index',
       'pages/ShopDetail/index',
-      'pages/Mine/index'
+      'pages/Mine/index',
+      'pages/OrderPay/index',
+      'pages/OrderList/index',
+      'pages/OrderDetail/index'
     ],
     window: {
       backgroundTextStyle: 'light',

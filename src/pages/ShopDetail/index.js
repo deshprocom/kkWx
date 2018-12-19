@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Text, RichText } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, isObjEmpty } from '../../utils/utils';
+import { logMsg, isObjEmpty, urlEncode } from '../../utils/utils';
 import { AtActivityIndicator, AtAti } from 'taro-ui'
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
@@ -55,6 +55,11 @@ export default class Shopdetail extends Component {
     this.setState({
       index: 1
     })
+  }
+
+  goOrderPay(id,e){
+    let url = e.currentTarget.dataset.url + `?${urlEncode({ id })}`
+    Taro.navigateTo({ url })
   }
 
   moreMessage = () => {
@@ -144,7 +149,9 @@ export default class Shopdetail extends Component {
           <View className="btn_view">
             <Text className="btn_text">咨询客服</Text>
           </View>
-          <View className="btn_view  btn3_view">
+          <View data-url='/pages/OrderPay/index'
+            onClick={this.goOrderPay.bind(this,id)}
+            className="btn_view  btn3_view">
             <Text className="btn_text">已售罄</Text>
           </View>
         </View>
