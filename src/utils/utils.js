@@ -1,9 +1,16 @@
 import moment from 'moment'
-
+import _ from 'lodash'
 
 export function logMsg(...msg){
       if(process.env.NODE_ENV !== 'production')
       console.log(...msg)
+}
+
+export function isObjEmpty(obj){
+    for (var i in obj) { // 如果不为空，则会执行到这一步，返回false
+        return false
+    }
+    return true // 如果为空,返回true
 }
 
 export function dateFormat(timestamp,formatStr = "YYYY-MM-DD HH:mm:ss"){

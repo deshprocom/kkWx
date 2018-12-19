@@ -40,7 +40,7 @@ export default function request (options = { method: 'GET', data: {} }) {
         });
       }
       options.resolve && options.resolve(data.data)
-      return data;
+      return res;
     } else {
       options.reject && options.reject(res)
       throw new Error(`网络请求错误，状态码${statusCode}`);
