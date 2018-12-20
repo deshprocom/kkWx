@@ -8,7 +8,7 @@ export function userLogin(params,resolve,reject){
             logMsg('登录结果',ret)
             const {status,access_token} = ret;
             if(status === 'login_success'){
-                  setToken(ret.access_token)w
+                  setToken(ret.access_token)
                   Taro.setStorageSync('loginUser',ret)
             }
             resolve(ret)
