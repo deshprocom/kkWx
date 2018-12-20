@@ -4,12 +4,15 @@
   @include wh(100%, 100%);
 
   .order_top_view{
-    @include fr(center);
+    @include fc(center);
     background-color: white;
     width:100%;
     margin-top: 2px;
     padding-top: 26px;
     padding-bottom:26px;
+  }
+  .textarea{
+    margin-top: 20px;
   }
   .top_left_view{
     @include fc(flex-start);

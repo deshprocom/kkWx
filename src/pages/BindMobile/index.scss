@@ -108,7 +108,7 @@
     overflow: hidden;
     border-bottom: 1px solid #f8f8f8;
     input {
-      width: 275px;
+  
       height: 80px;
       font-size: 28px;
       outline:0;
@@ -121,6 +121,12 @@
       float: left;
       text-align: left;
       color: #333;
+    }
+    .btn_count{
+      height: 160px;
+      width: 80px;
+      background-color: #D64761;
+      @include fr(center)
     }
   }
 
@@ -158,5 +164,7 @@
     line-height: 40px;
     padding: 50px 10px 40px 10px;
   }
+
+  
 }
 
