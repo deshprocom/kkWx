@@ -52,8 +52,10 @@ export default class Shopdetail extends Component {
 
 
 
-      goOrderPay(id, e) {
-            let url = e.currentTarget.dataset.url + `?${urlEncode({ id })}`
+      goOrderPay(variants, e) {
+            let select = variants[0]
+            let url = e.currentTarget.dataset.url + `?${urlEncode(select)}`
+            logMsg('预支付',url)
             Taro.navigateTo({ url })
       }
 
@@ -83,12 +85,7 @@ export default class Shopdetail extends Component {
                   </View>
             })
 
-            let rootClass = classNames(
-                  'at-action-sheet',
-                  {
-                        'at-action-sheet--active': this.state.isOpened,
-                  }
-            )
+       
             let select_message = [{}, {}, {}].map((item, index) => {
                   <View className="name1_text_view">
                         <Text className="name1_text">免坐</Text>
@@ -118,7 +115,7 @@ export default class Shopdetail extends Component {
                               </View>
                         </View>
 
-                        <Text className="main_info">规格选择</Text>
+                        {/* <Text className="main_info">规格选择</Text>
 
                         <View className="spec_view">
                               <View className="spec1_view" style="margin-right:10px" onClick={this.onPress1}>
@@ -127,7 +124,7 @@ export default class Shopdetail extends Component {
                               <View className="spec1_view" onClick={this.onPress2}>
                                     <Text className="spec1_text">进阶版</Text>
                               </View>
-                        </View>
+                        </View> */}
 
                         <View className="main_info_view">
                               <Text className="main_info_text">商家信息</Text>
@@ -157,13 +154,14 @@ export default class Shopdetail extends Component {
                                     <Text className="btn_text">咨询客服</Text>
                               </View>
                               <View data-url='/pages/OrderPay/index'
-                                    onClick={this.goOrderPay.bind(this, id)}
+                                    onClick={this.goOrderPay.bind(this, variants)}
                                     className="btn_view  btn3_view">
-                                    <Text className="btn_text">已售罄</Text>
+                                    <Text className="btn_text">立即购买</Text>
                               </View>
                         </View>
 
-                        <View className={rootClass} onTouchMove={this.handleTouchMove}>
+                        {this.state.isOpened?<View className='at-action-sheet--active' 
+                        onTouchMove={this.handleTouchMove}>
                               <View onClick={this.onPress1} className='at-action-sheet__overlay' />
                               <View className='at-action-sheet__container'>
                                     <Image  className="default_img"  src={default_img}/>
@@ -182,7 +180,7 @@ export default class Shopdetail extends Component {
                                           <Text className="confirm_text">确认</Text>
                                     </View>
                               </View>
-                        </View>
+                        </View>:null}
                   </View>
             )
       }

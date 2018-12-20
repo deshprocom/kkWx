@@ -3,6 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import right_img from '../../images/mine/right.png'
+import { logMsg } from '../../utils/utils';
 
 @connect(({OrderPay}) => ({
   ...OrderPay,
@@ -14,6 +15,7 @@ export default class Orderpay extends Component {
 
   componentDidMount = () => {
 
+    logMsg('参数',this.$router.params)
   };
 
   render() {
