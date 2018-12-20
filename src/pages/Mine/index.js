@@ -35,9 +35,10 @@ export default class Mine extends Component {
         }
         logMsg('登陆信息', params)
         userLogin(params,ret=>{
-         if(ret.status === 'need_register'){
-           Taro.navigateTo({url:'/pages/BindMobile/index'})
-         }
+          Taro.navigateTo({url:'/pages/BindMobile/index'})
+        //  if(ret.status === 'need_register'){
+        //    Taro.navigateTo({url:'/pages/BindMobile/index'})
+        //  }
         },err=>{
 
         })
