@@ -4,15 +4,17 @@
   @include wh(100%, 100%);
 
   .order_top_view{
-    @include fc(center);
+    @include fc;
     background-color: white;
     width:100%;
     margin-top: 2px;
     padding-top: 26px;
     padding-bottom:26px;
+    padding-left: 20px;
   }
   .textarea{
     margin-top: 20px;
+    width: 600px;
   }
   .top_left_view{
     @include fc(flex-start);
@@ -119,7 +121,7 @@
     @include fc(flex-start);
     width:100%;
     background-color: white;
-    margin-top: 10px;
+    margin-top: 2px;
   }
   .price_text2{
     @include sc(28px,#E54A2E);

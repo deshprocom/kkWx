@@ -4,7 +4,8 @@ import { connect } from '@tarojs/redux';
 import './index.scss';
 import right_img from '../../images/mine/right.png'
 import { logMsg } from '../../utils/utils';
-import { AtInput, AtForm, AtTextarea } from 'taro-ui'
+import { AtInput, AtInputNumber, AtTextarea } from 'taro-ui'
+import OrderItem from '../../components/order/OrderItem'
 
 @connect(({ OrderPay }) => ({
   ...OrderPay,
@@ -17,7 +18,14 @@ export default class Orderpay extends Component {
   state = {
     userName: '',
     mobile: '',
-    product: {}
+    product: {},
+    number5: 1,
+  }
+
+  handleNumberChange (stateName, value) {
+    this.setState({
+      [stateName]: value
+    })
   }
 
   componentDidMount = () => {
@@ -46,7 +54,11 @@ export default class Orderpay extends Component {
     const { userName, mobile } = this.state
     return (
       <View className="OrderPay-page">
+       <View className="message_view_top">
+          <Text className="left_name2">输入订单信息</Text>
+        </View>
         <View className="order_top_view">
+       
           <AtInput
             name='value1'
             title={`姓    名: `}
@@ -54,68 +66,33 @@ export default class Orderpay extends Component {
             placeholder={userName}
             border={true}
           />
+          <View style="height:1px;" />
           <AtInput
             name='value2'
             title={`手机号码: `}
             type='number'
             placeholder={mobile}
           />
+
           <AtTextarea
             className='textarea'
             maxLength={200}
             placeholder='备注...'
+            height={200}
           />
 
         </View>
         <View className="message_view_top">
           <Text className="left_name2">商品信息</Text>
-          <View style='display:flex;flex:1' />
-          <Text className="left_phone2">共计2件</Text>
-        </View>
-        <View className="message_view">
-          <View className="list_view">
-            <Image
-              className="list_btn_img"
-              src="../../images/tab/cart-active.png"
-            />
-            <View className="list_view_right">
-              <Text className="intro_text">新概念短线蓝牙耳机 立体声音低声智能降噪</Text>
-              <View className="right_view_middle">
-                <Text className="price_text">¥39.9</Text>
-                <Text className="origin_price_text">¥69.9</Text>
-                <View style='display:flex;flex:1' />
-                <Text className="count_text"><Text className="count_text1">X</Text>1</Text>
-              </View>
-              <View className="right_view_middle">
-                <View className="use_btn_view">
-                  <Text className="use_text">待使用</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style="width:100%;height:2px;" />
-        </View>
-
-        <View className="message_view_top">
-          <Text className="left_name2">订单明细</Text>
-        </View>
-
-        <View className="detail_view">
-          <View className="message_view_top">
-            <Text className="freight_text2">商品金额</Text>
-            <View style='display:flex;flex:1' />
-            <Text className="price_text2" >¥39.9</Text>
-          </View>
-          <View className="message_view_top">
-            <Text className="freight_text2">运费</Text>
-            <View style='display:flex;flex:1' />
-            <Text className="price_text2">¥31.9</Text>
+           <View style="flex:1;"/>
+          <View className='panel__content' style="margin-right:20px;">
+          <View className='example-item'>
+            <AtInputNumber size='lg' min={0} max={10} step={1} value={this.state.number5} onChange={this.handleNumberChange.bind(this, 'number5')} />
           </View>
         </View>
-
-        <View className="remarks_view">
-          <Text className="freight_text">备注</Text>
         </View>
+        <OrderItem />
+        
 
         <View className="bottom_view">
           <Text className="freight_text2">实付款：</Text>
@@ -125,6 +102,7 @@ export default class Orderpay extends Component {
             <Text className="pay_text">微信支付</Text>
           </View>
         </View>
+       
       </View>
     )
   }
