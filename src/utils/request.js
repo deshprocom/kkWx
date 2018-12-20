@@ -10,11 +10,25 @@ let Headers = {
   'Content-Type': 'application/json',
 }
 
+export function setToken(access_token){
+  Headers['access_token'] = access_token
+}
+
+export function delToken(){
+  if(Headers.hasOwnProperty("access_token")){
+     delete Headers['access_token']
+  }
+}
+
 export function get(url,data,resolve,reject) {
   let options = {url,data,resolve,reject,method: 'GET'}
   request(options)
 }
 
+export function post(url,data,resolve,reject) {
+  let options = {url,data,resolve,reject,method: 'POST'}
+  request(options)
+}
 
 export default function request (options = { method: 'GET', data: {} }) {
   if (!Api.noConsole) {

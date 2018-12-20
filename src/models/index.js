@@ -11,6 +11,7 @@
  import OrderPay from '../pages/OrderPay/model'
  import OrderList from '../pages/OrderList/model'
  import OrderDetail from '../pages/OrderDetail/model'
+ import BindMobile from '../pages/BindMobile/model'
 
  export default[
       home,
@@ -19,5 +20,6 @@
       Mine,
       OrderPay,
       OrderList,
-      OrderDetail
+      OrderDetail,
+      BindMobile
  ]

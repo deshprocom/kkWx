@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, ScrollView } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { AtTabs, AtTabsPane } from 'taro-ui'
+import { AtTabs, AtTabsPane ,AtModal} from 'taro-ui'
 import OrderItem from '../../components/order/OrderItem'
 import { logMsg } from '../../utils/utils';
 @connect(({ OrderList }) => ({
