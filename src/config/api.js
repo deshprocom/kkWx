@@ -15,7 +15,8 @@ export default  {
   one_yuan_buys:'shop/one_yuan_buys',
   shop_product:'shop/products',
   user_login:'weixin/miniprogram/login',
-  bind_mobile:'weixin/miniprogram/bind_mobile'
+  bind_mobile:'weixin/miniprogram/bind_mobile',
+  v_code:'account/v_codes'
 
 }
 

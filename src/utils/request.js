@@ -5,6 +5,7 @@
  */
 import Taro from '@tarojs/taro';
 import Api from '../config/api';
+import { logMsg } from './utils';
 
 let Headers = {
   'Content-Type': 'application/json',
@@ -46,14 +47,17 @@ export default function request (options = { method: 'GET', data: {} }) {
       if (!Api.noConsole) {
         console.log(`${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`,res);
       }
-      if (data.code !== 0) {
+      if (data.code === 0) {
+        options.resolve && options.resolve(data.data)
+      }else{
+        logMsg(data.msg)
         Taro.showToast({
           title: `${data.msg}~` || data.code,
           icon: 'none',
-          mask: true,
+          duration: 2000
         });
+        options.reject && options.reject(res)
       }
-      options.resolve && options.resolve(data.data)
       return res;
     } else {
       options.reject && options.reject(res)

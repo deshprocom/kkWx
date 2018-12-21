@@ -1,9 +1,12 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View } from '@tarojs/components';
+import { View, Picker } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { AtInput, AtForm ,AtButton} from 'taro-ui'
-@connect(({BindMobile}) => ({
+import { AtInput, AtForm, AtButton, AtList, AtListItem } from 'taro-ui'
+import { wxMobileBind, bindMobile } from '../../service/accountDao';
+import { logMsg, isObjEmpty } from '../../utils/utils';
+import { resolve } from 'path';
+@connect(({ BindMobile }) => ({
   ...BindMobile,
 }))
 export default class BindMobile extends Component {
@@ -11,13 +14,16 @@ export default class BindMobile extends Component {
     navigationBarTitleText: '绑定手机',
   };
 
-  constructor () {
+  constructor() {
     super(...arguments)
     this.state = {
-      value14: '',
-      value15: '',
+      code: '',
+      mobile: '',
       disabled: false,
-      second: 60
+      second: 60,
+      selector: ['大陆 +86', '香港 +852', '澳门 +853', '台湾 +886'],
+      selectorValue: 0,
+      btnLoading: false
     }
   }
 
@@ -25,12 +31,50 @@ export default class BindMobile extends Component {
 
   };
 
-  showTipText () {
+  showTipText() {
     return this.state.disabled ? `${this.state.second}s后重试` : '发送验证码'
   }
 
-  sendCode () {
+  submitBind = () => {
+    const { selector, selectorValue, code, mobile } = this.state
+    if (isObjEmpty(mobile) || isObjEmpty(code)) {
+      this.handleResult('没有填写完成', 'none')
+      return
+    }
+    let ext = selector[selectorValue].split('+')[1]
+    const { access_token } = this.$router.params
+    let param = {
+      code,
+      account:mobile,
+      ext,
+      access_token
+    }
+    bindMobile(param, ret => {
+
+    }, err => {
+       this.handleResult(err,'none')
+    })
+
+
+  }
+
+  wxBindMobile() {
     if (this.state.disabled) return
+    let param = {
+      option_type: 'bind_wx_account',
+      vcode_type: 'mobile',
+      mobile: this.state.mobile
+    }
+    wxMobileBind(param, ret => {
+      this.handleResult('已发送验证码', 'success')
+      this.sendCode()
+    }, err => {
+     
+    })
+  }
+
+  sendCode = () => {
+
     this.setState({
       disabled: true
     })
@@ -50,54 +94,82 @@ export default class BindMobile extends Component {
     }, 1000)
   }
 
-  handleInput (stateName, value) {
+  handleInput(stateName, value) {
     this.setState({
       [stateName]: value
     })
   }
-  handleClick () {
+  handleResult = (title, icon) => {
     Taro.showToast({
-      title: '已发送验证码',
-      icon: 'success',
+      title,
+      icon,
       duration: 2000
     })
   }
 
+  handleChange = e => {
+    this.setState({
+      selectorValue: e.detail.value
+    })
+  }
+
   render() {
+    const { selector, selectorValue, btnLoading } = this.state;
     return (
       <View className="BindMobile-page">
         <View className='panel'>
-            <View className='panel__content no-padding'>
-              <View className='component-item'>
-                <AtForm>
-                 
-                  <AtInput name='value15' border={true} type='phone' clear placeholder='请输入手机号码' value={this.state.value15} onChange={this.handleInput.bind(this, 'value15')}>
-                    <View
-                      style={{
-                        'color': this.state.disabled ? '#FF4949' : '',
-                        'fontSize': '12px',
-                        'width': '90px'
-                      }}
-                      onClick={this.sendCode.bind(this)}
-                    >
-                      {this.showTipText()}
-                    </View>
-                  </AtInput>
-                  <View style="height:1px;"/>
-
-                  <AtInput name='value14' title='验证码' type='number' maxlength='6' clear placeholder='验证码' value={this.state.value14} onChange={this.handleInput.bind(this, 'value14')}/>
-                   
-                 
-                </AtForm>
+          <View className='panel__content no-padding'>
+            <View className='component-item'>
+              <View style="margin-top:20px;">
+                <AtList>
+                  <Picker mode='selector' range={selector} value={selectorValue} onChange={this.handleChange}>
+                    <AtListItem title='国家地区' extraText={selector[selectorValue]} />
+                  </Picker>
+                </AtList>
               </View>
+              <AtForm>
+                <AtInput name='mobile'
+                  border={true}
+                  type='phone'
+                  clear
+                  placeholder='请输入手机号码'
+                  value={this.state.mobile}
+                  onChange={this.handleInput.bind(this, 'mobile')}>
+                  <View
+                    style={{
+                      'color': this.state.disabled ? '#FF4949' : '',
+                      'fontSize': '12px',
+                      'width': '90px'
+                    }}
+                    onClick={this.wxBindMobile.bind(this)}
+                  >
+                    {this.showTipText()}
+                  </View>
+                </AtInput>
+                <View style="height:1px;" />
+
+                <AtInput name='code'
+                  title='验证码'
+                  type='number'
+                  maxlength='6'
+                  clear
+                  placeholder='验证码'
+                  value={this.state.code}
+                  onChange={this.handleInput.bind(this, 'code')} />
+
+
+              </AtForm>
             </View>
+          </View>
 
-            <View className='btn-item btn-bind'>
-                <AtButton type='primary' loading>Loading</AtButton>
-              </View>
+          <View className='btn-item btn-bind'>
+            <AtButton type='primary'
+              loading={btnLoading}
+              onClick={this.submitBind}>绑定手机</AtButton>
           </View>
         </View>
-     
+      </View>
+
     )
   }
 }

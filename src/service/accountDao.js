@@ -18,6 +18,15 @@ export function userLogin(params,resolve,reject){
 export function bindMobile(params,resolve,reject){
       post(api.bind_mobile,params,ret=>{
             logMsg('手机号绑定',ret)
+            const {status,access_token} = ret;
+            if(status === 'login_success'){
+                  setToken(ret.access_token)
+                  Taro.setStorageSync('loginUser',ret)
+            }
             resolve(ret.data)
       },reject)
+}
+
+export function wxMobileBind(params,resolve,reject){
+      post(api.v_code,params,resolve,reject)
 }
