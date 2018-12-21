@@ -45,14 +45,15 @@ export default class BindMobile extends Component {
     const { access_token } = this.$router.params
     let param = {
       code,
-      account:mobile,
+      account: mobile,
       ext,
       access_token
     }
     bindMobile(param, ret => {
-
+      this.handleResult('手机绑定成功', 'success')
+      Taro.navigateBack({ delta: 1 })
     }, err => {
-       this.handleResult(err,'none')
+
     })
 
 
@@ -68,8 +69,9 @@ export default class BindMobile extends Component {
     wxMobileBind(param, ret => {
       this.handleResult('已发送验证码', 'success')
       this.sendCode()
+
     }, err => {
-     
+
     })
   }
 
