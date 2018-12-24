@@ -1,0 +1,5 @@
+@import "../../styles/mixin";
+
+.Login-page {
+  @include wh(100%, 100%);
+}

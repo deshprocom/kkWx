@@ -52,8 +52,9 @@ export default class Shopdetail extends Component {
 
 
 
-      goOrderPay(variants, e) {
+      goOrderPay(title,variants, e) {
             let select = variants[0]
+            select.title = title
             let url = e.currentTarget.dataset.url + `?${urlEncode(select)}`
             logMsg('预支付',url)
             Taro.navigateTo({ url })
@@ -154,7 +155,7 @@ export default class Shopdetail extends Component {
                                     <Text className="btn_text">咨询客服</Text>
                               </View>
                               <View data-url='/pages/OrderPay/index'
-                                    onClick={this.goOrderPay.bind(this, variants)}
+                                    onClick={this.goOrderPay.bind(this, title,variants)}
                                     className="btn_view  btn3_view">
                                     <Text className="btn_text">立即购买</Text>
                               </View>

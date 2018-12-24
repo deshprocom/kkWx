@@ -10,18 +10,19 @@ export default class OrderItem extends Component {
   }
 
   render() {
+    const {title,original_price,price,image} = this.props.item
     return (<View className="order_list_view"
       onClick={this.goOrderDetail.bind(this)}>
       <View className="list_view">
         <Image
           className="list_btn_img"
-          src="../../images/tab/cart-active.png"
+          src={image}
         />
         <View className="list_view_right">
-          <Text className="intro_text">新概念短线蓝牙耳机 立体声音低声智能降噪</Text>
+          <Text className="intro_text">{title}</Text>
           <View className="right_view_middle">
-            <Text className="price_text">¥39.9</Text>
-            <Text className="origin_price_text">¥69.9</Text>
+            <Text className="price_text">{`¥${price}`}</Text>
+            <Text className="origin_price_text">{`¥${original_price}`}</Text>
             <View style='display:flex;flex:1' />
             <Text className="count_text"><Text className="count_text1">X</Text>1</Text>
           </View>

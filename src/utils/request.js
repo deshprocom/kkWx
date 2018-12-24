@@ -5,19 +5,19 @@
  */
 import Taro from '@tarojs/taro';
 import Api from '../config/api';
-import { logMsg } from './utils';
+import { logMsg,showToast } from './utils';
 
 let Headers = {
   'Content-Type': 'application/json',
 }
 
 export function setToken(access_token){
-  Headers['access_token'] = access_token
+  Headers['x-access-token'] = access_token
 }
 
 export function delToken(){
-  if(Headers.hasOwnProperty("access_token")){
-     delete Headers['access_token']
+  if(Headers.hasOwnProperty("x-access-token")){
+     delete Headers['x-access-token']
   }
 }
 
@@ -60,8 +60,12 @@ export default function request (options = { method: 'GET', data: {} }) {
       }
       return res;
     } else {
+      if(statusCode ===401){
+        showToast('登录过期,请重新登录')
+        Taro.navigateTo({url:'/pages/Mine/index'})
+      }
       options.reject && options.reject(res)
-      throw new Error(`网络请求错误，状态码${statusCode}`);
+      // throw new Error(`网络请求错误，状态码${statusCode}`);
     }
   })
 }

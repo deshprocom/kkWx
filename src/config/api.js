@@ -16,7 +16,8 @@ export default  {
   shop_product:'shop/products',
   user_login:'weixin/miniprogram/login',
   bind_mobile:'weixin/miniprogram/bind_mobile',
-  v_code:'account/v_codes'
+  v_code:'account/v_codes',
+  shop_order:'shop/orders'
 
 }
 

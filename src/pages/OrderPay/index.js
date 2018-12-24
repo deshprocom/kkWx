@@ -3,9 +3,10 @@ import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import right_img from '../../images/mine/right.png'
-import { logMsg } from '../../utils/utils';
+import { logMsg, mul } from '../../utils/utils';
 import { AtInput, AtInputNumber, AtTextarea } from 'taro-ui'
 import OrderItem from '../../components/order/OrderItem'
+import { createOrder } from '../../service/Mall';
 
 @connect(({ OrderPay }) => ({
   ...OrderPay,
@@ -14,25 +15,35 @@ export default class Orderpay extends Component {
   config = {
     navigationBarTitleText: 'OrderPay',
   };
-
-  state = {
-    userName: '',
-    mobile: '',
-    product: {},
-    number5: 1,
-  }
-
-  handleNumberChange (stateName, value) {
-    this.setState({
-      [stateName]: value
-    })
-  }
-
-  componentDidMount = () => {
+  constructor(props) {
+    super(props)
 
     let product = this.$router.params
     logMsg('参数', product)
 
+    const { price } = product
+    this.state = {
+      userName: '',
+      mobile: '',
+      product,
+      selectNum: 1,
+      truePrice: price,
+      memo: ''
+    }
+  }
+
+
+
+  handleNumberChange(stateName, value) {
+    const { price } = this.state.product
+    let truePrice = mul(value, price)
+    this.setState({
+      [stateName]: value,
+      truePrice: truePrice
+    })
+  }
+
+  componentDidMount = () => {
     try {
       let loginUser = Taro.getStorageSync('loginUser')
       logMsg('登录', loginUser)
@@ -40,25 +51,51 @@ export default class Orderpay extends Component {
         let user = loginUser.user
         this.setState({
           userName: user.nick_name,
-          mobile: user.mobile,
-          product
+          mobile: user.mobile
         })
       }
     } catch (error) {
 
     }
+  }
 
-  };
+  onCreateOrder = () => {
+    const { product, selectNum, userName, mobile, memo } = this.state
+    let params = {
+      variants: [
+        {
+          id: product.id,
+          number: selectNum
+        }],
+      shipping_info: {
+        name: userName,
+        mobile
+      },
+      memo
+    }
+
+    createOrder(params, ret => {
+      logMsg("创建订单", ret)
+    }, err => {
+      logMsg("创建订单", err)
+    })
+
+  }
+  areaMeno(e) {
+    this.setState({
+      memo: e.target.value
+    })
+  }
 
   render() {
-    const { userName, mobile } = this.state
+    const { userName, mobile, truePrice, product, selectNum, meno } = this.state
     return (
       <View className="OrderPay-page">
-       <View className="message_view_top">
+        <View className="message_view_top">
           <Text className="left_name2">输入订单信息</Text>
         </View>
         <View className="order_top_view">
-       
+
           <AtInput
             name='value1'
             title={`姓    名: `}
@@ -78,31 +115,40 @@ export default class Orderpay extends Component {
             className='textarea'
             maxLength={200}
             placeholder='备注...'
-            height={200}
+            height={'200'}
+            onChange={this.areaMeno.bind(this)}
           />
 
         </View>
         <View className="message_view_top">
           <Text className="left_name2">商品信息</Text>
-           <View style="flex:1;"/>
+          <View style="flex:1;" />
           <View className='panel__content' style="margin-right:20px;">
-          <View className='example-item'>
-            <AtInputNumber size='lg' min={0} max={10} step={1} value={this.state.number5} onChange={this.handleNumberChange.bind(this, 'number5')} />
+            <View className='example-item'>
+              <AtInputNumber size='lg'
+                value={meno}
+                min={0}
+                max={parseInt(product.stock)}
+                step={1}
+                value={selectNum}
+                onChange={this.handleNumberChange.bind(this, 'selectNum')} />
+            </View>
           </View>
         </View>
-        </View>
-        <OrderItem />
-        
+        <OrderItem item={product} />
+
 
         <View className="bottom_view">
           <Text className="freight_text2">实付款：</Text>
-          <Text className="price_text">¥89.9</Text>
+          <Text className="price_text">{`¥${truePrice}`}</Text>
           <View style='display:flex;flex:1' />
-          <View className="pay_view">
+          <View
+            onClick={this.onCreateOrder}
+            className="pay_view">
             <Text className="pay_text">微信支付</Text>
           </View>
         </View>
-       
+
       </View>
     )
   }

@@ -29,7 +29,6 @@ export default class Mine extends Component {
     logMsg('用户信息', e)
     Taro.login({
       success: function (res) {
-
         let params = {
           code: res.code,
           encrypted_data: e.currentTarget.encryptedData,
