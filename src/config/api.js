@@ -13,7 +13,13 @@ export default  {
   baseUrl:test,
   shopCategories:'shop/categories',
   one_yuan_buys:'shop/one_yuan_buys',
-  shop_product:'shop/products'
+  shop_product:'shop/products',
+  user_login:'weixin/miniprogram/login',
+  bind_mobile:'weixin/miniprogram/bind_mobile',
+  v_code:'account/v_codes',
+  shop_order:'shop/orders',
+  new_shop_order:'shop/orders/new'
+
 }
 
 

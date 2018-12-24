@@ -3,7 +3,7 @@ import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components'
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { logMsg } from '../../utils/utils';
-import ShopItem from './ShopItem';
+import ShopItem from '../../components/shopItem/ShopItem';
 import { getOneBuysList } from './service'
 import { AtTabs, AtTabsPane } from 'taro-ui'
 
@@ -20,6 +20,19 @@ export default class Home extends Component {
 
   };
 
+  constructor(props){
+    super(props)
+    try {
+      let loginUser = Taro.getStorageSync('loginUser')
+      logMsg('登录用户', loginUser)
+      if (loginUser && loginUser.user) {
+        this.props.dispatch({type:'Mine/effectsUser',loginUser})
+      }
+    } catch (error) {
+
+    }
+  }
+
   state = {
     goingPage: 1,
     pastPage: 1,
@@ -29,7 +42,7 @@ export default class Home extends Component {
   }
 
   curTab = 0;
-  
+
   banners = [
     {
       src: baseUrl + 'banner/a427450bfd8d9c1aec3147abf07e3ce5.png'
@@ -146,14 +159,14 @@ export default class Home extends Component {
             style="width:100%;"
             onClick={this.handleClick.bind(this, 'currentTab')}>
             <AtTabsPane current={currentTab} index={0} >
-              {goingList.map((item, index) =>
+              {goingList.length > 0 && goingList.map((item, index) =>
                 (<ShopItem
                   style="width:100%;"
                   key={`shop_${index}`}
                   item={item} />))}
             </AtTabsPane>
             <AtTabsPane current={currentTab} index={1}>
-              {pastList.map((item, index) =>
+              {pastList.length > 0 && pastList.map((item, index) =>
                 (<ShopItem
                   style="width:100%;"
                   key={`shop_${index}`}

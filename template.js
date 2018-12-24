@@ -23,7 +23,7 @@ import './index.scss';
 @connect(({${dirName}}) => ({
   ...${dirName},
 }))
-export default class ${titleCase(dirName)} extends Component {
+export default class ${dirName} extends Component {
   config = {
     navigationBarTitleText: '${dirName}',
   };
@@ -62,10 +62,13 @@ export default {
   effects: {
     * effectsDemo(_, { call, put }) {
       const { statusCode, data } = yield call(${dirName}Api.demo, {});
-      yield put({ type: 'save',
-          payload: {
-            topData: data,
-          } });
+      if (statusCode === 200 && data){
+        yield put({ type: 'save',
+        payload: {
+          topData: data.data,
+        } });
+      }
+     
     },
   },
 
