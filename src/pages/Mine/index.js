@@ -38,7 +38,7 @@ export default class Mine extends Component {
         userLogin(params, ret => {
           let url = `/pages/BindMobile/index?${urlEncode(ret)}`
           if (ret.status === 'need_register') {
-            Taro.navigateTo({ url: '/pages/BindMobile/index' })
+            Taro.navigateTo({ url})
           }
         }, err => {
 

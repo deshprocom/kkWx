@@ -22,7 +22,7 @@ export function bindMobile(params, resolve, reject) {
             if (status === 'login_success') {
                   dva.getDispatch()({ type: 'Mine/effectsUser', loginUser: ret })
             }
-            resolve(ret.data)
+            resolve(ret)
       }, reject)
 }
 

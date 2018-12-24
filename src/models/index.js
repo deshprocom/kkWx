@@ -12,6 +12,7 @@
  import OrderList from '../pages/OrderList/model'
  import OrderDetail from '../pages/OrderDetail/model'
  import BindMobile from '../pages/BindMobile/model'
+ import Login from '../pages/Login/model'
 
  export default[
       home,
@@ -21,5 +22,6 @@
       OrderPay,
       OrderList,
       OrderDetail,
-      BindMobile
+      BindMobile,
+      Login
  ]

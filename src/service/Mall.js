@@ -13,4 +13,9 @@ export function getShopCategorios(resolve,reject) {
 
 export function createOrder(param,resolve,reject){
   post(api.shop_order,param,resolve,reject)
+ 
+}
+
+export function newOrder(param,resolve,reject){
+  post(api.new_shop_order,param,resolve,reject)
 }

@@ -36,7 +36,6 @@ export default class BindMobile extends Component {
   }
 
   submitBind = () => {
-    this.props.dispatch({action:'Mine/effectsUser',user:{nick:'2323'}})
     const { selector, selectorValue, code, mobile } = this.state
     if (isObjEmpty(mobile) || isObjEmpty(code)) {
       this.handleResult('没有填写完成', 'none')
@@ -50,6 +49,7 @@ export default class BindMobile extends Component {
       ext,
       access_token
     }
+    logMsg('绑定参数',param)
     bindMobile(param, ret => {
       this.handleResult('手机绑定成功', 'success')
       Taro.navigateBack({ delta: 1 })

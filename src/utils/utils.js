@@ -1,10 +1,32 @@
 import moment from 'moment'
 import _ from 'lodash'
 import Taro from '@tarojs/taro'
+import { userLogin } from '../service/accountDao';
 
 
-export function reLogin(user){
-    
+export function reLogin(e){
+    logMsg('用户信息', e)
+    Taro.login({
+      success: function (res) {
+        let params = {
+          code: res.code,
+          encrypted_data: e.currentTarget.encryptedData,
+          iv: e.currentTarget.iv
+        }
+        logMsg('登陆信息', params)
+        userLogin(params, ret => {
+          let url = `/pages/BindMobile/index?${urlEncode(ret)}`
+          if (ret.status === 'need_register') {
+            Taro.navigateTo({ url })
+          }else{
+              Taro.navigateBack()
+          }
+        }, err => {
+
+        })
+
+      }
+    })
 }
 
 export function showToast(title){

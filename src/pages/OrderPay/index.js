@@ -6,7 +6,7 @@ import right_img from '../../images/mine/right.png'
 import { logMsg, mul } from '../../utils/utils';
 import { AtInput, AtInputNumber, AtTextarea } from 'taro-ui'
 import OrderItem from '../../components/order/OrderItem'
-import { createOrder } from '../../service/Mall';
+import { createOrder, newOrder } from '../../service/Mall';
 
 @connect(({ OrderPay }) => ({
   ...OrderPay,
@@ -44,6 +44,8 @@ export default class Orderpay extends Component {
   }
 
   componentDidMount = () => {
+
+    newOrder(this.getParam())
     try {
       let loginUser = Taro.getStorageSync('loginUser')
       logMsg('登录', loginUser)
@@ -59,7 +61,7 @@ export default class Orderpay extends Component {
     }
   }
 
-  onCreateOrder = () => {
+  getParam = ()=>{
     const { product, selectNum, userName, mobile, memo } = this.state
     let params = {
       variants: [
@@ -69,12 +71,25 @@ export default class Orderpay extends Component {
         }],
       shipping_info: {
         name: userName,
-        mobile
+        mobile,
+        address:{
+          province:'',
+          city: '',
+          area: '',
+          detail: ''
+        }
       },
-      memo
+      memo,
+      deduction: false,
+      deduction_numbers: 0
     }
+    return params
+  }
 
-    createOrder(params, ret => {
+  onCreateOrder = () => {
+    
+
+    createOrder(this.getParam()), ret => {
       logMsg("创建订单", ret)
     }, err => {
       logMsg("创建订单", err)

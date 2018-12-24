@@ -38,21 +38,21 @@ export default function request (options = { method: 'GET', data: {} }) {
   return Taro.request({
     url: Api.baseUrl + options.url,
     data: options.data,
-    headers: Headers,
+    header: Headers,
     method: options.method.toUpperCase(),
   }).then((res) => {
 
     const { statusCode, data } = res;
     if (statusCode >= 200 && statusCode < 300) {
       if (!Api.noConsole) {
-        console.log(`${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`,res);
+        console.log(`${new Date().toLocaleString()}【 M=${options.url} 】【接口响应：】`,res)
       }
       if (data.code === 0) {
         options.resolve && options.resolve(data.data)
       }else{
         logMsg(data.msg)
         Taro.showToast({
-          title: `${data.msg}~` || data.code,
+          title: `${data.msg}` || data.code,
           icon: 'none',
           duration: 2000
         });
@@ -62,7 +62,7 @@ export default function request (options = { method: 'GET', data: {} }) {
     } else {
       if(statusCode ===401){
         showToast('登录过期,请重新登录')
-        Taro.navigateTo({url:'/pages/Mine/index'})
+        Taro.navigateTo({url:'/pages/Login/index'})
       }
       options.reject && options.reject(res)
       // throw new Error(`网络请求错误，状态码${statusCode}`);

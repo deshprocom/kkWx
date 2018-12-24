@@ -38,7 +38,8 @@ class App extends Component {
       'pages/OrderPay/index',
       'pages/OrderList/index',
       'pages/OrderDetail/index',
-      'pages/BindMobile/index'
+      'pages/BindMobile/index',
+      'pages/Login/index'
     ],
     window: {
       backgroundTextStyle: 'light',
