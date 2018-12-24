@@ -36,6 +36,7 @@ export default class BindMobile extends Component {
   }
 
   submitBind = () => {
+    this.props.dispatch({action:'Mine/effectsUser',user:{nick:'2323'}})
     const { selector, selectorValue, code, mobile } = this.state
     if (isObjEmpty(mobile) || isObjEmpty(code)) {
       this.handleResult('没有填写完成', 'none')

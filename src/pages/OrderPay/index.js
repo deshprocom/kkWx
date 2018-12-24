@@ -35,7 +35,7 @@ export default class Orderpay extends Component {
 
     try {
       let loginUser = Taro.getStorageSync('loginUser')
-      logMsg('登录用户', loginUser)
+      logMsg('登录', loginUser)
       if (loginUser && loginUser.user) {
         let user = loginUser.user
         this.setState({

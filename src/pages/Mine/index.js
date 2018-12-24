@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Button, FunctionalPageNavigator } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, urlEncode } from '../../utils/utils';
+import { logMsg, urlEncode, isObjEmpty } from '../../utils/utils';
 import right_img from '../../images/mine/right.png'
 import img_all from '../../images/mine/all.png'
 import img_dgh from '../../images/mine/dgh.png'
@@ -15,35 +15,36 @@ import { userLogin } from '../../service/accountDao';
   ...Mine,
 }))
 export default class Mine extends Component {
+
+
   config = {
     navigationBarTitleText: 'Mine',
   };
 
   componentDidMount = () => {
-   
+
   };
 
-  onUserInfo(e){
+  onUserInfo(e) {
     logMsg('用户信息', e)
     Taro.login({
       success: function (res) {
-       
+
         let params = {
-          code:res.code,
-          encrypted_data:e.currentTarget.encryptedData,
-          iv:e.currentTarget.iv
+          code: res.code,
+          encrypted_data: e.currentTarget.encryptedData,
+          iv: e.currentTarget.iv
         }
         logMsg('登陆信息', params)
-        userLogin(params,ret=>{
+        userLogin(params, ret => {
           let url = `/pages/BindMobile/index?${urlEncode(ret)}`
-          Taro.navigateTo({url})
-        //  if(ret.status === 'need_register'){
-        //    Taro.navigateTo({url:'/pages/BindMobile/index'})
-        //  }
-        },err=>{
+          if (ret.status === 'need_register') {
+            Taro.navigateTo({ url: '/pages/BindMobile/index' })
+          }
+        }, err => {
 
         })
-        
+
       }
     })
   }
@@ -58,10 +59,12 @@ export default class Mine extends Component {
   }
 
   render() {
+    const { loginUser } = this.props
+    logMsg('用户', loginUser)
     return (
       <View className="Mine-page">
 
-        <Button 
+        {isObjEmpty(loginUser) ? <Button
           className="mine_top_view"
           openType='getUserInfo'
           onGetUserInfo={this.onUserInfo.bind(this)}>
@@ -75,7 +78,17 @@ export default class Mine extends Component {
             className="right_image"
             src={right_img}
           />
-        </Button>
+        </Button> : <Button
+          className="mine_top_view"
+        >
+            <Image
+              className="per_image"
+              src={loginUser.user && loginUser.user.avatar}
+            />
+            <Text className="top_name">{loginUser.user && loginUser.user.nick_name}</Text>
+            
+          </Button>}
+
 
         <View className="mine_orders_view">
           <Text className="order_text">我的订单</Text>
