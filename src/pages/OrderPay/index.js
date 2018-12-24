@@ -89,7 +89,7 @@ export default class Orderpay extends Component {
   onCreateOrder = () => {
     
 
-    createOrder(this.getParam()), ret => {
+    createOrder(this.getParam(), ret => {
       logMsg("创建订单", ret)
     }, err => {
       logMsg("创建订单", err)
