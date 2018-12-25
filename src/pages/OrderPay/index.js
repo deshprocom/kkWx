@@ -45,7 +45,7 @@ export default class Orderpay extends Component {
 
   componentDidMount = () => {
 
-    newOrder(this.getParam())
+    // newOrder(this.getParam())
     try {
       let loginUser = Taro.getStorageSync('loginUser')
       logMsg('登录', loginUser)
@@ -73,10 +73,10 @@ export default class Orderpay extends Component {
         name: userName,
         mobile,
         address:{
-          province:'',
-          city: '',
-          area: '',
-          detail: ''
+          province:'广东省',
+          city: '深圳市',
+          area: '福田区',
+          detail: '卓越世纪3号楼'
         }
       },
       memo,
@@ -87,7 +87,6 @@ export default class Orderpay extends Component {
   }
 
   onCreateOrder = () => {
-    
 
     createOrder(this.getParam(), ret => {
       logMsg("创建订单", ret)

@@ -29,6 +29,16 @@ export function reLogin(e){
     })
 }
 
+let systemInfo = {}
+export function getSysInfo(){
+  return systemInfo
+}
+
+export function setSystemInfo(info){
+    logMsg('系统信息',info)
+    systemInfo = info
+}
+
 export function showToast(title){
     Taro.showToast({
         title,
