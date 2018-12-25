@@ -3,6 +3,8 @@ import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import OrderItem from '../../components/order/OrderItem'
+import { shopOrderDetail } from '../../service/Mall';
+import { logMsg } from '../../utils/utils';
 
 @connect(({OrderDetail}) => ({
   ...OrderDetail,
@@ -13,7 +15,13 @@ export default class Orderdetail extends Component {
   };
 
   componentDidMount = () => {
-
+      let param = this.$router.params
+     
+      shopOrderDetail(param.order_number,ret=>{
+        logMsg('订单详情',ret)
+      },err=>{
+        logMsg('订单详情',err)
+      })
   };
 
   render() {
@@ -22,7 +30,7 @@ export default class Orderdetail extends Component {
         <View className="detail_top_view">
           <Text className="top_text">商品信息</Text>
         </View>
-        <OrderItem/>
+        {/* <OrderItem/> */}
 
         <View className="detail_top_view" style="margin-top:10px;">
           <Text className="top_text">订单信息</Text>

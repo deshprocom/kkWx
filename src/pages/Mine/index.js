@@ -149,7 +149,7 @@ export default class Mine extends Component {
           <Text className="order_text">待使用订单</Text>
         </View>
 
-        <OrderItem />
+        {/* <OrderItem /> */}
       </View>
     )
   }
