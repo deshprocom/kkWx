@@ -5,7 +5,7 @@ import './index.scss';
 import right_img from '../../images/mine/right.png'
 import { logMsg, mul } from '../../utils/utils';
 import { AtInput, AtInputNumber, AtTextarea } from 'taro-ui'
-import OrderItem from '../../components/order/OrderItem'
+import OrderItem from '../../components/preOrder'
 import { createOrder, newOrder } from '../../service/Mall';
 
 @connect(({ OrderPay }) => ({

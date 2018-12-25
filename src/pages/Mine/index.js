@@ -8,7 +8,7 @@ import img_all from '../../images/mine/all.png'
 import img_dgh from '../../images/mine/dgh.png'
 import img_dsh from '../../images/mine/dsh.png'
 import img_dzf from '../../images/mine/dzf.png'
-import OrderItem from '../../components/order/OrderItem'
+import OrderItem from '../../components/preOrder'
 import { userLogin } from '../../service/accountDao';
 
 @connect(({ Mine }) => ({
@@ -149,7 +149,7 @@ export default class Mine extends Component {
           <Text className="order_text">待使用订单</Text>
         </View>
 
-        {/* <OrderItem /> */}
+        <OrderItem style="width:100%;"/>
       </View>
     )
   }
