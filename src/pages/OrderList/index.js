@@ -127,7 +127,7 @@ export default class Orderlist extends Component {
               style={`height:100vh;`}>
               {dsyList.map((item, index) =>
                 (<OrderItem key={`dsy_${index}`}
-                  item={item} />))}
+                  item={item}  style="width:100%"/>))}
 
               <View style='height:60px' />
             </ScrollView>
@@ -138,7 +138,7 @@ export default class Orderlist extends Component {
               style={`height:100vh;`}>
               {ywcList.map((item, index) =>
                 (<OrderItem key={`ywc_${index}`}
-                  item={item} />))}
+                  item={item}  style="width:100%"/>))}
 
               <View style='height:60px' />
             </ScrollView>
@@ -151,7 +151,7 @@ export default class Orderlist extends Component {
               style={`height:100vh;`}>
               {allList.map((item, index) =>
                 (<OrderItem key={`all_${index}`}
-                  item={item} />))}
+                  item={item}  style="width:100%"/>))}
 
               <View style='height:60px' />
             </ScrollView>
