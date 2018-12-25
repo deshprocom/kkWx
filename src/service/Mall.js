@@ -34,28 +34,21 @@ export function shopOrderDetail(id,resolve,reject){
 
 export function shopWxPay(order_num,resolve,reject){
   post(`${api.shop_order}/${order_num}/wx_pay`, {trade_source:'miniprogram'}, ret=>{
-    let pay = {}
-    pay.timeStamp = ret.timestamp
-    pay.nonceStr = ret.noncestr
-    pay.signType = 'MD5'
-    pay.paySign = ret.sign
-    pay.package = ret.package
+   
     let callback = {success:(res)=>{
       logMsg('微信支付结果1',res)
-      shopWxPayEnd(order_num,result=>{
-        logMsg('微信支付结果2',result)
-      })
+      
     },fail:(res)=>{
       showToast(res.err_desc)
       logMsg('微信支付失败',res)
     }}
-    Object.assign(pay,callback)
-    logMsg('微信支付参数',pay)
-    Taro.requestPayment(pay)
+    Object.assign(ret,callback)
+    logMsg('微信支付参数',ret)
+    Taro.requestPayment(ret)
 
   }, reject)
 }
 
 export function shopWxPayEnd(order_num,resolve,reject){
-  post(`${api.shop_order}/${order_num}/wx_paid_result`, param, resolve, reject)
+  post(`${api.shop_order}/${order_num}/wx_paid_result`, {}, resolve, reject)
 }
