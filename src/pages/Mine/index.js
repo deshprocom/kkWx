@@ -148,8 +148,9 @@ export default class Mine extends Component {
         <View className="unused_view">
           <Text className="order_text">待使用订单</Text>
         </View>
-
-        <OrderItem style="width:100%;"/>
+          
+        <OrderItem style="width:100%"/>
+        
       </View>
     )
   }

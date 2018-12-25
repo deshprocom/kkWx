@@ -15,11 +15,12 @@ export default class PreOrder extends Component {
 
     return (<View className="order_list_view"
       onClick={this.goOrderDetail.bind(this,item)}>
-      <View className="list_view">
+      <View className="list_view" >
         <Image
           className="list_btn_img"
           src="https://cdn-upyun.deshpro.com/uploads/products/Variant/4/b6c9b1e09d8dadf4087f5039876e19ec.jpg!sm"
         />
+        
         <View className="list_view_right">
           <Text className="intro_text">拉萨地方是对方离开</Text>
           <View className="right_view_middle">
