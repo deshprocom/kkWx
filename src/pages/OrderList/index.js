@@ -4,8 +4,10 @@ import { connect } from '@tarojs/redux';
 import './index.scss';
 import { AtTabs, AtTabsPane, AtModal } from 'taro-ui'
 import OrderItem from '../../components/order/OrderItem'
-import { logMsg, getSysInfo } from '../../utils/utils';
+import { logMsg, getSysInfo, urlEncode } from '../../utils/utils';
 import { shopOrderList } from '../../service/Mall';
+
+
 @connect(({ OrderList }) => ({
   ...OrderList,
 }))
