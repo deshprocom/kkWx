@@ -20,19 +20,6 @@ export default class Home extends Component {
 
   };
 
-  constructor(props){
-    super(props)
-    try {
-      let loginUser = Taro.getStorageSync('loginUser')
-      logMsg('登录用户', loginUser)
-      if (loginUser && loginUser.user) {
-        this.props.dispatch({type:'Mine/effectsUser',loginUser})
-      }
-    } catch (error) {
-
-    }
-  }
-
   state = {
     goingPage: 1,
     pastPage: 1,
@@ -61,6 +48,14 @@ export default class Home extends Component {
 
   componentDidMount = () => {
     this.refreshLoad(REFRESH)
+    try {
+      let loginUser = Taro.getStorageSync('loginUser')
+      logMsg('登录用户', loginUser)
+      if (loginUser && loginUser.user) {
+        this.props.dispatch({type:'Mine/effectsUser',loginUser})
+      }
+    } catch (error) {
+    }
   };
 
 

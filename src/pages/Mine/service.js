@@ -1,9 +1,10 @@
 import Request from '../../utils/request';
+import api from '../../config/api'
 
-export const demo = (data) => {
+export const getPaids = (data) => {
   return Request({
-    url: '路径',
-    method: 'POST',
+    url:api.shop_order,
+    method: 'get',
     data,
   });
 };
