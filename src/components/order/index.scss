@@ -3,8 +3,8 @@
    .order_list_view{
       margin-top: 2px;
       width:100%;
-      background_color:#ECECEE;
-    
+      background-color:#ECECEE;
+      margin-bottom: 10px;
       .item_top_view{
         @include fr(center);
         padding-top: 20px;
@@ -23,13 +23,13 @@
             background-color: #FBFAFA
           }
           .list_btn_img{
-            width:35%;
+            width:200px;
             height:200px;
             margin-right: 12px;
           }
           .list_view_right{
             @include fc(flex-start);
-            width:65%;
+            height:200px;
           }
           .intro_text{
             @include sc(32px,#1c1c1c);

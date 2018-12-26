@@ -43,7 +43,10 @@ export default class OrderItem extends Component {
           src={product.image}
         />
         <View className="list_view_right">
+          <View style="flex:1;">
           <Text className="intro_text">{product.title}</Text>
+          </View>
+          
           <View className="right_view_middle">
             <Text className="price_text">{`¥${product.price}`}</Text>
             <Text className="origin_price_text">{`¥${product.original_price}`}</Text>
