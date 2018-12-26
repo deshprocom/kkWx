@@ -1,10 +1,11 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View } from '@tarojs/components';
+import { View ,Canvas} from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import OrderItem from '../../components/order/OrderItem'
 import { shopOrderDetail } from '../../service/Mall';
 import { logMsg } from '../../utils/utils';
+import drawQrcode from 'weapp-qrcode'
 
 @connect(({OrderDetail}) => ({
   ...OrderDetail,
@@ -16,7 +17,12 @@ export default class Orderdetail extends Component {
 
   componentDidMount = () => {
       let param = this.$router.params
-     
+      drawQrcode({
+        width: 200,
+        height: 200,
+        canvasId: 'OrderQrcode',
+        text: param.order_number
+      })
       shopOrderDetail(param.order_number,ret=>{
         logMsg('订单详情',ret)
       },err=>{
@@ -47,6 +53,7 @@ export default class Orderdetail extends Component {
         </View>
         <View className="erweima_view">
           <Text className="text1">商家扫码</Text>
+          <Canvas style="width: 200px; height: 200px;" canvas-id="OrderQrcode"></Canvas>
         </View>
 
         <View className="btn_view">

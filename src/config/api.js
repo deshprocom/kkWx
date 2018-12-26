@@ -18,8 +18,7 @@ export default  {
   bind_mobile:'weixin/miniprogram/bind_mobile',
   v_code:'account/v_codes',
   shop_order:'shop/orders',
-  new_shop_order:'shop/orders/new',
-  shop_order:'shop/orders'
+  new_shop_order:'shop/orders/new'
 
 }
 

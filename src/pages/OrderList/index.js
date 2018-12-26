@@ -62,7 +62,7 @@ export default class Orderlist extends Component {
         listkey = 'dfkList'
         break;
       case 1:
-        status = 'delivered'
+        status = 'paid'
         pagekey = 'dsyPage'
         listkey = 'dsyList'
         break;
