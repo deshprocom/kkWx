@@ -39,7 +39,7 @@ export function shopWxPay(order_num,resolve,reject){
       logMsg('微信支付结果1',res)
       
     },fail:(res)=>{
-      showToast(res.err_desc)
+      res.err_desc && showToast(res.err_desc)
       logMsg('微信支付失败',res)
     }}
     Object.assign(ret,callback)

@@ -12,22 +12,18 @@
             margin-right: 20px;
           }
           .list_btn_img{
-            width:35%;
+            width:200px;
             height:200px;
             margin-right: 20px;
           }
           .list_view_right{
             @include fc(flex-start);
-            width:65%;
+            height: 200px;
           }
           .intro_text{
             @include sc(32px,#1c1c1c);
           }
-          .right_view_middle{
-            @include fr(center);
-            width:100%;
-            margin-top: 5px;
-          }
+      
           .price_text{
             @include sc(30px,#E54A2E);
             margin-right: 25px;
@@ -37,31 +33,7 @@
             @include sc(32px,#1c1c1c);
             text-decoration-line: line-through
           }
-          .count_text{
-            @include sc(32px,#1c1c1c);
-            font-weight: bold;
-          }
-          .count_text1{
-            @include sc(36px,#1c1c1c);
-            font-weight: bold;
-          }
-          .use_btn_view{
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 18px;
-            padding-right: 25px;
-            border-radius: 2px;
-            background-color: #F78181;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 25px;
-          }
-          .use_text{
-            @include sc(28px,white);
-          }
-          .freight_text{
-            @include sc(28px,#1c1c1c);
-          }
+        
+       
     }
     
