@@ -30,7 +30,7 @@ export default {
     * getPaid(_, { call, put }) {
 
       let param = {
-        status: 'paid',
+        status: 'undelivered',
         page: 1,
         page_size: 10
       }

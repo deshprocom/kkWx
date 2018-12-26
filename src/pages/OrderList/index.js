@@ -37,8 +37,8 @@ export default class Orderlist extends Component {
 
 
   componentDidMount = () => {
-
-    this.getOrderList(0, 1)
+    const {currentTab} = this.state
+    this.getOrderList(currentTab, 1)
   };
 
   handleClick(stateName, value) {
@@ -62,7 +62,7 @@ export default class Orderlist extends Component {
         listkey = 'dfkList'
         break;
       case 1:
-        status = 'paid'
+        status = 'undelivered'
         pagekey = 'dsyPage'
         listkey = 'dsyList'
         break;
@@ -72,7 +72,7 @@ export default class Orderlist extends Component {
         listkey = 'ywcList'
         break;
       case 3:
-        status = 'all'
+        status = ''
         pagekey = 'allPage'
         listkey = 'allList'
         break;
@@ -84,9 +84,16 @@ export default class Orderlist extends Component {
     }
     shopOrderList(param, ret => {
       if (ret && ret.items && ret.items.length > 0) {
-        page++
-        let list = this.state[listkey].concat(this.state[listkey], ret.items)
-        logMsg('订单列表', list)
+       
+        let list = []
+        if(page>1){
+          page++
+          list = this.state[listkey].concat(this.state[listkey], ret.items)
+        }else{
+          list = ret.items
+        }
+       
+        logMsg('订单列表'+listkey, list)
         this.setState({
           [listkey]: list,
           [pagekey]: page
