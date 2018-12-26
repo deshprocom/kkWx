@@ -4,7 +4,7 @@ import { connect } from '@tarojs/redux';
 import './index.scss';
 import OrderItem from '../../components/order/OrderItem'
 import { shopOrderDetail } from '../../service/Mall';
-import { logMsg } from '../../utils/utils';
+import { logMsg,convertDate ,utcDate} from '../../utils/utils';
 import drawQrcode from 'weapp-qrcode'
 
 @connect(({OrderDetail}) => ({
@@ -15,6 +15,10 @@ export default class Orderdetail extends Component {
     navigationBarTitleText: 'OrderDetail',
   };
 
+  state={
+    orderDetail:{}
+  }
+
   componentDidMount = () => {
       let param = this.$router.params
       drawQrcode({
@@ -24,13 +28,32 @@ export default class Orderdetail extends Component {
         text: param.order_number
       })
       shopOrderDetail(param.order_number,ret=>{
-        logMsg('订单详情',ret)
+        logMsg('订单详情',ret);
+        this.setState({
+          orderDetail:ret
+        })
       },err=>{
         logMsg('订单详情',err)
       })
   };
+  pay_status=(pay_status)=>{
+    if (pay_status === 'paid') {
+      return '待使用';
+    } else if (pay_status === 'unpaid') {
+        return '待付款';
+    } else if (pay_status === 'compeleted') {
+        return '已完成';
+    }else if (pay_status === 'cancel') {
+      return '已完成';
+    } else {
+        return pay_status
+    }
+  }
 
   render() {
+    const {orderDetail} = this.state;
+    console.log("orderDetail",orderDetail);
+    const {created_at,final_price,order_number,pay_status,refunded_price,shipping_price,status,total_price,total_product_price} = orderDetail;
     return (
       <View className="OrderDetail-page">
         <View className="detail_top_view">
@@ -42,13 +65,13 @@ export default class Orderdetail extends Component {
           <Text className="top_text">订单信息</Text>
         </View>
         <View className="detail_list_view">
-          <Text className="detail_text1">订单编号：20180907367</Text>
-          <Text className="detail_text1">下单时间：2018年12月3日 14:30</Text>
-          <Text className="detail_text1">商品金额：¥39</Text>
-          <Text className="detail_text1">实际付款：¥38</Text>
+          <Text className="detail_text1">订单编号：{order_number}</Text>
+          <Text className="detail_text1">下单时间：{utcDate(created_at,'YYYY年MM月DD日 MM:ss')}</Text>
+          <Text className="detail_text1">商品金额：¥{total_price}</Text>
+          <Text className="detail_text1">实际付款：¥{total_product_price}</Text>
           <View className="last_detail_view">
             <Text className="detail_text3">使用状态：</Text>
-            <Text className="detail_text2">待使用</Text>
+            <Text className="detail_text2">{this.pay_status(pay_status)}</Text>
           </View>
         </View>
         <View className="erweima_view">
