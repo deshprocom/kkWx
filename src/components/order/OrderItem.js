@@ -1,8 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Button, FunctionalPageNavigator } from '@tarojs/components';
 import './index.scss';
-import { urlEncode } from '../../utils/utils';
-
+import { urlEncode,strNotNull} from '../../utils/utils';
 
 export default class OrderItem extends Component {
 
@@ -19,9 +18,9 @@ export default class OrderItem extends Component {
     let product = item.order_items[0];
     const {image,number,original_price,price,product_id,return_status_text,returnable} = product;
     
-    let status_text = return_status_text === "" ? <View/> :<View className="use_btn_view">
+    let status_text = strNotNull(return_status_text) ? <View className="use_btn_view">
     <Text className="use_text">{return_status_text}</Text>
-  </View>
+  </View> :<View/>;
 
     return (<View className="order_list_view"
       onClick={this.goOrderDetail.bind(this,item)}>
