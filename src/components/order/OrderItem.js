@@ -14,17 +14,30 @@ export default class OrderItem extends Component {
     const {item} = this.props;
     const {created_at,final_price,order_items,order_number,pay_status,refunded_price,shipping_price,
       status,total_price,total_product_price} = item;
-      
+    let products = item.order_items;
     let product = item.order_items[0];
     const {image,number,original_price,price,product_id,return_status_text,returnable} = product;
     
     let status_text = strNotNull(return_status_text) ? <View className="use_btn_view">
     <Text className="use_text">{return_status_text}</Text>
   </View> :<View/>;
-
-    return (<View className="order_list_view"
-      onClick={this.goOrderDetail.bind(this,item)}>
-      <View className="list_view">
+  // let pay_status={
+  //   ()=>{·
+  //     if(status === 'unpaid'){
+  //       return <Text className="text3" style="margin-right:10px;">待付款</Text>
+  //     }else if(status === 'paid'){
+  //       return <Text className="text3" style="margin-right:10px;">已付款</Text>
+  //     }else if(status === 'canceled'){
+  //       return <Text className="text3" style="margin-right:10px;">已取消</Text>
+  //     }else if(status === 'completed'){
+  //       return <Text className="text3" style="margin-right:10px;">已完成</Text>
+  //     }
+  //   }
+  // }
+  
+  let item_list = products.map((product,index)=>{
+    return (
+      <View className="list_view" key={index}>
         <Image
           className="list_btn_img"
           src={product.image}
@@ -42,7 +55,22 @@ export default class OrderItem extends Component {
             <Text className="freight_text">运费：¥{refunded_price}</Text>
           </View>
         </View>
+      
       </View>
+    )
+  })
+
+    return (<View className="order_list_view"
+      onClick={this.goOrderDetail.bind(this,item)}>
+      <View className="item_top_view">
+        <Text className="text3" style="margin-left:10px;">订单编号：{order_number}</Text>
+        <View style="display:flex;flex:1"/>
+        {/* {this.pay_status(pay_status)} */}
+      </View>
+      {item_list}
+      
     </View>)
   }
+
+  
 }
