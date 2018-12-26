@@ -45,7 +45,6 @@ export default class Orderlist extends Component {
     this.setState({
       [stateName]: value
     })
-
     this.getOrderList(value, 1)
   }
 
@@ -80,7 +79,7 @@ export default class Orderlist extends Component {
     let param = {
       status,
       page: page,
-      page_size: 20
+      page_size: 60
     }
     shopOrderList(param, ret => {
       if (ret && ret.items && ret.items.length > 0) {
