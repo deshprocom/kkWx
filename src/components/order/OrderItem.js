@@ -50,7 +50,7 @@ export default class OrderItem extends Component {
           <View className="right_view_middle">
             <Text className="price_text">{`¥${product.price}`}</Text>
             <Text className="origin_price_text">{`¥${product.original_price}`}</Text>
-            <View style='display:flex;flex:1' />
+            <View style="display:flex;flex:1;" />
             <Text className="count_text"><Text className="count_text1">X</Text>{product.number}</Text>
           </View>
           <View className="right_view_middle">
