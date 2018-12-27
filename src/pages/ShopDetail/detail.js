@@ -66,6 +66,10 @@ export default class Shopdetail extends Component {
             })
       }
 
+      goBack =()=>{
+            Taro.navigateBack({delta:1})
+      }
+
       render() {
             const { shopDetail } = this.props;
 
@@ -136,7 +140,9 @@ export default class Shopdetail extends Component {
                         </View>
 
                         <View className="bottom_view">
-                              <View className="btn_view">
+                              <View 
+                              onClick={this.goBack}
+                              className="btn_view">
                                     <Text className="btn_text">商城首页</Text>
                               </View>
                               <View className="btn_view">

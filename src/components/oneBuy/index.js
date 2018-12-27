@@ -54,7 +54,9 @@ export default class OneBuy extends Component {
             }
             logMsg("当前时间", diff)
 
-            return (<View className='one-buy'>
+            return (<View className='one-buy'
+                  data-url="/pages/ShopDetail/index"
+                  onClick={this.goDetailPage.bind(this, product_id)}>
                   <Image className="cover"
                         mode="widthFix"
                         src={icon} />
@@ -71,7 +73,7 @@ export default class OneBuy extends Component {
                         <View style='display:flex;flex:1;' />
                         <View className='price'>
                               <Text className='price1'>{`¥${price}`}</Text>
-                              <Text className='price2'>{original_price}</Text>
+                              <Text className='price2'>{`门市价:¥${original_price}`}</Text>
                               <View style='display:flex;flex:1;' />
                               <View className='btn1'>
                                     <Text className='btn1-name'>马上抢</Text>

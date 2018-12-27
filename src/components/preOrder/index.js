@@ -20,8 +20,8 @@ export default class PreOrder extends Component {
           <Text className="intro_text">{title}</Text>
           </View>
           
-          <Text className="origin_price_text">{`原价 ¥${original_price}`}</Text>
-          <Text className="price_text">{`实付款 ¥${price}`}</Text>
+          <Text className="origin_price_text">{`门市价:¥${original_price}`}</Text>
+          <Text className="price_text">{`活动价:¥${price}`}</Text>
         </View>
       </View>
     </View>)

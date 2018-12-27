@@ -74,10 +74,11 @@ export default class Orderdetail extends Component {
             <Text className="detail_text2">{this.pay_status(pay_status)}</Text>
           </View>
         </View>
-        <View className="erweima_view">
+        {status === 'paid'?<View className="erweima_view">
           <Text className="text1">商家扫码</Text>
           <Canvas style="width: 200px; height: 200px;" canvas-id="OrderQrcode"></Canvas>
-        </View>
+        </View>:null}
+        
         <View style="height:120px;"/>
        </ScrollView>
         

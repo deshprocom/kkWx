@@ -48,6 +48,7 @@
   .text1{
     @include sc(32px,#1c1c1c);
     font-weight: bold;
+    margin-bottom: 20px;
   }
   .btn_view{
     width:100%;

@@ -6,10 +6,10 @@
       @include fr(center);
       padding-left: 20px;
       padding-right: 20px;
+      margin-top: 2px;
 
       .cover{
             @include wh(260px,260px);
-            
       }
       .content{
             @include fc(flex-start);
