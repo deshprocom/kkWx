@@ -60,15 +60,14 @@ export default class OneBuy extends Component {
                         src={icon} />
 
                   <View className="content">
-                        <View style='flex:1;'>
                         <Text className='title'>{title}上看到就会分开就好</Text>
-                        </View>
                         
-                        <Text className='txt1'>{`距结束`}</Text>
+                        <Text className='txt1' style="margin-top:5px;">{`距结束`}</Text>
+                        <View style='display:flex;flex:1;'/>
                         <View className='price'>
                               <Text className='price1'>{`¥${price}`}</Text>
                               <Text className='price2'>{original_price}</Text>
-                              <View style='flex:1;'/>
+                              <View style='display:flex;flex:1;'/>
                               <View className='btn1'>
                                     <Text className='btn1-name'>马上抢</Text>
                               </View>

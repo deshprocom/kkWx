@@ -6,13 +6,16 @@
       @include fr(center);
       padding-left: 20px;
       padding-right: 20px;
+
       .cover{
             @include wh(260px,260px);
+            
       }
       .content{
-            @include fc;
+            @include fc(flex-start);
+            height:200px;
             margin-left: 20px;
-            height: 260px;
+            margin-right: 20px;
       }
       .title{
             @include sc(30px,#333333);
@@ -28,7 +31,8 @@
             @include sc(28px,$_DF1)
       }
       .price{
-            @include fr(flex-end);
+            @include fr(flex-start);
+            width:100%;
       }
       .price1{
             @include sc(30px,$_DF1);
@@ -45,6 +49,7 @@
             border-radius: 8px;
             @include fc(center);
             justify-content: center;
+            margin-right: 20px;
       }
       .btn1-name{
             @include sc(28px,#fff)
