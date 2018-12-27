@@ -17,7 +17,7 @@ export default class Shopdetail extends Component {
 
 
   config = {
-    navigationBarTitleText: 'ShopDetail',
+    navigationBarTitleText: '商品详情',
   };
 
   componentDidMount = () => {

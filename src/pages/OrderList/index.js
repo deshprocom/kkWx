@@ -32,7 +32,7 @@ export default class Orderlist extends Component {
   }
 
   config = {
-    navigationBarTitleText: 'OrderList',
+    navigationBarTitleText: '订单列表',
   };
 
 

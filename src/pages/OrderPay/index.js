@@ -13,7 +13,7 @@ import { createOrder, newOrder } from '../../service/Mall';
 }))
 export default class Orderpay extends Component {
   config = {
-    navigationBarTitleText: 'OrderPay',
+    navigationBarTitleText: '订单付款',
   };
   constructor(props) {
     super(props)

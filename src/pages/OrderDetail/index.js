@@ -12,7 +12,7 @@ import drawQrcode from 'weapp-qrcode'
 }))
 export default class Orderdetail extends Component {
   config = {
-    navigationBarTitleText: 'OrderDetail',
+    navigationBarTitleText: '订单详情',
   };
 
   state={
