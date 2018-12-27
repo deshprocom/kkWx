@@ -126,6 +126,7 @@ export default class Orderpay extends Component {
           />
 
           <AtTextarea
+            style="width:90%"
             className='textarea'
             maxLength={200}
             placeholder='备注...'

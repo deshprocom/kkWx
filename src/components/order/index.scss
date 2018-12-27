@@ -29,6 +29,7 @@
           }
           .list_view_right{
             @include fc(flex-start);
+            flex:1;
             height:200px;
           }
           .intro_text{
