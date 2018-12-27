@@ -38,6 +38,9 @@
           .text3{
             @include sc(26px,#1c1c1c);
           }
+          .text4{
+            @include sc(26px,#0ceca9);
+          }
           .right_view_middle{
             @include fr(center);
             width:100%;

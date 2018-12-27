@@ -51,12 +51,11 @@
   }
   .btn_view{
     width:100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    height: 100px;
     @include fc(center);
     flex-direction: row-reverse;
     background-color: white;
-    position: absolute;
+    position: fixed;
     bottom: 0
   }
 }

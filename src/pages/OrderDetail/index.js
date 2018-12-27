@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View ,Canvas} from '@tarojs/components';
+import { View ,Canvas,ScrollView} from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import OrderItem from '../../components/order/OrderItem'
@@ -52,14 +52,14 @@ export default class Orderdetail extends Component {
 
   render() {
     const {orderDetail} = this.state;
-    console.log("orderDetail",orderDetail);
     const {created_at,final_price,order_number,pay_status,refunded_price,shipping_price,status,total_price,total_product_price} = orderDetail;
     return (
       <View className="OrderDetail-page">
-        <View className="detail_top_view">
+       <ScrollView scrollY>
+       <View className="detail_top_view" style="margin-top:2px;">
           <Text className="top_text">商品信息</Text>
         </View>
-        {/* <OrderItem/> */}
+        <OrderItem item={orderDetail}/>
 
         <View className="detail_top_view" style="margin-top:10px;">
           <Text className="top_text">订单信息</Text>
@@ -78,6 +78,9 @@ export default class Orderdetail extends Component {
           <Text className="text1">商家扫码</Text>
           <Canvas style="width: 200px; height: 200px;" canvas-id="OrderQrcode"></Canvas>
         </View>
+        <View style="height:120px;"/>
+       </ScrollView>
+        
 
         <View className="btn_view">
           <Text className="top_text">联系客服</Text>
