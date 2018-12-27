@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components';
 import './index.scss';
-import { AtCountDown, AtButton } from 'taro-ui'
+import CountDown from '../../components/countdown'
 import { logMsg, dateFormat, urlEncode } from '../../utils/utils';
 
 export default class OneBuy extends Component {
@@ -61,13 +61,18 @@ export default class OneBuy extends Component {
 
                   <View className="content">
                         <Text className='title'>{title}上看到就会分开就好</Text>
-                        
-                        <Text className='txt1' style="margin-top:5px;">{`距结束`}</Text>
-                        <View style='display:flex;flex:1;'/>
+                        <View className='count-down'>
+                              <Text className='txt1'>{`距结束`}</Text>
+                              <CountDown
+                                    isShowDay
+                                    seconds={diff} />
+                        </View>
+
+                        <View style='display:flex;flex:1;' />
                         <View className='price'>
                               <Text className='price1'>{`¥${price}`}</Text>
                               <Text className='price2'>{original_price}</Text>
-                              <View style='display:flex;flex:1;'/>
+                              <View style='display:flex;flex:1;' />
                               <View className='btn1'>
                                     <Text className='btn1-name'>马上抢</Text>
                               </View>
