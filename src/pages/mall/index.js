@@ -37,6 +37,9 @@ export default class mall extends Component {
     })
   };
 
+  toLogin = ()=>{
+    Taro.navigateTo({url:'/pages/Login/index'})
+  }
 
 
   render() {
@@ -48,6 +51,7 @@ export default class mall extends Component {
         <View className="home-page">
            
           {this.banners.map((item, index) => (<View
+            onClick={this.toLogin}
             key={index}
             className="item">
 

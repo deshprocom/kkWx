@@ -19,6 +19,7 @@ export function reLogin(e){
           if (ret.status === 'need_register') {
             Taro.navigateTo({ url })
           }else{
+              showToast('登陆成功')
               Taro.navigateBack()
           }
         }, err => {
