@@ -2,8 +2,9 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg } from '../../utils/utils';
-import {getMallList} from '../../service/Mall'
+import { logMsg,strNotNull } from '../../utils/utils';
+import {getMallList} from '../../service/Mall';
+import default_img from '../../images/mine/empty_ticket.png';
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/'
 @connect(({ mall }) => ({
@@ -68,7 +69,8 @@ export default class mall extends Component {
 
             <Image className="cover"
               mode="widthFix"
-              src={baseUrl + 'info/fb7f15abf27937b26fa1cedfd602685b.png!md'} />
+              style="height:300px;width:100%"
+              src={strNotNull(icon)?icon:default_img} />
 
             <Text className="title">{intro}</Text>
 
