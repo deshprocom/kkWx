@@ -153,7 +153,7 @@ $ease-in-out-back: cubic-bezier(0.680, -0.550, 0.265, 1.550);
 }
 
 //距离
-@mixin distance($marginLeft:17px, $marginRight:17px) {
+@mixin distance($marginLeft:20px, $marginRight:20px) {
   margin-left:$marginLeft;
   margin-right: $marginRight
 }

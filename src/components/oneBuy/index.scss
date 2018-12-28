@@ -1,0 +1,63 @@
+@import "../../styles/mixin";
+
+.one-buy{
+      @include wh(100%,280px);
+      background-color: #ffffff;
+      @include fr(center);
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-top: 2px;
+
+      .cover{
+            @include wh(260px,260px);
+      }
+      .content{
+            @include fc(flex-start);
+            height:200px;
+            margin-left: 20px;
+            margin-right: 20px;
+      }
+      .title{
+            @include sc(30px,#333333);
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+      }
+      .txt1{
+            @include sc(28px,#666666);
+            margin-right: 10px;
+      }
+      
+      .count-down{
+            @include fr(center);
+            margin-top: 5px;
+      }
+      .at-count-down__time{
+            @include sc(28px,$_DF1);
+      }
+      .price{
+            @include fr(flex-start);
+            width:100%;
+      }
+      .price1{
+            @include sc(30px,$_DF1);
+            font-weight: 'bold';
+      }
+      .price2{
+            @include sc(28px,$_666);
+            margin-left: 18px;
+            text-decoration:line-through;
+      }
+      .btn1{
+            @include wh(140px,50px);
+            background-color: $_DF1;
+            border-radius: 8px;
+            @include fc(center);
+            justify-content: center;
+            margin-right: 20px;
+      }
+      .btn1-name{
+            @include sc(28px,#fff)
+      }
+}

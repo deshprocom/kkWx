@@ -8,7 +8,7 @@ import { Provider } from '@tarojs/redux'
 import './styles/base.scss'
 import { black } from 'ansi-colors';
 import withLogin from './service/WithLogin';
-import { logMsg } from './utils/utils';
+import { logMsg, setSystemInfo } from './utils/utils';
 if (process.env.TARO_ENV === "weapp") {
   require("taro-ui/dist/weapp/css/index.css")
 } else if (process.env.TARO_ENV === "h5") {
@@ -74,6 +74,10 @@ class App extends Component {
 
   componentDidMount() {
     logMsg('当前环境', Taro.getEnv())
+    Taro.getSystemInfo({success:info=>{
+      setSystemInfo(info)
+    }})
+   
   }
 
   componentDidShow() { }

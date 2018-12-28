@@ -5,7 +5,7 @@ import './index.scss';
 import right_img from '../../images/mine/right.png'
 import { logMsg, mul } from '../../utils/utils';
 import { AtInput, AtInputNumber, AtTextarea } from 'taro-ui'
-import OrderItem from '../../components/order/OrderItem'
+import OrderItem from '../../components/preOrder'
 import { createOrder, newOrder } from '../../service/Mall';
 
 @connect(({ OrderPay }) => ({
@@ -13,7 +13,7 @@ import { createOrder, newOrder } from '../../service/Mall';
 }))
 export default class Orderpay extends Component {
   config = {
-    navigationBarTitleText: 'OrderPay',
+    navigationBarTitleText: '订单付款',
   };
   constructor(props) {
     super(props)
@@ -45,7 +45,7 @@ export default class Orderpay extends Component {
 
   componentDidMount = () => {
 
-    newOrder(this.getParam())
+    // newOrder(this.getParam())
     try {
       let loginUser = Taro.getStorageSync('loginUser')
       logMsg('登录', loginUser)
@@ -73,10 +73,10 @@ export default class Orderpay extends Component {
         name: userName,
         mobile,
         address:{
-          province:'',
-          city: '',
-          area: '',
-          detail: ''
+          province:'广东省',
+          city: '深圳市',
+          area: '福田区',
+          detail: '卓越世纪3号楼'
         }
       },
       memo,
@@ -87,7 +87,6 @@ export default class Orderpay extends Component {
   }
 
   onCreateOrder = () => {
-    
 
     createOrder(this.getParam(), ret => {
       logMsg("创建订单", ret)
@@ -127,6 +126,7 @@ export default class Orderpay extends Component {
           />
 
           <AtTextarea
+            style="width:90%"
             className='textarea'
             maxLength={200}
             placeholder='备注...'

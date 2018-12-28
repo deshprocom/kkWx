@@ -19,6 +19,7 @@ export function reLogin(e){
           if (ret.status === 'need_register') {
             Taro.navigateTo({ url })
           }else{
+              showToast('登陆成功')
               Taro.navigateBack()
           }
         }, err => {
@@ -27,6 +28,16 @@ export function reLogin(e){
 
       }
     })
+}
+
+let systemInfo = {}
+export function getSysInfo(){
+  return systemInfo
+}
+
+export function setSystemInfo(info){
+    logMsg('系统信息',info)
+    systemInfo = info
 }
 
 export function showToast(title){
@@ -41,6 +52,14 @@ export function logMsg(...msg){
       if(process.env.NODE_ENV !== 'production')
       console.log(...msg)
 }
+
+export function strNotNull(str) {
+    if (str == undefined || str == null || str.length == 0)
+        return false;
+    else
+        return true;
+}
+
 
 export function isObjEmpty(obj){
     for (var i in obj) { // 如果不为空，则会执行到这一步，返回false
@@ -132,4 +151,16 @@ export function sub(a, b) {
         d = 0;
     }
     return e = Math.pow(10, Math.max(c, d)), (mul(a, e) - mul(b, e)) / e;
+}
+
+/*日期转化*/
+export function convertDate(date, formate) {
+    if (strNotNull(date))
+        return moment(date).format(formate)
+}
+
+//UTC 时间转化
+export function utcDate(utc, formate) {
+    if (strNotNull(utc))
+        return moment.unix(utc).format(formate)
 }

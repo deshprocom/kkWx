@@ -37,7 +37,7 @@ export default class Shopdetail extends Component {
 
       handleTouchMove = e => {
             e.stopPropagation()
-          }
+      }
 
       onPress1 = () => {
             this.setState({
@@ -52,11 +52,11 @@ export default class Shopdetail extends Component {
 
 
 
-      goOrderPay(title,variants, e) {
+      goOrderPay(title, variants, e) {
             let select = variants[0]
             select.title = title
             let url = e.currentTarget.dataset.url + `?${urlEncode(select)}`
-            logMsg('预支付',url)
+            logMsg('预支付', url)
             Taro.navigateTo({ url })
       }
 
@@ -64,6 +64,10 @@ export default class Shopdetail extends Component {
             this.setState({
                   showMore: !this.state.showMore
             })
+      }
+
+      goBack =()=>{
+            Taro.navigateBack({delta:1})
       }
 
       render() {
@@ -79,14 +83,7 @@ export default class Shopdetail extends Component {
                   </View>
             </SwiperItem>));
 
-            let more_message = [{}, {}, {}].map((item, index) => {
-                  <View className="info_middle_view">
-                        <Text className="name1">快乐的鱼</Text>
-                        <Text className="name2">支持用 React 的开发方式编写一次代码</Text>
-                  </View>
-            })
 
-       
             let select_message = [{}, {}, {}].map((item, index) => {
                   <View className="name1_text_view">
                         <Text className="name1_text">免坐</Text>
@@ -107,11 +104,10 @@ export default class Shopdetail extends Component {
                         <View className="detail_view">
                               <Text className="detail_intro">{title}</Text>
                               <View className="info1_view">
-                                    <Text className="price_text">{`¥${price}`}</Text>
                                     <Text className="begin_price">{`门市价¥${original_price}`}</Text>
                               </View>
                               <View className="info2_view">
-                                    <Text className="saled_text">已售：683</Text>
+                                    <Text className="price_text">{`¥${price}`}</Text>
                                     <Text className="saved_text">{`库存：${stock}`}</Text>
                               </View>
                         </View>
@@ -129,17 +125,13 @@ export default class Shopdetail extends Component {
 
                         <View className="main_info_view">
                               <Text className="main_info_text">商家信息</Text>
-                              <View onClick={this.moreMessage}>
-                                    <Text className="more_info">更多信息</Text>
-                              </View>
                         </View>
 
                         <View className="main2_view">
                               <View className="info_middle_view">
-                                    <Text className="name1">快乐的鱼</Text>
-                                    <Text className="name2">支持用 React 的开发方式编写一次代码</Text>
+                                    <Text className="name1">澳门牛牛茶果店</Text>
+                                    <Text className="name2">澳门步行街2033号</Text>
                               </View>
-                              {this.state.showMore ? more_message : null}
                         </View>
                         <Text className="main_info">详细信息</Text>
 
@@ -148,30 +140,32 @@ export default class Shopdetail extends Component {
                         </View>
 
                         <View className="bottom_view">
-                              <View className="btn_view">
+                              <View 
+                              onClick={this.goBack}
+                              className="btn_view">
                                     <Text className="btn_text">商城首页</Text>
                               </View>
                               <View className="btn_view">
                                     <Text className="btn_text">咨询客服</Text>
                               </View>
                               <View data-url='/pages/OrderPay/index'
-                                    onClick={this.goOrderPay.bind(this, title,variants)}
+                                    onClick={this.goOrderPay.bind(this, title, variants)}
                                     className="btn_view  btn3_view">
-                                    <Text className="btn_text">立即购买</Text>
+                                    <Text className="btn_text1">立即购买</Text>
                               </View>
                         </View>
 
-                        {this.state.isOpened?<View className='at-action-sheet--active' 
-                        onTouchMove={this.handleTouchMove}>
+                        {this.state.isOpened ? <View className='at-action-sheet--active'
+                              onTouchMove={this.handleTouchMove}>
                               <View onClick={this.onPress1} className='at-action-sheet__overlay' />
                               <View className='at-action-sheet__container'>
-                                    <Image  className="default_img"  src={default_img}/>
+                                    <Image className="default_img" src={default_img} />
                                     <View className="top_right_view">
                                           <Text className="top_price_text">3125.0</Text>
                                           <Text className="kucun_text">库存15件</Text>
                                     </View>
-                                    <Image onClick={this.onPress1} className="close_img"  src={close_img}/>
-                                    <View style="width:100%;height:2px;background-color:#F3F3F3;margin-top:20px;"/>
+                                    <Image onClick={this.onPress1} className="close_img" src={close_img} />
+                                    <View style="width:100%;height:2px;background-color:#F3F3F3;margin-top:20px;" />
                                     <Text className="name1_text">阿尔法七座商务车</Text>
                                     <View className="name1_view">
                                           {select_message}
@@ -181,7 +175,7 @@ export default class Shopdetail extends Component {
                                           <Text className="confirm_text">确认</Text>
                                     </View>
                               </View>
-                        </View>:null}
+                        </View> : null}
                   </View>
             )
       }
