@@ -8,6 +8,11 @@ import api from '../config/api'
 import Taro from '@tarojs/taro';
 import { logMsg, showToast } from '../utils/utils';
 
+export function getMallList(param, resolve, reject) {
+  get(api.mall_list, param, resolve, reject)
+}
+
+
 export function getShopCategorios(resolve, reject) {
   get(api.shopCategories, {}, resolve, reject)
 }
