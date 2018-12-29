@@ -42,7 +42,7 @@
   
   .banner{
     @include wh(100%,500px);
-    background-color: white
+    max-height: 500px;
   }
   .detail_view{
     width:100%;

@@ -5,6 +5,7 @@ import './index.scss';
 import { logMsg, isObjEmpty, urlEncode, loginUser, toLoginPage } from '../../utils/utils'
 import classNames from 'classnames';
 import default_img from '../../images/mine/default_img.png';
+import empty_img from '../../images/mine/empty_ticket.png';
 import close_img from '../../images/mine/close.png';
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
@@ -79,16 +80,30 @@ export default class Shopdetail extends Component {
 
       render() {
             const { shopDetail } = this.props;
-
             const { category_id, description, first_discounts, freight_fee, has_variants,
-                  icon, id, images, intro, master, option_types, returnable, title, variants } = shopDetail.product
-            const { original_price, price, stock } = master
+                  icon, id, images, intro, master, option_types, returnable, title, variants,merchant } = shopDetail.product
+            const { original_price, price, stock } = master;
+
             let bannerViews = images && images.map((item, index) => (<SwiperItem key={`banner_${index}`}>
-                  <View className="banner">
-                        <Image className="banner"
-                              src={item.large} />
-                  </View>
+            <View className="banner">
+                  <Image className="banner"
+                        src={item.large} />
+            </View>
             </SwiperItem>));
+
+            let swiper_img=isObjEmpty(images)?<View className="banner">
+            <Image className="banner"
+                  src={empty_img} />
+            </View>:<Swiper
+                              className="banner"
+                              indicatorColor='#999'
+                              indicatorActiveColor='#333'
+                              circular
+                              indicatorDots
+                              autoplay>
+                              {bannerViews}
+                        </Swiper>;
+            
 
 
             let select_message = [{}, {}, {}].map((item, index) => {
@@ -99,15 +114,7 @@ export default class Shopdetail extends Component {
 
             return (
                   <View className="ShopDetail-page">
-                        <Swiper
-                              className="banner"
-                              indicatorColor='#999'
-                              indicatorActiveColor='#333'
-                              circular
-                              indicatorDots
-                              autoplay>
-                              {bannerViews}
-                        </Swiper>
+                        {swiper_img}
                         <View className="detail_view">
                               <Text className="detail_intro">{title}</Text>
                               <View className="info1_view">
@@ -119,7 +126,7 @@ export default class Shopdetail extends Component {
                               </View>
                         </View>
 
-                        {/* <Text className="main_info">规格选择</Text>
+                        <Text className="main_info">规格选择</Text>
 
                         <View className="spec_view">
                               <View className="spec1_view" style="margin-right:10px" onClick={this.onPress1}>
@@ -128,18 +135,18 @@ export default class Shopdetail extends Component {
                               <View className="spec1_view" onClick={this.onPress2}>
                                     <Text className="spec1_text">进阶版</Text>
                               </View>
-                        </View> */}
+                        </View>
 
-                        {/* <View className="main_info_view">
+                        <View className="main_info_view">
                               <Text className="main_info_text">商家信息</Text>
                         </View>
 
                         <View className="main2_view">
                               <View className="info_middle_view">
-                                    <Text className="name1">澳门牛牛茶果店</Text>
-                                    <Text className="name2">澳门步行街2033号</Text>
+                                    <Text className="name1">{merchant.name}</Text>
+                                    <Text className="name2">{merchant.location}</Text>
                               </View>
-                        </View> */}
+                        </View>
                         <Text className="main_info">详细信息</Text>
 
                         <View className="des_view">
