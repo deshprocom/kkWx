@@ -1,5 +1,5 @@
 import * as MineApi from './service';
-import { logMsg } from '../../utils/utils';
+import { logMsg, setLoginUser } from '../../utils/utils';
 import { setToken } from '../../utils/request'
 import Taro from '@tarojs/taro';
 import { shopOrderList } from '../../service/Mall';
@@ -15,6 +15,7 @@ export default {
     * effectsUser(_, { call, put }) {
       logMsg('用户数据', _.loginUser)
       setToken(_.loginUser.access_token)
+      setLoginUser(_.loginUser)
       Taro.setStorageSync('loginUser', _.loginUser)
       
 

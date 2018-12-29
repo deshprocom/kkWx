@@ -4,53 +4,64 @@ import Taro from '@tarojs/taro'
 import { userLogin } from '../service/accountDao';
 
 
-export function reLogin(e){
+export let loginUser = null
+
+export function setLoginUser(user) {
+    loginUser = user
+}
+
+export function toLoginPage() {
+    loginUser = null
+    Taro.navigateTo({ url: '/pages/Login/index' })
+}
+
+export function reLogin(e) {
     logMsg('用户信息', e)
     Taro.login({
-      success: function (res) {
-        let params = {
-          code: res.code,
-          encrypted_data: e.currentTarget.encryptedData,
-          iv: e.currentTarget.iv
+        success: function (res) {
+            let params = {
+                code: res.code,
+                encrypted_data: e.currentTarget.encryptedData,
+                iv: e.currentTarget.iv
+            }
+            logMsg('登陆信息', params)
+            userLogin(params, ret => {
+                let url = `/pages/BindMobile/index?${urlEncode(ret)}`
+                if (ret.status === 'need_register') {
+                    Taro.navigateTo({ url })
+                } else {
+                    showToast('登陆成功')
+                    Taro.navigateBack()
+                }
+            }, err => {
+
+            })
+
         }
-        logMsg('登陆信息', params)
-        userLogin(params, ret => {
-          let url = `/pages/BindMobile/index?${urlEncode(ret)}`
-          if (ret.status === 'need_register') {
-            Taro.navigateTo({ url })
-          }else{
-              showToast('登陆成功')
-              Taro.navigateBack()
-          }
-        }, err => {
-
-        })
-
-      }
     })
 }
 
 let systemInfo = {}
-export function getSysInfo(){
-  return systemInfo
+export function getSysInfo() {
+    return systemInfo
 }
 
-export function setSystemInfo(info){
-    logMsg('系统信息',info)
+export function setSystemInfo(info) {
+    logMsg('系统信息', info)
     systemInfo = info
 }
 
-export function showToast(title){
+export function showToast(title) {
     Taro.showToast({
         title,
         icon: 'none',
         duration: 2000
-      });
+    });
 }
 
-export function logMsg(...msg){
-      if(process.env.NODE_ENV !== 'production')
-      console.log(...msg)
+export function logMsg(...msg) {
+    if (process.env.NODE_ENV !== 'production')
+        console.log(...msg)
 }
 
 export function strNotNull(str) {
@@ -61,26 +72,26 @@ export function strNotNull(str) {
 }
 
 
-export function isObjEmpty(obj){
+export function isObjEmpty(obj) {
     for (var i in obj) { // 如果不为空，则会执行到这一步，返回false
         return false
     }
     return true // 如果为空,返回true
 }
 
-export function dateFormat(timestamp,formatStr = "YYYY-MM-DD HH:mm:ss"){
-    
-      let comTime = moment.unix(timestamp).format(formatStr)
-      logMsg(`转换后的时间 ${comTime}`)
-      return comTime
+export function dateFormat(timestamp, formatStr = "YYYY-MM-DD HH:mm:ss") {
+
+    let comTime = moment.unix(timestamp).format(formatStr)
+    logMsg(`转换后的时间 ${comTime}`)
+    return comTime
 }
 
-export function urlEncode(param, key, encode){
-      if (param==null) return '';
+export function urlEncode(param, key, encode) {
+    if (param == null) return '';
     var paramStr = '';
     var t = typeof (param);
     if (t == 'string' || t == 'number' || t == 'boolean') {
-        paramStr += '&' + key + '='  + ((encode==null||encode) ? encodeURIComponent(param) : param); 
+        paramStr += '&' + key + '=' + ((encode == null || encode) ? encodeURIComponent(param) : param);
     } else {
         for (var i in param) {
             var k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i)

@@ -5,7 +5,7 @@
  */
 import Taro from '@tarojs/taro';
 import Api from '../config/api';
-import { logMsg,showToast } from './utils';
+import { logMsg,showToast, loginUser, toLoginPage } from './utils';
 
 let Headers = {
   'Content-Type': 'application/json',
@@ -62,8 +62,7 @@ export default function request (options = { method: 'GET', data: {} }) {
       return res;
     } else {
       if(statusCode ===401){
-        showToast('登录过期,请重新登录')
-        Taro.navigateTo({url:'/pages/Login/index'})
+        toLoginPage()
       }
       options.reject && options.reject(res)
       // throw new Error(`网络请求错误，状态码${statusCode}`);

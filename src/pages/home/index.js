@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg } from '../../utils/utils';
+import { logMsg, setLoginUser } from '../../utils/utils';
 import ShopItem from '../../components/oneBuy';
 import { getOneBuysList } from './service'
 import { AtTabs, AtTabsPane } from 'taro-ui'
@@ -50,9 +50,12 @@ export default class Home extends Component {
     this.refreshLoad(REFRESH)
     try {
       let loginUser = Taro.getStorageSync('loginUser')
+      setLoginUser(loginUser)
       logMsg('登录用户', loginUser)
       if (loginUser && loginUser.user) {
         this.props.dispatch({type:'Mine/effectsUser',loginUser})
+      }else{
+        Taro.navigateTo({url:'/pages/Login/index'})
       }
     } catch (error) {
     }
@@ -76,7 +79,7 @@ export default class Home extends Component {
       Taro.stopPullDownRefresh()
       if(data && data.items && data.items.length<=0)
       return
-      
+
       if (params.type === 'going') {
         goingPage++
         let list = data.items
