@@ -74,6 +74,9 @@ export default class Home extends Component {
     getOneBuysList(params, data => {
       logMsg('一元购数据', data)
       Taro.stopPullDownRefresh()
+      if(data && data.items && data.items.length<=0)
+      return
+      
       if (params.type === 'going') {
         goingPage++
         let list = data.items
@@ -137,7 +140,7 @@ export default class Home extends Component {
         lowerThreshold={10}
       >
         <View className="home-page">
-          <Swiper
+          {/* <Swiper
             className="banner"
             indicatorColor='#999'
             indicatorActiveColor='#333'
@@ -145,7 +148,7 @@ export default class Home extends Component {
             indicatorDots
             autoplay>
             {bannerViews}
-          </Swiper>
+          </Swiper> */}
 
 
           <AtTabs swipeable={false}
