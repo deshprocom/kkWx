@@ -1,13 +1,18 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Button, FunctionalPageNavigator } from '@tarojs/components';
 import './index.scss';
-import { urlEncode, strNotNull } from '../../utils/utils';
+import { urlEncode, strNotNull, logMsg } from '../../utils/utils';
 
 export default class OrderItem extends Component {
 
   goOrderDetail(item, e) {
-    let url = `/pages/OrderDetail/index?${urlEncode(item)}`
-    Taro.navigateTo({ url })
+    const { unclick} = this.props;
+    if(unclick){
+      return;
+    }else{
+      let url = `/pages/OrderDetail/index?${urlEncode(item)}`
+      Taro.navigateTo({ url })
+    }
   }
 
   pay_status=(status)=>{
@@ -23,7 +28,8 @@ export default class OrderItem extends Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item,unclick } = this.props;
+    logMsg("unclick:",unclick)
     const { created_at, final_price, order_items, order_number, pay_status, refunded_price, shipping_price } = item;
 
     let item_list = order_items && order_items.map((product, index) => {
@@ -67,6 +73,5 @@ export default class OrderItem extends Component {
 
     </View>)
   }
-
 
 }

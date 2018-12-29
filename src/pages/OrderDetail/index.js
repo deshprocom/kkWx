@@ -59,7 +59,7 @@ export default class Orderdetail extends Component {
        <View className="detail_top_view" style="margin-top:2px;">
           <Text className="top_text">商品信息</Text>
         </View>
-        <OrderItem item={orderDetail}/>
+        <OrderItem item={orderDetail} unclick={true}/>
 
         <View className="detail_top_view" style="margin-top:10px;">
           <Text className="top_text">订单信息</Text>
