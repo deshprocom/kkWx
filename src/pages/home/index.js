@@ -130,7 +130,7 @@ export default class Home extends Component {
   render() {
 
     const { currentTab, goingList, pastList } = this.state;
-    const tabList = [{ title: '正在进行' }, { title: '往前回顾' }]
+    const tabList = [{ title: '正在进行' }, { title: '往期回顾' }]
     let bannerViews = this.banners.map((item, index) => (<SwiperItem key={`banner_${index}`}>
       <View className="banner">
         <Image className="banner"
