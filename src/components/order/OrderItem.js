@@ -29,7 +29,6 @@ export default class OrderItem extends Component {
 
   render() {
     const { item,unclick } = this.props;
-    logMsg("unclick:",unclick)
     const { created_at, final_price, order_items, order_number, pay_status, refunded_price, shipping_price } = item;
 
     let item_list = order_items && order_items.map((product, index) => {
