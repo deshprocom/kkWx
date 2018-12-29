@@ -9,6 +9,7 @@ import { logMsg,showToast } from './utils';
 
 let Headers = {
   'Content-Type': 'application/json',
+  'Accept': "*/*"
 }
 
 export function setToken(access_token){

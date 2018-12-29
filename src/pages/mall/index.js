@@ -69,6 +69,12 @@ export default class mall extends Component {
     this.refreshLoad(LOADMORE)
   }
 
+  goDetailPage(product_id, e) {
+    logMsg(e, product_id)
+    let url = e.currentTarget.dataset.url + `?${urlEncode({ product_id })}`
+    Taro.navigateTo({ url })
+  }
+
   render() {
     const { mall_list } = this.state;
     return (
@@ -81,7 +87,8 @@ export default class mall extends Component {
             const { all_stock, category_id, first_discounts, icon, id, intro, original_price, price, returnable, title } = item;
             return (
               <View
-                onClick={this.toLogin}
+                data-url="/pages/ShopDetail/index"
+                onClick={this.goDetailPage.bind(this, product_id)}
                 key={index}
                 className="item">
 
