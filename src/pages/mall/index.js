@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, strNotNull } from '../../utils/utils';
+import { logMsg, strNotNull,urlEncode } from '../../utils/utils';
 import { getMallList } from '../../service/Mall';
 import default_img from '../../images/mine/empty_ticket.png';
 
@@ -88,7 +88,7 @@ export default class mall extends Component {
             return (
               <View
                 data-url="/pages/ShopDetail/index"
-                onClick={this.goDetailPage.bind(this, product_id)}
+                onClick={this.goDetailPage.bind(this, id)}
                 key={index}
                 className="item">
 

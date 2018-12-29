@@ -123,7 +123,7 @@ export default class Shopdetail extends Component {
                               </View>
                         </View> */}
 
-                        <View className="main_info_view">
+                        {/* <View className="main_info_view">
                               <Text className="main_info_text">商家信息</Text>
                         </View>
 
@@ -132,7 +132,7 @@ export default class Shopdetail extends Component {
                                     <Text className="name1">澳门牛牛茶果店</Text>
                                     <Text className="name2">澳门步行街2033号</Text>
                               </View>
-                        </View>
+                        </View> */}
                         <Text className="main_info">详细信息</Text>
 
                         <View className="des_view">
