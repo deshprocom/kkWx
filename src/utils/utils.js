@@ -17,6 +17,7 @@ export function toLoginPage() {
 
 export function reLogin(e) {
     logMsg('用户信息', e)
+    Taro.showLoading({ title: '正在登录...' })
     Taro.login({
         success: function (res) {
             let params = {
@@ -26,6 +27,7 @@ export function reLogin(e) {
             }
             logMsg('登陆信息', params)
             userLogin(params, ret => {
+                Taro.hideLoading()
                 let url = `/pages/BindMobile/index?${urlEncode(ret)}`
                 if (ret.status === 'need_register') {
                     Taro.navigateTo({ url })
@@ -34,7 +36,7 @@ export function reLogin(e) {
                     Taro.navigateBack()
                 }
             }, err => {
-
+                Taro.hideLoading()
             })
 
         }
