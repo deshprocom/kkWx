@@ -6,6 +6,13 @@ import { userLogin } from '../service/accountDao';
 
 export let loginUser = null
 
+/**微信登录code */
+export let loginWxCode = null
+
+/**系统信息 */
+let systemInfo = {}
+
+
 export function setLoginUser(user) {
     loginUser = user
 }
@@ -15,35 +22,57 @@ export function toLoginPage() {
     Taro.navigateTo({ url: '/pages/Login/index' })
 }
 
+export function setLoginWxCode(code) {
+    logMsg('登录code',code)
+    loginWxCode = code
+}
+
 export function reLogin(e) {
     logMsg('用户信息', e)
     Taro.showLoading({ title: '正在登录...' })
-    Taro.login({
-        success: function (res) {
-            let params = {
-                code: res.code,
-                encrypted_data: e.currentTarget.encryptedData,
-                iv: e.currentTarget.iv
-            }
-            logMsg('登陆信息', params)
-            userLogin(params, ret => {
-                Taro.hideLoading()
-                let url = `/pages/BindMobile/index?${urlEncode(ret)}`
-                if (ret.status === 'need_register') {
-                    Taro.navigateTo({ url })
-                } else {
-                    showToast('登陆成功')
-                    Taro.navigateBack()
+    if (loginWxCode === null) {
+        Taro.login({
+            success: function (res) {
+                setLoginWxCode(res.code)
+                let params = {
+                    code: res.code,
+                    encrypted_data: e.currentTarget.encryptedData,
+                    iv: e.currentTarget.iv
                 }
-            }, err => {
-                Taro.hideLoading()
-            })
+                wxLogin(params)
+            }
+        })
 
+    } else {
+        let params = {
+            code: loginWxCode,
+            encrypted_data: e.currentTarget.encryptedData,
+            iv: e.currentTarget.iv
         }
+        wxLogin(params)
+    }
+
+
+}
+
+function wxLogin(params) {
+    logMsg('登陆信息', params)
+    userLogin(params, ret => {
+        Taro.hideLoading()
+        let url = `/pages/BindMobile/index?${urlEncode(ret)}`
+        if (ret.status === 'need_register') {
+            Taro.navigateTo({ url })
+        } else {
+            showToast('登陆成功')
+            Taro.navigateBack()
+        }
+    }, err => {
+        Taro.hideLoading()
     })
 }
 
-let systemInfo = {}
+
+
 export function getSysInfo() {
     return systemInfo
 }

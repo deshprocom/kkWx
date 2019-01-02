@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Button, ScrollView } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, urlEncode, isObjEmpty } from '../../utils/utils';
+import { logMsg, urlEncode, isObjEmpty, reLogin } from '../../utils/utils';
 import right_img from '../../images/mine/right.png'
 import img_all from '../../images/mine/all.png'
 import img_dgh from '../../images/mine/dgh.png'
@@ -27,26 +27,7 @@ export default class Mine extends Component {
   };
 
   onUserInfo(e) {
-    logMsg('用户信息', e)
-    Taro.login({
-      success: function (res) {
-        let params = {
-          code: res.code,
-          encrypted_data: e.currentTarget.encryptedData,
-          iv: e.currentTarget.iv
-        }
-        logMsg('登陆信息', params)
-        userLogin(params, ret => {
-          let url = `/pages/BindMobile/index?${urlEncode(ret)}`
-          if (ret.status === 'need_register') {
-            Taro.navigateTo({ url })
-          }
-        }, err => {
-
-        })
-
-      }
-    })
+     reLogin(e)
   }
 
   onGoOrderList(initTab, e) {
