@@ -24,22 +24,26 @@ export function toLoginPage() {
 
 export function setLoginWxCode(code) {
     logMsg('登录code',code)
-    loginWxCode = code
+    // loginWxCode = code
 }
 
 export function reLogin(e) {
     logMsg('用户信息', e)
     Taro.showLoading({ title: '正在登录...' })
-    if (loginWxCode === null) {
+    if (loginWxCode === null || isObjEmpty(e)) {
         Taro.login({
             success: function (res) {
                 setLoginWxCode(res.code)
-                let params = {
-                    code: res.code,
-                    encrypted_data: e.currentTarget.encryptedData,
-                    iv: e.currentTarget.iv
-                }
-                wxLogin(params)
+                Taro.getUserInfo({withCredentials:true}).then(ret=>{
+                    logMsg('重登录',ret)
+                    let params = {
+                        code: res.code,
+                        encrypted_data: ret.encryptedData,
+                        iv: ret.iv
+                    }
+                    wxLogin(params)
+                })
+                
             }
         })
 
