@@ -181,7 +181,9 @@ export default class Shopdetail extends Component {
                         <Text className="main_info">详细信息</Text>
 
                         <View className="des_view">
+                              <View style="margin-left:10px;margin-right:10px;">
                               <RichText className="des_text" nodes={description} />
+                              </View>
                         </View>
 
                         <View className="bottom_view">

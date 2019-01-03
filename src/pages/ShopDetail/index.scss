@@ -158,13 +158,11 @@
     @include sc(26px,#222121);
   }
   .des_view{
-    @include distance_padding(17px, 17px);
     margin-top: 10px;
     background-color: white;
-    padding-top: 25px;
     padding-bottom: 25px;
     margin-bottom: 180px;
-    width:100%;
+  
   }
   .des_text{
     font-size:28px;
