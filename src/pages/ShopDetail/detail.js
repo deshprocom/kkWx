@@ -126,7 +126,7 @@ export default class Shopdetail extends Component {
                               </View>
                         </View>
 
-                        <Text className="main_info">规格选择</Text>
+                        {/* <Text className="main_info">规格选择</Text>
 
                         <View className="spec_view">
                               <View className="spec1_view" style="margin-right:10px" onClick={this.onPress1}>
@@ -135,7 +135,7 @@ export default class Shopdetail extends Component {
                               <View className="spec1_view" onClick={this.onPress2}>
                                     <Text className="spec1_text">进阶版</Text>
                               </View>
-                        </View>
+                        </View> */}
 
                         <View className="main_info_view">
                               <Text className="main_info_text">商家信息</Text>
