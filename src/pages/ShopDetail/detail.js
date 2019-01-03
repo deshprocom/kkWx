@@ -125,7 +125,7 @@ export default class Shopdetail extends Component {
                               </View>
                               <View className="info2_view">
                                     <Text className="price_text">{`¥${price}`}</Text>
-                                    <Text className="saved_text">{`库存：${stock}`}</Text>
+                                    <Text className="saved_text">{`已卖出：${stock}份`}</Text>
                               </View>
                         </View>
 
