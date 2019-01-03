@@ -62,7 +62,7 @@ export default class OneBuy extends Component {
                         src={icon} />
 
                   <View className="content">
-                        <Text className='title'>{title}上看到就会分开就好</Text>
+                        <Text className='title'>{title}</Text>
                         <View className='count-down'>
                               <Text className='txt1'>{`距结束`}</Text>
                               <CountDown

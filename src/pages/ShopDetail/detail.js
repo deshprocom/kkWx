@@ -7,6 +7,9 @@ import classNames from 'classnames';
 import default_img from '../../images/mine/default_img.png';
 import empty_img from '../../images/mine/empty_ticket.png';
 import close_img from '../../images/mine/close.png';
+import call_img from '../../images/tab/call_bg.png';
+import location_img from '../../images/tab/location.png';
+
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
 
@@ -142,10 +145,13 @@ export default class Shopdetail extends Component {
                         </View>
 
                         <View className="main2_view">
-                              <View className="info_middle_view">
+                              <Image className="location_img" src={location_img}/>
+                              <View className="info_middle_left_view">
                                     <Text className="name1">{merchant.name}</Text>
                                     <Text className="name2">{merchant.location}</Text>
                               </View>
+                              <View style='display:flex;flex:1;'/>
+                              <Image className="call_img" src={call_img}/>
                         </View>
                         <Text className="main_info">详细信息</Text>
 

@@ -68,11 +68,12 @@
     margin-top: 10px;
   }
   .price_text{
-    @include sc(32px,#E54A2E);
+    @include sc(36px,#E54A2E);
+    font-weight: bold;
     margin-left: 20px;
   }
   .begin_price{
-    @include sc(26px,#888888);
+    @include sc(25px,#888888);
     text-decoration-line: line-through
   }
   .saved_text{
@@ -102,15 +103,28 @@
   .main2_view{
     width:100%;
     background-color: white;
-    padding-left: 20px;
-    padding-right: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
-    @include fr(flex-start);
+    @include fr(center);
   }
   .info_middle_view{
+    @include fr(flex-start);
+    width:100%;
+  }
+  .info_middle_left_view{
     @include fc(flex-start);
-    width:1000%;
+    width:80%;
+  }
+  .location_img{
+    width:35px;
+    height:50px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .call_img{
+    width:40px;
+    height:50px;
+    margin-right: 20px;
   }
   .name1{
     @include sc(26px,#1C1C1C);

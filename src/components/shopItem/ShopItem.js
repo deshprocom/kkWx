@@ -76,7 +76,7 @@ export default class ShopItem extends Component {
         <View className="line" />
         <View className="info">
           <Text className="price">{`¥ ${price}`}</Text>
-          <Text className="price2">{`门店价:¥${original_price}`}</Text>
+          <Text className="price2">{`门市价:¥${original_price}`}</Text>
           <View className="space" />
           <Text>{`销售量：${sales_volume}`}</Text>
         </View>
