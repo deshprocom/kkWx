@@ -34,15 +34,12 @@ export function reLogin(e) {
         Taro.login({
             success: function (res) {
                 setLoginWxCode(res.code)
-                Taro.getUserInfo({withCredentials:true}).then(ret=>{
-                    logMsg('重登录',ret)
-                    let params = {
-                        code: res.code,
-                        encrypted_data: ret.encryptedData,
-                        iv: ret.iv
-                    }
-                    wxLogin(params)
-                })
+                let params = {
+                    code: res.code,
+                    encrypted_data: e.currentTarget.encryptedData,
+                    iv: e.currentTarget.iv
+                }
+                wxLogin(params)
                 
             }
         })
