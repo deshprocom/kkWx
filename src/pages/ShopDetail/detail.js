@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Text, RichText } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, isObjEmpty, urlEncode, loginUser, toLoginPage } from '../../utils/utils'
+import { logMsg, isObjEmpty, urlEncode, loginUser, toLoginPage, DESHMOBILE } from '../../utils/utils'
 import classNames from 'classnames';
 import default_img from '../../images/mine/default_img.png';
 import empty_img from '../../images/mine/empty_ticket.png';
@@ -91,6 +91,10 @@ export default class Shopdetail extends Component {
 
       onCall(merchant,e){
         Taro.makePhoneCall({phoneNumber:merchant.telephone})
+      }
+
+      onCustomer =()=>{
+            Taro.makePhoneCall({phoneNumber:DESHMOBILE})
       }
 
       render() {
@@ -185,7 +189,8 @@ export default class Shopdetail extends Component {
                                     className="btn_view">
                                     <Text className="btn_text">商城首页</Text>
                               </View>
-                              <View className="btn_view">
+                              <View className="btn_view"
+                              onClick={this.onCustomer}>
                                     <Text className="btn_text">咨询客服</Text>
                               </View>
                               <View data-url='/pages/OrderPay/index'

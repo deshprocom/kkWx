@@ -4,6 +4,8 @@ import Taro from '@tarojs/taro'
 import { userLogin } from '../service/accountDao';
 
 
+export const DESHMOBILE = '0755-23919844'
+
 export let loginUser = null
 
 /**微信登录code */
