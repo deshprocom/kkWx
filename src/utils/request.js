@@ -68,7 +68,8 @@ export default function request (options = { method: 'GET', data: {} }) {
       // throw new Error(`网络请求错误，状态码${statusCode}`);
     }
   }).catch(err=>{
-    logMsg('请求失败',err)
+    logMsg('请求失败'+process.env.NODE_ENV,err)
+    showToast(JSON.stringify(err))
     options.reject && options.reject(err)
   })
 }
