@@ -67,6 +67,8 @@ function wxLogin(params) {
             Taro.navigateBack()
         }
     }, err => {
+        showToast('登录失败，请重试')
+        setLoginWxCode(null)
         Taro.hideLoading()
     })
 }
