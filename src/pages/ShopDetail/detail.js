@@ -81,20 +81,20 @@ export default class Shopdetail extends Component {
             Taro.navigateBack({ delta: 1 })
       }
 
-      onLocation(merchant,e){
-         Taro.openLocation({
-            longitude:parseInt(merchant.longitude),
-            latitude:parseInt(merchant.latitude),
-            name:merchant.name
-         })
+      onLocation(merchant, e) {
+            Taro.openLocation({
+                  longitude: parseInt(merchant.longitude),
+                  latitude: parseInt(merchant.latitude),
+                  name: merchant.name
+            })
       }
 
-      onCall(merchant,e){
-        Taro.makePhoneCall({phoneNumber:merchant.telephone})
+      onCall(merchant, e) {
+            Taro.makePhoneCall({ phoneNumber: merchant.telephone })
       }
 
-      onCustomer =()=>{
-            Taro.makePhoneCall({phoneNumber:DESHMOBILE})
+      onCustomer = () => {
+            Taro.makePhoneCall({ phoneNumber: DESHMOBILE })
       }
 
       render() {
@@ -112,6 +112,7 @@ export default class Shopdetail extends Component {
 
             let swiper_img = isObjEmpty(images) ? <View className="banner">
                   <Image className="banner"
+                        mode='aspectFit'
                         src={empty_img} />
             </View> : <Swiper
                   className="banner"
@@ -162,7 +163,7 @@ export default class Shopdetail extends Component {
 
                         <View className="main2_view">
                               <View className="btn_shop1"
-                                    onClick={this.onLocation.bind(this,merchant)}>
+                                    onClick={this.onLocation.bind(this, merchant)}>
                                     <Image className="location_img" src={location_img} />
                               </View>
 
@@ -172,7 +173,7 @@ export default class Shopdetail extends Component {
                               </View>
                               <View style='display:flex;flex:1;' />
                               <View className="btn_shop1"
-                                    onClick={this.onCall.bind(this,merchant)}>
+                                    onClick={this.onCall.bind(this, merchant)}>
                                     <Image className="call_img" src={call_img} />
                               </View>
 
@@ -190,7 +191,7 @@ export default class Shopdetail extends Component {
                                     <Text className="btn_text">商城首页</Text>
                               </View>
                               <View className="btn_view"
-                              onClick={this.onCustomer}>
+                                    onClick={this.onCustomer}>
                                     <Text className="btn_text">咨询客服</Text>
                               </View>
                               <View data-url='/pages/OrderPay/index'
