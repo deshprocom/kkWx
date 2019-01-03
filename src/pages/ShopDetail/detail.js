@@ -81,32 +81,44 @@ export default class Shopdetail extends Component {
             Taro.navigateBack({ delta: 1 })
       }
 
+      onLocation(merchant,e){
+         Taro.openLocation({
+            longitude:parseInt(merchant.longitude),
+            latitude:parseInt(merchant.latitude),
+            name:merchant.name
+         })
+      }
+
+      onCall(merchant,e){
+        Taro.makePhoneCall({phoneNumber:merchant.telephone})
+      }
+
       render() {
             const { shopDetail } = this.props;
             const { category_id, description, first_discounts, freight_fee, has_variants,
-                  icon, id, images, intro, master, option_types, returnable, title, variants,merchant } = shopDetail.product
+                  icon, id, images, intro, master, option_types, returnable, title, variants, merchant } = shopDetail.product
             const { original_price, price, stock } = master;
 
             let bannerViews = images && images.map((item, index) => (<SwiperItem key={`banner_${index}`}>
-            <View className="banner">
-                  <Image className="banner"
-                        src={item.large} />
-            </View>
+                  <View className="banner">
+                        <Image className="banner"
+                              src={item.large} />
+                  </View>
             </SwiperItem>));
 
-            let swiper_img=isObjEmpty(images)?<View className="banner">
-            <Image className="banner"
-                  src={empty_img} />
-            </View>:<Swiper
-                              className="banner"
-                              indicatorColor='#999'
-                              indicatorActiveColor='#333'
-                              circular
-                              indicatorDots
-                              autoplay>
-                              {bannerViews}
-                        </Swiper>;
-            
+            let swiper_img = isObjEmpty(images) ? <View className="banner">
+                  <Image className="banner"
+                        src={empty_img} />
+            </View> : <Swiper
+                  className="banner"
+                  indicatorColor='#999'
+                  indicatorActiveColor='#333'
+                  circular
+                  indicatorDots
+                  autoplay>
+                        {bannerViews}
+                  </Swiper>;
+
 
 
             let select_message = [{}, {}, {}].map((item, index) => {
@@ -145,13 +157,21 @@ export default class Shopdetail extends Component {
                         </View>
 
                         <View className="main2_view">
-                              <Image className="location_img" src={location_img}/>
+                              <View className="btn_shop1"
+                                    onClick={this.onLocation.bind(this,merchant)}>
+                                    <Image className="location_img" src={location_img} />
+                              </View>
+
                               <View className="info_middle_left_view">
                                     <Text className="name1">{merchant.name}</Text>
                                     <Text className="name2">{merchant.location}</Text>
                               </View>
-                              <View style='display:flex;flex:1;'/>
-                              <Image className="call_img" src={call_img}/>
+                              <View style='display:flex;flex:1;' />
+                              <View className="btn_shop1"
+                                    onClick={this.onCall.bind(this,merchant)}>
+                                    <Image className="call_img" src={call_img} />
+                              </View>
+
                         </View>
                         <Text className="main_info">详细信息</Text>
 
