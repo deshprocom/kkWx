@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Text, RichText } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, isObjEmpty, urlEncode, loginUser, toLoginPage, DESHMOBILE } from '../../utils/utils'
+import { logMsg, isObjEmpty, urlEncode, loginUser, toLoginPage, DESHMOBILE, showToast } from '../../utils/utils'
 import classNames from 'classnames';
 import default_img from '../../images/mine/default_img.png';
 import empty_img from '../../images/mine/empty_ticket.png';
@@ -59,12 +59,19 @@ export default class Shopdetail extends Component {
 
       goOrderPay(title, variants, e) {
 
+            logMsg('是打开肌肤', title, variants)
             if (loginUser) {
-                  let select = variants[0]
-                  select.title = title
-                  let url = e.currentTarget.dataset.url + `?${urlEncode(select)}`
-                  logMsg('预支付', url)
-                  Taro.navigateTo({ url })
+                  if (isObjEmpty(variants)) {
+                        showToast('商品录入不完整')
+                        return
+                  } else {
+                        let select = variants[0]
+                        select.title = title
+                        let url = e.currentTarget.dataset.url + `?${urlEncode(select)}`
+                        logMsg('预支付', url)
+                        Taro.navigateTo({ url })
+                  }
+
             } else {
                   toLoginPage()
             }
