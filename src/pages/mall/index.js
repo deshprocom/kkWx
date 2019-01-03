@@ -44,11 +44,12 @@ export default class mall extends Component {
         page++
         let list = ret.items
         if (pullType === LOADMORE)
-          list = mall_list.concat(data.items)
+          list = mall_list.concat(ret.items)
         logMsg("商品折扣列表：", list)
 
         this.setState({
-          mall_list: list
+          mall_list: list,
+          page
         })
       }
 
@@ -102,7 +103,6 @@ export default class mall extends Component {
 
                 <Image className="cover"
                   mode="widthFix"
-                  style="height:300px;width:100%"
                   src={strNotNull(icon) ? icon : default_img} />
 
                 <Text className="title">{intro}</Text>
@@ -112,7 +112,7 @@ export default class mall extends Component {
                   <Text className="price">¥ {price}</Text>
                   <Text className="price2">门市价:¥{original_price}</Text>
                   <View className="space" />
-                  <Text>销售量：{all_stock}</Text>
+                  <Text style='font-size:14px;color:#666;'>销售量：{all_stock}</Text>
                 </View>
               </View>
             )

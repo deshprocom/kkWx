@@ -61,4 +61,15 @@
       .btn1-name{
             @include sc(28px,#fff)
       }
+      .btn2{
+            @include wh(140px,50px);
+            background-color: #cccccc;
+            border-radius: 8px;
+            @include fc(center);
+            justify-content: center;
+            margin-right: 20px;
+      }
+      .btn2-name{
+            @include sc(28px,#666666)
+      }
 }
