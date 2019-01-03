@@ -20,11 +20,16 @@ export default class Mine extends Component {
 
   config = {
     navigationBarTitleText: 'Mine',
+    enablePullDownRefresh: true
   };
 
   componentDidMount = () => {
 
   };
+
+  onPullDownRefresh = () => {
+    this.props.dispatch({type:'Mine/getPaid'})
+  }
 
   onUserInfo(e) {
      reLogin(e)
@@ -33,10 +38,6 @@ export default class Mine extends Component {
   onGoOrderList(initTab, e) {
     let url = e.currentTarget.dataset.url + `?${urlEncode({ initTab })}`
     Taro.navigateTo({ url })
-  }
-
-  componentWillReceiveProps(newProps) {
-    logMsg('newProps', newProps)
   }
 
   render() {

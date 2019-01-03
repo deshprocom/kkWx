@@ -89,7 +89,9 @@ export default class Orderpay extends Component {
   onCreateOrder = () => {
 
     createOrder(this.getParam(), ret => {
-      logMsg("创建订单", ret)
+      Taro.navigateBack({delta:3})
+      Taro.switchTab({url:'/pages/Mine/index'})
+      this.props.dispatch({type:'Mine/getPaid'})
     }, err => {
       logMsg("创建订单", err)
     })
