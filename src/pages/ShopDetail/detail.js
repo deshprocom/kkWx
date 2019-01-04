@@ -104,19 +104,13 @@ export default class Shopdetail extends Component {
             Taro.makePhoneCall({ phoneNumber: DESHMOBILE })
       }
 
-      componentDidMount() {
-            const { shopDetail } = this.props;
-            const { description } = shopDetail.product
-            WxParse.wxParse('article', 'html', description, this.$scope, 5)
-      }
-
       render() {
             const { shopDetail } = this.props;
             const { category_id, description, first_discounts, freight_fee, has_variants,
                   icon, id, images, intro, master, option_types, returnable, title, variants, merchant } = shopDetail.product
             const { original_price, price, stock } = master;
 
-
+            WxParse.wxParse('article', 'html', description, this.$scope, 5)
 
             let bannerViews = images && images.map((item, index) => (<SwiperItem key={`banner_${index}`}>
                   <View className="banner">
