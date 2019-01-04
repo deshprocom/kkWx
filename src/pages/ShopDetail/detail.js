@@ -9,7 +9,7 @@ import empty_img from '../../images/mine/empty_ticket.png';
 import close_img from '../../images/mine/close.png';
 import call_img from '../../images/tab/call_bg.png';
 import location_img from '../../images/tab/location.png';
-
+import WxParse from '../../components/wxParse/wxParse'
 
 const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
 
@@ -104,11 +104,19 @@ export default class Shopdetail extends Component {
             Taro.makePhoneCall({ phoneNumber: DESHMOBILE })
       }
 
+      componentDidMount() {
+            const { shopDetail } = this.props;
+            const { description } = shopDetail.product
+            WxParse.wxParse('article', 'html', description, this.$scope, 5)
+      }
+
       render() {
             const { shopDetail } = this.props;
             const { category_id, description, first_discounts, freight_fee, has_variants,
                   icon, id, images, intro, master, option_types, returnable, title, variants, merchant } = shopDetail.product
             const { original_price, price, stock } = master;
+
+
 
             let bannerViews = images && images.map((item, index) => (<SwiperItem key={`banner_${index}`}>
                   <View className="banner">
@@ -188,9 +196,8 @@ export default class Shopdetail extends Component {
                         <Text className="main_info">详细信息</Text>
 
                         <View className="des_view">
-                              <View style="margin-left:10px;margin-right:10px;">
-                              <RichText className="des_text" nodes={description} />
-                              </View>
+                              <import src='../../components/wxParse/wxParse.wxml' />
+                              <template is='wxParse' data='{{wxParseData:article.nodes}}' />
                         </View>
 
                         <View className="bottom_view">
