@@ -158,15 +158,20 @@
     @include sc(26px,#222121);
   }
   .des_view{
+    width:100%;
     margin-top: 10px;
     background-color: white;
     padding-bottom: 25px;
     margin-bottom: 180px;
-  
+    padding-top: 20px;
   }
   .des_text{
     font-size:28px;
     line-height: 46px;
+  }
+  .des_view img{
+    width:100px !important;
+    height:auto !important;
   }
   .bottom_view{
     @include fr(flex-start);
