@@ -62,7 +62,7 @@ export default class Shopdetail extends Component {
             logMsg('是打开肌肤', title, variants)
             if (loginUser) {
                   if (isObjEmpty(variants)) {
-                        showToast('商品录入不完整')
+                        showToast('商品录入不完整，缺少规格')
                         return
                   } else {
                         let select = variants[0]

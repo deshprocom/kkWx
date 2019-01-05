@@ -4,7 +4,7 @@ import { connect } from '@tarojs/redux';
 import './index.scss';
 import OrderItem from '../../components/order/OrderItem'
 import { shopOrderDetail } from '../../service/Mall';
-import { logMsg,convertDate ,utcDate} from '../../utils/utils';
+import { logMsg,convertDate ,utcDate, DESHMOBILE} from '../../utils/utils';
 import drawQrcode from 'weapp-qrcode'
 
 @connect(({OrderDetail}) => ({
@@ -25,7 +25,7 @@ export default class Orderdetail extends Component {
         width: 200,
         height: 200,
         canvasId: 'OrderQrcode',
-        text: param.order_number
+        text: `{order_number:${param.order_number}}`
       })
       shopOrderDetail(param.order_number,ret=>{
         logMsg('订单详情',ret);
@@ -50,12 +50,23 @@ export default class Orderdetail extends Component {
     }
   }
 
+  onCustomer = ()=>{
+    Taro.makePhoneCall({ phoneNumber: DESHMOBILE })
+  }
+
   render() {
     const {orderDetail} = this.state;
-    const {created_at,final_price,order_number,pay_status,refunded_price,shipping_price,status,total_price,total_product_price} = orderDetail;
+    const {created_at,final_price,order_number,pay_status,refunded_price,address,status,total_price,total_product_price} = orderDetail;
+   
     return (
       <View className="OrderDetail-page">
        <ScrollView scrollY>
+
+       {status === 'paid'?<View className="erweima_view">
+          <Text className="text1">商家扫码</Text>
+          <Canvas style="width: 200px; height: 200px;" canvas-id="OrderQrcode"></Canvas>
+        </View>:null}
+
        <View className="detail_top_view" style="margin-top:2px;">
           <Text className="top_text">商品信息</Text>
         </View>
@@ -67,23 +78,22 @@ export default class Orderdetail extends Component {
         <View className="detail_list_view">
           <Text className="detail_text1">订单编号：{order_number}</Text>
           <Text className="detail_text1">下单时间：{utcDate(created_at,'YYYY年MM月DD日 MM:ss')}</Text>
+          <Text className="detail_text1">下单人名：{address.name}</Text>
+          <Text className="detail_text1">电话号码：{address.mobile}</Text>
           <Text className="detail_text1">商品金额：¥{total_price}</Text>
-          <Text className="detail_text1">实际付款：¥{total_product_price}</Text>
+          <Text className="detail_text1">实际付款：¥{final_price}</Text>
           <View className="last_detail_view">
             <Text className="detail_text3">使用状态：</Text>
             <Text className="detail_text2">{this.pay_status(pay_status)}</Text>
           </View>
         </View>
-        {status === 'paid'?<View className="erweima_view">
-          <Text className="text1">商家扫码</Text>
-          <Canvas style="width: 200px; height: 200px;" canvas-id="OrderQrcode"></Canvas>
-        </View>:null}
+       
         
         <View style="height:120px;"/>
        </ScrollView>
         
 
-        <View className="btn_view">
+        <View className="btn_view" onClick={this.onCustomer}>
           <Text className="top_text">联系客服</Text>
         </View>
       </View>
