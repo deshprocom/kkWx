@@ -106,7 +106,7 @@ export default class Orderlist extends Component {
 
   render() {
     const { currentTab, dfkList, dsyList, ywcList, allList } = this.state;
-    const tabList = [{ title: '代付款' }, { title: '待使用' }, { title: '已完成' }, { title: '全部订单' }]
+    const tabList = [{ title: '待付款' }, { title: '待使用' }, { title: '已完成' }, { title: '全部订单' }]
 
     return (
       <View className="OrderList-page">
