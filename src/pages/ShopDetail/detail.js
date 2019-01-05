@@ -7,11 +7,8 @@ import classNames from 'classnames';
 import default_img from '../../images/mine/default_img.png';
 import empty_img from '../../images/mine/empty_ticket.png';
 import close_img from '../../images/mine/close.png';
-import call_img from '../../images/tab/call_bg.png';
-import location_img from '../../images/tab/location.png';
 import WxParse from '../../components/wxParse/wxParse'
-
-const baseUrl = 'https://cdn-upyun.deshpro.com/kk/uploads/';
+import Merchant from './Merchant';
 
 export default class Shopdetail extends Component {
 
@@ -21,24 +18,6 @@ export default class Shopdetail extends Component {
             showMore: false,
             isOpened: false
       };
-
-
-      banners = [
-            {
-                  src: baseUrl + 'banner/a427450bfd8d9c1aec3147abf07e3ce5.png'
-            },
-            {
-                  src: baseUrl + 'banner/59167dc4ba75bac58a393634da809e9e.png'
-            },
-            {
-                  src: baseUrl + 'banner/43abd55b90359e10435f943e8a2de67a.png'
-            }, {
-                  src: baseUrl + 'banner/2a614a4f08f35e5468030423267e0b8f.png'
-            }, {
-                  src: baseUrl + 'banner/efa0769a1f697e0bf037bb2971fffe43.png'
-            }
-      ]
-
 
       handleTouchMove = e => {
             e.stopPropagation()
@@ -86,18 +65,6 @@ export default class Shopdetail extends Component {
 
       goBack = () => {
             Taro.navigateBack({ delta: 1 })
-      }
-
-      onLocation(merchant, e) {
-            Taro.openLocation({
-                  longitude: parseInt(merchant.longitude),
-                  latitude: parseInt(merchant.latitude),
-                  name: merchant.name
-            })
-      }
-
-      onCall(merchant, e) {
-            Taro.makePhoneCall({ phoneNumber: merchant.telephone })
       }
 
       onCustomer = () => {
@@ -170,23 +137,8 @@ export default class Shopdetail extends Component {
                               <Text className="main_info_text">商家信息</Text>
                         </View>
 
-                        <View className="main2_view">
-                              <View className="btn_shop1"
-                                    onClick={this.onLocation.bind(this, merchant)}>
-                                    <Image className="location_img" src={location_img} />
-                              </View>
-
-                              <View className="info_middle_left_view">
-                                    <Text className="name1">{merchant.name}</Text>
-                                    <Text className="name2">{merchant.location}</Text>
-                              </View>
-                              <View style='display:flex;flex:1;' />
-                              <View className="btn_shop1"
-                                    onClick={this.onCall.bind(this, merchant)}>
-                                    <Image className="call_img" src={call_img} />
-                              </View>
-
-                        </View>
+                        <Merchant merchant={merchant}
+                              style='width:100%;' />
                         <Text className="main_info">详细信息</Text>
 
                         <View className="des_view">
