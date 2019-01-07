@@ -105,7 +105,7 @@ export default class mall extends Component {
                   mode="widthFix"
                   src={strNotNull(icon) ? icon : default_img} />
 
-                <Text className="title">{intro}</Text>
+                <Text className="title">{`${title}\n${intro}`}</Text>
 
                 <View className="line" />
                 <View className="info">
