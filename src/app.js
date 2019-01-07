@@ -8,7 +8,7 @@ import { Provider } from '@tarojs/redux'
 import './styles/base.scss'
 import { black } from 'ansi-colors';
 import withLogin from './service/WithLogin';
-import { logMsg, setSystemInfo, setLoginWxCode } from './utils/utils';
+import { logMsg, setSystemInfo } from './utils/utils';
 if (process.env.TARO_ENV === "weapp") {
   require("taro-ui/dist/weapp/css/index.css")
 } else if (process.env.TARO_ENV === "h5") {
@@ -77,11 +77,6 @@ class App extends Component {
     Taro.getSystemInfo({success:info=>{
       setSystemInfo(info)
     }})
-    Taro.login({
-      success: function (res) {
-        setLoginWxCode(res.code)
-      }
-    })
    
   }
 

@@ -6,11 +6,6 @@ import dva from '../config/dva'
 
 export function userLogin(params, resolve, reject) {
       post(api.user_login, params, ret => {
-            logMsg('登录结果', ret)
-            const { status, access_token } = ret;
-            if (status === 'login_success') {
-                  dva.getDispatch()({ type: 'Mine/effectsUser', loginUser: ret })
-            }
             resolve(ret)
       }, reject)
 }

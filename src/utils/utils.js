@@ -25,49 +25,38 @@ export function toLoginPage() {
 }
 
 export function setLoginWxCode(code) {
-    logMsg('登录code',code)
+    logMsg('登录code', code)
     // loginWxCode = code
 }
 
-export function reLogin(e) {
+export function reLogin(e, dispatch, frompage, code) {
     logMsg('用户信息', e)
     Taro.showLoading({ title: '正在登录...' })
-    if (loginWxCode === null || isObjEmpty(e)) {
-        Taro.login({
-            success: function (res) {
-                setLoginWxCode(res.code)
-                let params = {
-                    code: res.code,
-                    encrypted_data: e.currentTarget.encryptedData,
-                    iv: e.currentTarget.iv
-                }
-                wxLogin(params)
-                
-            }
-        })
-
-    } else {
-        let params = {
-            code: loginWxCode,
-            encrypted_data: e.currentTarget.encryptedData,
-            iv: e.currentTarget.iv
-        }
-        wxLogin(params)
+    let params = {
+        code: code,
+        encrypted_data: e.currentTarget.encryptedData,
+        iv: e.currentTarget.iv
     }
+    wxLogin(params, dispatch, frompage)
 
 
 }
 
-function wxLogin(params) {
+function wxLogin(params, dispatch, frompage) {
     logMsg('登陆信息', params)
     userLogin(params, ret => {
         Taro.hideLoading()
         let url = `/pages/BindMobile/index?${urlEncode(ret)}`
         if (ret.status === 'need_register') {
             Taro.navigateTo({ url })
-        } else {
+        } else if (ret.status === 'login_success') {
             showToast('登陆成功')
-            Taro.navigateBack()
+
+            dispatch({ type: 'Mine/effectsUser', loginUser: ret })
+            if (frompage === 'loginpage') {
+                Taro.navigateBack()
+            }
+
         }
     }, err => {
         showToast('登录失败，请重试')

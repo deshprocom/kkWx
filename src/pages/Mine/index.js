@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Button, ScrollView } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, urlEncode, isObjEmpty, reLogin } from '../../utils/utils';
+import { logMsg, urlEncode, isObjEmpty, reLogin, setLoginWxCode } from '../../utils/utils';
 import right_img from '../../images/mine/right.png'
 import img_all from '../../images/mine/all.png'
 import img_dgh from '../../images/mine/dgh.png'
@@ -24,7 +24,11 @@ export default class Mine extends Component {
   };
 
   componentDidMount = () => {
-
+    Taro.login({
+      success: (res)=> {
+        this.code = res.code
+      }
+    })
   };
 
   onPullDownRefresh = () => {
@@ -32,7 +36,7 @@ export default class Mine extends Component {
   }
 
   onUserInfo(e) {
-     reLogin(e)
+     reLogin(e,this.props.dispatch,'mine',this.code)
   }
 
   onGoOrderList(initTab, e) {
