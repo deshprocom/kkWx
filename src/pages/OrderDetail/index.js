@@ -70,7 +70,7 @@ export default class Orderdetail extends Component {
             <Canvas style="width: 200px; height: 200px;" canvas-id="OrderQrcode"></Canvas>
           </View> : null}
 
-         {showMerchant?<View className="detail_top_view" style="margin-top:10px;">
+         {showMerchant?<View className="detail_top_view" style="margin-top:10px;margin-bottom:1px;">
             <Text className="top_text">商家信息</Text>
           </View>:null}
           {showMerchant?<Merchant merchant={order_items[0].merchant}
@@ -79,7 +79,7 @@ export default class Orderdetail extends Component {
           <View className="detail_top_view" style="margin-top:10px;">
             <Text className="top_text">商品信息</Text>
           </View>
-          <View style="height:2px;"/>
+          
           <OrderItem item={orderDetail} unclick={true} />
 
           <View className="detail_top_view" style="margin-top:10px;">
