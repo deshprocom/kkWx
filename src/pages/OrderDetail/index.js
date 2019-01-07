@@ -57,8 +57,10 @@ export default class Orderdetail extends Component {
 
   render() {
     const { orderDetail } = this.state;
-    const { created_at, final_price, order_number, pay_status, merchant, address, status, total_price, total_product_price } = orderDetail;
+    const { created_at, final_price, order_number, pay_status, address, status, total_price, order_items } = orderDetail;
 
+  
+    let showMerchant = order_items && order_items.length>0 && order_items[0].merchant
     return (
       <View className="OrderDetail-page">
         <ScrollView scrollY>
@@ -68,15 +70,16 @@ export default class Orderdetail extends Component {
             <Canvas style="width: 200px; height: 200px;" canvas-id="OrderQrcode"></Canvas>
           </View> : null}
 
-         {merchant?<View className="detail_top_view" style="margin-top:10px;">
+         {showMerchant?<View className="detail_top_view" style="margin-top:10px;">
             <Text className="top_text">商家信息</Text>
           </View>:null}
-          {merchant?<Merchant merchant={merchant}
+          {showMerchant?<Merchant merchant={order_items[0].merchant}
             style='width:100%;' />:null}
           
           <View className="detail_top_view" style="margin-top:10px;">
             <Text className="top_text">商品信息</Text>
           </View>
+          <View style="height:2px;"/>
           <OrderItem item={orderDetail} unclick={true} />
 
           <View className="detail_top_view" style="margin-top:10px;">
