@@ -13,7 +13,7 @@ export function userLogin(params, resolve, reject) {
 export function bindMobile(params, resolve, reject,dispatch) {
       post(api.bind_mobile, params, ret => {
             logMsg('手机号绑定', ret)
-            const { user_name, access_token } = ret;
+            const { user_name, access_token,status} = ret;
             if (user_name && access_token) {
                   let login = {
                         status:'login_success',
@@ -21,6 +21,8 @@ export function bindMobile(params, resolve, reject,dispatch) {
                         user:ret
                   }
                   dispatch({ type: 'Mine/effectsUser', loginUser: login })
+            }else if( status === 'login_success'){
+                  dispatch({ type: 'Mine/effectsUser', loginUser: ret })
             }
             resolve(ret)
       }, reject)
