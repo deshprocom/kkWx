@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, strNotNull,urlEncode } from '../../utils/utils';
+import { logMsg, strNotNull, urlEncode } from '../../utils/utils';
 import { getMallList } from '../../service/Mall';
 import default_img from '../../images/mine/empty_ticket.png';
 
@@ -35,8 +35,8 @@ export default class mall extends Component {
   refreshLoad = (pullType) => {
     let { mall_list, page } = this.state
 
+    page = pullType === REFRESH ? 1 : page
     let params = { page, page_size: 20 }
-
 
     getMallList(params, ret => {
       Taro.stopPullDownRefresh()
