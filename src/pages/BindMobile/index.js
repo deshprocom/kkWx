@@ -55,7 +55,7 @@ export default class BindMobile extends Component {
       Taro.navigateBack({ delta: 1 })
     }, err => {
       this.handleResult('手机绑定失败，稍后再试', 'none')
-    })
+    },this.props.dispatch)
 
 
   }

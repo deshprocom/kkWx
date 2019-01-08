@@ -46,8 +46,9 @@ function wxLogin(params, dispatch, frompage) {
     logMsg('登陆信息', params)
     userLogin(params, ret => {
         Taro.hideLoading()
-        let url = `/pages/BindMobile/index?${urlEncode(ret)}`
+
         if (ret.status === 'need_register') {
+            let url = `/pages/BindMobile/index?${urlEncode(ret)}`
             Taro.navigateTo({ url })
         } else if (ret.status === 'login_success') {
             showToast('登陆成功')

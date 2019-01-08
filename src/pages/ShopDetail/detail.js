@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import default_img from '../../images/mine/default_img.png';
 import empty_img from '../../images/mine/empty_ticket.png';
 import close_img from '../../images/mine/close.png';
-import WxParse from '../../components/wxParse/wxParse'
+import wxParser from '../../components/wxParser/index'
 import Merchant from './Merchant';
 
 export default class Shopdetail extends Component {
@@ -77,7 +77,19 @@ export default class Shopdetail extends Component {
                   icon, id, images, intro, master, option_types, returnable, title, variants, merchant } = shopDetail.product
             const { original_price, price, stock } = master;
 
-            WxParse.wxParse('article', 'html', description, this.$scope, 5)
+            wxParser.parse({
+                  bind: 'richText',
+                  html: description,
+                  target: this.$scope,
+                  enablePreviewImage: true, // 禁用图片预览功能
+                  tapLink: (url) => { // 点击超链接时的回调函数
+                        // url 就是 HTML 富文本中 a 标签的 href 属性值
+                        // 这里可以自定义点击事件逻辑，比如页面跳转
+                        wx.navigateTo({
+                              url
+                        });
+                  }
+            });
 
             let bannerViews = images && images.map((item, index) => (<SwiperItem key={`banner_${index}`}>
                   <View className="banner">
@@ -133,18 +145,19 @@ export default class Shopdetail extends Component {
                               </View>
                         </View> */}
 
-                        <View className="main_info_view">
+                        {merchant ? <View className="main_info_view">
                               <Text className="main_info_text">商家信息</Text>
-                        </View>
+                        </View> : null}
+                        {merchant ? <Merchant merchant={merchant}
+                              style='width:100%;' /> : null}
 
-                        <Merchant merchant={merchant}
-                              style='width:100%;' />
+
                         <Text className="main_info">详细信息</Text>
 
-                        <View className="des_view">
-                              <import src='../../components/wxParse/wxParse.wxml' />
-                              <template is='wxParse' data='{{wxParseData:article.nodes}}' />
-                        </View>
+                        <import src="../../components/wxParser/index.wxml" />
+                        <view class="wxParser">
+                              <template is="wxParser" data="{{wxParserData:richText.nodes}}" />
+                        </view>
 
                         <View className="bottom_view">
                               <View

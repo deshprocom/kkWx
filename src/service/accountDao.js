@@ -10,12 +10,12 @@ export function userLogin(params, resolve, reject) {
       }, reject)
 }
 
-export function bindMobile(params, resolve, reject) {
+export function bindMobile(params, resolve, reject,dispatch) {
       post(api.bind_mobile, params, ret => {
             logMsg('手机号绑定', ret)
             const { status, access_token } = ret;
             if (status === 'login_success') {
-                  dva.getDispatch()({ type: 'Mine/effectsUser', loginUser: ret })
+                  dispatch({ type: 'Mine/effectsUser', loginUser: ret })
             }
             resolve(ret)
       }, reject)
