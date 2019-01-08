@@ -62,10 +62,13 @@ export default class BindMobile extends Component {
 
   wxBindMobile() {
     if (this.state.disabled) return
+    const { selector, selectorValue, mobile } = this.state
+    let ext = selector[selectorValue].split('+')[1]
     let param = {
       option_type: 'bind_wx_account',
       vcode_type: 'mobile',
-      mobile: this.state.mobile
+      mobile: mobile,
+      ext
     }
     wxMobileBind(param, ret => {
       this.handleResult('已发送验证码', 'success')
