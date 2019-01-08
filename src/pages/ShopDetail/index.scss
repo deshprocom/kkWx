@@ -1,5 +1,41 @@
 @import "../../styles/mixin";
 
+.main2_view{
+  width:100%;
+  background-color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  @include fr(center);
+}
+.info_middle_view{
+  @include fr(flex-start);
+  width:100%;
+}
+.info_middle_left_view{
+  @include fc(flex-start);
+  width:80%;
+}
+.location_img{
+  width:35px;
+  height:50px;
+}
+.btn_shop1{
+ @include wh(100px,100%);
+ @include fc(center);
+ justify-content: center;
+}
+.call_img{
+  width:40px;
+  height:50px;
+}
+.name1{
+  @include sc(26px,#1C1C1C);
+}
+.name2{
+  @include sc(26px,#888888);
+  margin-top:20px;
+}
+
 .ShopDetail-page {
   width:100%;
   @include fc(flex-start);
@@ -41,8 +77,8 @@
   }
   
   .banner{
-    @include wh(100%,500px);
-    background-color: white
+    @include wh(100%,600px);
+    max-height: 600px;
   }
   .detail_view{
     width:100%;
@@ -68,11 +104,12 @@
     margin-top: 10px;
   }
   .price_text{
-    @include sc(32px,#E54A2E);
+    @include sc(36px,#E54A2E);
+    font-weight: bold;
     margin-left: 20px;
   }
   .begin_price{
-    @include sc(26px,#888888);
+    @include sc(25px,#888888);
     text-decoration-line: line-through
   }
   .saved_text{
@@ -99,26 +136,6 @@
   .more_info{
     @include sc(26px,#E54A2E);
   }
-  .main2_view{
-    width:100%;
-    background-color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    @include fr(flex-start);
-  }
-  .info_middle_view{
-    @include fc(flex-start);
-    width:1000%;
-  }
-  .name1{
-    @include sc(26px,#1C1C1C);
-  }
-  .name2{
-    @include sc(26px,#888888);
-    margin-top:20px;
-  }
   .spec_view{
     @include fr(center);
     width:100%;
@@ -142,17 +159,24 @@
     @include sc(26px,#222121);
   }
   .des_view{
-    @include distance_padding(17px, 17px);
+    width:100%;
     margin-top: 10px;
     background-color: white;
-    padding-top: 25px;
     padding-bottom: 25px;
     margin-bottom: 180px;
-    width:100%;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
-  .des_text{
-    font-size:28px;
+  .des_view .WxEmojiView{
+    font-size:27px;
     line-height: 46px;
+    
+  }
+  .des_view .wxParse-inline{
+    font-size:27px;
+    line-height: 46px;
+    
   }
   .bottom_view{
     @include fr(flex-start);

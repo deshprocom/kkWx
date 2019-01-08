@@ -81,7 +81,7 @@
       font-weight: bold;
     }
     .price2{
-      @include sc(32px,$_666);
+      @include sc(30px,$_666);
       margin-left: 18px;
       text-decoration:line-through;
     }

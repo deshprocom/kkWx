@@ -3,13 +3,16 @@ import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components'
 import './index.scss';
 import CountDown from '../../components/countdown'
 import { logMsg, dateFormat, urlEncode } from '../../utils/utils';
+import classnames from 'classnames'
 
 export default class OneBuy extends Component {
 
-      goDetailPage(product_id, e) {
-            logMsg(e, product_id)
-            let url = e.currentTarget.dataset.url + `?${urlEncode({ product_id })}`
-            Taro.navigateTo({ url })
+      goDetailPage(product_id, one_yuan_buy_status, e) {
+            if (one_yuan_buy_status === 'unbegin' || one_yuan_buy_status === 'going') {
+                  let url = e.currentTarget.dataset.url + `?${urlEncode({ product_id })}`
+                  Taro.navigateTo({ url })
+            }
+
       }
 
       dayHour = (millis) => {
@@ -26,6 +29,47 @@ export default class OneBuy extends Component {
             logMsg(`${dayC} 天 ${hour} 时 ${minC} 分`)
       }
 
+      oneBuyStatus = (status) => {
+
+            let str = ''
+            switch (status) {
+                  case 'unbegin':
+                        str = '距离开始'
+                        break;
+                  case 'end':
+                        str = '已结束'
+                        break;
+                  case 'sell_out':
+                        str = '已售罄'
+                        break;
+                  case 'going':
+                        str = '进行中'
+                        break;
+            }
+
+            return str
+      }
+
+      oneBuyStatusBtn = (status) => {
+
+            let str = ''
+            switch (status) {
+                  case 'unbegin':
+                        str = '即将到来'
+                        break;
+                  case 'end':
+                        str = '已结束'
+                        break;
+                  case 'sell_out':
+                        str = '已售罄'
+                        break;
+                  case 'going':
+                        str = '马上抢'
+                        break;
+            }
+
+            return str
+      }
 
       render() {
             let curDate = new Date()
@@ -33,7 +77,7 @@ export default class OneBuy extends Component {
 
             const { icon, title, original_price, price,
                   product_id, returnable, saleable_num, sales_volume,
-                  end_time, begin_time } = this.props.item;
+                  end_time, begin_time, one_yuan_buy_status } = this.props.item;
             logMsg(`begin_time ${dateFormat(begin_time)}`)
             logMsg(`end_time ${dateFormat(end_time)}`)
             let diff = curTimes - end_time
@@ -46,7 +90,7 @@ export default class OneBuy extends Component {
             } else {//小于结束时间
                   if (diff1 > 0) {//大于开始时间
                         diff = Math.abs(diff)
-                        canBuyStr = `距离结束`
+                        canBuyStr = `进行中`
                   } else {//小于开始时间
                         canBuyStr = `距离开始`
                         diff = Math.abs(diff1)
@@ -54,29 +98,34 @@ export default class OneBuy extends Component {
             }
             logMsg("当前时间", diff)
 
+            let isRedStyle = one_yuan_buy_status === 'going'
+
             return (<View className='one-buy'
                   data-url="/pages/ShopDetail/index"
-                  onClick={this.goDetailPage.bind(this, product_id)}>
+                  onClick={this.goDetailPage.bind(this, product_id, one_yuan_buy_status)}>
                   <Image className="cover"
                         mode="widthFix"
                         src={icon} />
 
                   <View className="content">
-                        <Text className='title'>{title}上看到就会分开就好</Text>
-                        <View className='count-down'>
-                              <Text className='txt1'>{`距结束`}</Text>
-                              <CountDown
-                                    isShowDay
-                                    seconds={diff} />
-                        </View>
+                        <Text className='title'>{title}</Text>
+
+                        {one_yuan_buy_status === 'unbegin' || one_yuan_buy_status === 'going' ?
+                              <View className='count-down'>
+                                    <Text className='txt1'>{this.oneBuyStatus(one_yuan_buy_status)}</Text>
+                                    <CountDown
+                                          isShowDay
+                                          seconds={diff} />
+                              </View> : null}
+
 
                         <View style='display:flex;flex:1;' />
                         <View className='price'>
                               <Text className='price1'>{`¥${price}`}</Text>
                               <Text className='price2'>{`门市价:¥${original_price}`}</Text>
                               <View style='display:flex;flex:1;' />
-                              <View className='btn1'>
-                                    <Text className='btn1-name'>马上抢</Text>
+                              <View className={isRedStyle?'btn1':'btn2'}>
+                                    <Text className={isRedStyle?'btn1-name':'btn2-name'}>{this.oneBuyStatusBtn(one_yuan_buy_status)}</Text>
                               </View>
 
                         </View>

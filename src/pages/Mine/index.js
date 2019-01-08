@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Button, ScrollView } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, urlEncode, isObjEmpty } from '../../utils/utils';
+import { logMsg, urlEncode, isObjEmpty, reLogin, setLoginWxCode } from '../../utils/utils';
 import right_img from '../../images/mine/right.png'
 import img_all from '../../images/mine/all.png'
 import img_dgh from '../../images/mine/dgh.png'
@@ -20,42 +20,28 @@ export default class Mine extends Component {
 
   config = {
     navigationBarTitleText: 'Mine',
+    enablePullDownRefresh: true
   };
 
   componentDidMount = () => {
-
-  };
-
-  onUserInfo(e) {
-    logMsg('用户信息', e)
     Taro.login({
-      success: function (res) {
-        let params = {
-          code: res.code,
-          encrypted_data: e.currentTarget.encryptedData,
-          iv: e.currentTarget.iv
-        }
-        logMsg('登陆信息', params)
-        userLogin(params, ret => {
-          let url = `/pages/BindMobile/index?${urlEncode(ret)}`
-          if (ret.status === 'need_register') {
-            Taro.navigateTo({ url })
-          }
-        }, err => {
-
-        })
-
+      success: (res)=> {
+        this.code = res.code
       }
     })
+  };
+
+  onPullDownRefresh = () => {
+    this.props.dispatch({type:'Mine/getPaid'})
+  }
+
+  onUserInfo(e) {
+     reLogin(e,this.props.dispatch,'mine',this.code)
   }
 
   onGoOrderList(initTab, e) {
     let url = e.currentTarget.dataset.url + `?${urlEncode({ initTab })}`
     Taro.navigateTo({ url })
-  }
-
-  componentWillReceiveProps(newProps) {
-    logMsg('newProps', newProps)
   }
 
   render() {

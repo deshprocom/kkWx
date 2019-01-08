@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
 import { AtButton, AtAvatar } from 'taro-ui'
-import { reLogin } from '../../utils/utils';
+import { reLogin, showToast, loginUser, logMsg } from '../../utils/utils';
 
 @connect(({ Login }) => ({
   ...Login,
@@ -14,11 +14,17 @@ export default class Login extends Component {
   };
 
   componentDidMount = () => {
-
+    Taro.login({
+      success: (res) => {
+        logMsg('微信登录code', res)
+        this.loginCode = res.code
+      }
+    })
+    showToast(loginUser ? '请登录后操作' : '登录过期,请重新登录')
   };
 
   onUserInfo(e) {
-    reLogin(e)
+    reLogin(e, this.props.dispatch, 'loginpage', this.loginCode)
   }
 
   render() {

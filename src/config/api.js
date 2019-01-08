@@ -10,7 +10,7 @@ let production = 'https://kkapi.deshpro.com/v1/'
 
 export default  {
   noConsole:false,
-  baseUrl:test,
+  baseUrl:production,
   shopCategories:'shop/categories',
   one_yuan_buys:'shop/one_yuan_buys',
   shop_product:'shop/products',
@@ -18,7 +18,8 @@ export default  {
   bind_mobile:'weixin/miniprogram/bind_mobile',
   v_code:'account/v_codes',
   shop_order:'shop/orders',
-  new_shop_order:'shop/orders/new'
+  new_shop_order:'shop/orders/new',
+  mall_list:'shop/products/discounts'
 
 }
 

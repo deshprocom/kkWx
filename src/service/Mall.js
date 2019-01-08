@@ -8,15 +8,21 @@ import api from '../config/api'
 import Taro from '@tarojs/taro';
 import { logMsg, showToast } from '../utils/utils';
 
+export function getMallList(param, resolve, reject) {
+  get(api.mall_list, param, resolve, reject)
+}
+
+
 export function getShopCategorios(resolve, reject) {
   get(api.shopCategories, {}, resolve, reject)
 }
 
 export function createOrder(param, resolve, reject) {
   post(api.shop_order, param, ret=>{
-    resolve(ret)
-    shopWxPay(ret.order_number)
-  }, reject)
+    shopWxPay(ret.order_number,resolve,reject)
+  }, err=>{
+    showToast('下单失败，请重试')
+  })
 
 }
 
@@ -37,7 +43,7 @@ export function shopWxPay(order_num,resolve,reject){
    
     let callback = {success:(res)=>{
       logMsg('微信支付结果1',res)
-      
+      resolve(res)
     },fail:(res)=>{
       res.err_desc && showToast(res.err_desc)
       logMsg('微信支付失败',res)

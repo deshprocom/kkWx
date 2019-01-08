@@ -76,7 +76,7 @@ export default class Orderpay extends Component {
           province:'广东省',
           city: '深圳市',
           area: '福田区',
-          detail: '卓越世纪3号楼'
+          detail: 'weapp-小程序订单'
         }
       },
       memo,
@@ -89,7 +89,9 @@ export default class Orderpay extends Component {
   onCreateOrder = () => {
 
     createOrder(this.getParam(), ret => {
-      logMsg("创建订单", ret)
+      Taro.navigateBack({delta:3})
+      Taro.switchTab({url:'/pages/Mine/index'})
+      this.props.dispatch({type:'Mine/getPaid'})
     }, err => {
       logMsg("创建订单", err)
     })

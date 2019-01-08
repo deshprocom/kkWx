@@ -41,7 +41,7 @@
       width:160px;
       @include fr(center);
       justify-content: center;
-      background-color: #1be46f;
+      background-color: #E54A2E;
       position: absolute;
       top: 30px;
       left: -5px;
@@ -73,6 +73,7 @@
 
     .cover{
       height: 300px;
+      max-height: 650px;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
@@ -106,7 +107,7 @@
         font-weight: bold;
       }
       .price2{
-        @include sc(32px,$_666);
+        @include sc(30px,$_666);
         margin-left: 18px;
         text-decoration:line-through;
       }

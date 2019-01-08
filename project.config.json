@@ -4,7 +4,7 @@
 	"description": "澳门旅行小程序",
 	"appid": "wxc48e51deb0421c5c",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
