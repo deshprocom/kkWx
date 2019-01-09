@@ -19,7 +19,7 @@ export default class Mine extends Component {
 
 
   config = {
-    navigationBarTitleText: 'Mine',
+    navigationBarTitleText: '我的',
     enablePullDownRefresh: true
   };
 
