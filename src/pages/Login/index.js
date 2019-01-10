@@ -20,7 +20,7 @@ export default class Login extends Component {
         this.loginCode = res.code
       }
     })
-    showToast(loginUser ? '请登录后操作' : '登录过期,请重新登录')
+    showToast(loginUser && loginUser.user ? '请登录后操作' : '登录过期,请重新登录')
   };
 
   onUserInfo(e) {

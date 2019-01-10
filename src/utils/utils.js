@@ -60,8 +60,8 @@ function wxLogin(params, dispatch, frompage) {
 
         }
     }, err => {
-        showToast('登录失败，请重试')
-        setLoginWxCode(null)
+        showToast(`登录失败${JSON.stringify(err)}`)
+       
         Taro.hideLoading()
     })
 }
