@@ -125,12 +125,14 @@ export default class Shopdetail extends Component {
                         {swiper_img}
                         <View className="detail_view">
                               <Text className="detail_intro">{title}</Text>
-                              <View className="info1_view">
-                                    <Text className="begin_price">{`门市价¥${original_price}`}</Text>
-                              </View>
+
                               <View className="info2_view">
-                                    <Text className="price_text">{`¥${price}`}</Text>
-                                    <Text className="saved_text">{`已卖出：${stock}份`}</Text>
+                                    <View className="info1_view">
+                                          <Text className="price_text">{`¥${price}`}</Text>
+                                          <Text className="begin_price" style="margin-left:15px;">{`门市价¥${original_price}`}</Text>
+                                    </View>
+
+                                    <Text className="saved_text">{`库存：${stock}份`}</Text>
                               </View>
                         </View>
 
