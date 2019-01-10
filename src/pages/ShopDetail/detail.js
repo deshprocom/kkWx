@@ -37,23 +37,28 @@ export default class Shopdetail extends Component {
 
 
       goOrderPay(title, variants, e) {
-
-            logMsg('是打开肌肤', title, variants)
-            if (loginUser) {
-                  if (isObjEmpty(variants)) {
-                        showToast('商品录入不完整，缺少规格')
-                        return
+            if(this.props.buyStatus && this.props.buyStatus === 'going'){
+                  logMsg('是打开肌肤', title, variants)
+                  if (loginUser) {
+                        if (isObjEmpty(variants)) {
+                              showToast('商品录入不完整，缺少规格')
+                              return
+                        } else {
+                              let select = variants[0]
+                              select.title = title
+                              let url = e.currentTarget.dataset.url + `?${urlEncode(select)}`
+                              logMsg('预支付', url)
+                              Taro.navigateTo({ url })
+                        }
+      
                   } else {
-                        let select = variants[0]
-                        select.title = title
-                        let url = e.currentTarget.dataset.url + `?${urlEncode(select)}`
-                        logMsg('预支付', url)
-                        Taro.navigateTo({ url })
+                        toLoginPage()
                   }
-
-            } else {
-                  toLoginPage()
+            }else{
+                  showToast('本商品已结束购买')
             }
+
+            
 
       }
 
@@ -129,10 +134,10 @@ export default class Shopdetail extends Component {
                               <View className="info2_view">
                                     <View className="info1_view">
                                           <Text className="price_text">{`¥${price}`}</Text>
-                                          <Text className="begin_price" style="margin-left:15px;">{`门市价¥${original_price}`}</Text>
+                                          <Text className="begin_price" style="margin-left:15px;">{`市价¥${original_price}`}</Text>
                                     </View>
 
-                                    <Text className="saved_text">{`库存：${stock}份`}</Text>
+                                    <Text className="saved_text">{`还剩：${stock}份`}</Text>
                               </View>
                         </View>
 

@@ -8,11 +8,8 @@ import classnames from 'classnames'
 export default class OneBuy extends Component {
 
       goDetailPage(product_id, one_yuan_buy_status, e) {
-            if (one_yuan_buy_status === 'unbegin' || one_yuan_buy_status === 'going') {
-                  let url = e.currentTarget.dataset.url + `?${urlEncode({ product_id })}`
-                  Taro.navigateTo({ url })
-            }
-
+            let url = e.currentTarget.dataset.url + `?${urlEncode({product_id,buyStatus:one_yuan_buy_status })}`
+            Taro.navigateTo({ url })
       }
 
       dayHour = (millis) => {
@@ -122,7 +119,7 @@ export default class OneBuy extends Component {
                         <View style='display:flex;flex:1;' />
                         <View className='price'>
                               <Text className='price1'>{`¥${price}`}</Text>
-                              <Text className='price2'>{`门市价:¥${original_price}`}</Text>
+                              <Text className='price2'>{`市价:¥${original_price}`}</Text>
                               <View style='display:flex;flex:1;' />
                               <View className={isRedStyle?'btn1':'btn2'}>
                                     <Text className={isRedStyle?'btn1-name':'btn2-name'}>{this.oneBuyStatusBtn(one_yuan_buy_status)}</Text>

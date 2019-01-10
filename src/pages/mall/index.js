@@ -72,7 +72,7 @@ export default class mall extends Component {
 
   goDetailPage(product_id, e) {
     logMsg(e, product_id)
-    let url = e.currentTarget.dataset.url + `?${urlEncode({ product_id })}`
+    let url = e.currentTarget.dataset.url + `?${urlEncode({ product_id,buyStatus:'going' })}`
     Taro.navigateTo({ url })
   }
 
@@ -110,9 +110,9 @@ export default class mall extends Component {
                 <View className="line" />
                 <View className="info">
                   <Text className="price">¥ {price}</Text>
-                  <Text className="price2">门市价:¥{original_price}</Text>
+                  <Text className="price2">市价:¥{original_price}</Text>
                   <View className="space" />
-                  <Text style='font-size:14px;color:#666;'>库存：{all_stock}</Text>
+                  <Text style='font-size:14px;color:#666;'>已卖：{all_stock}</Text>
                 </View>
               </View>
             )

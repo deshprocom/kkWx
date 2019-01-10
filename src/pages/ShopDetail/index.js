@@ -28,9 +28,11 @@ export default class Shopdetail extends Component {
 
   render() {
     const { shopDetail } = this.props;
+    let param = this.$router.params
     return (<View>
       {isObjEmpty(shopDetail) ? <AtActivityIndicator mode='center' />
-        : <Detail shopDetail={shopDetail} />}
+        : <Detail shopDetail={shopDetail}
+                  buyStatus={param.buyStatus} />}
     </View>)
   }
 
