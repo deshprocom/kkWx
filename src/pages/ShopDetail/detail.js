@@ -155,7 +155,7 @@ export default class Shopdetail extends Component {
 
 
                         <Text className="main_info">详细信息</Text>
-
+                
                         <import src="../../components/wxParser/index.wxml" />
                         <view class="wxParser">
                               <template is="wxParser" data="{{wxParserData:richText.nodes}}" />

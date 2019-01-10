@@ -112,7 +112,7 @@ export default class mall extends Component {
                   <Text className="price">¥ {price}</Text>
                   <Text className="price2">门市价:¥{original_price}</Text>
                   <View className="space" />
-                  <Text style='font-size:14px;color:#666;'>销售量：{all_stock}</Text>
+                  <Text style='font-size:14px;color:#666;'>库存：{all_stock}</Text>
                 </View>
               </View>
             )
