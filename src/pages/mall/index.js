@@ -85,7 +85,7 @@ export default class mall extends Component {
         <View className="home-page">
 
           {mall_list.map((item, index) => {
-            const { all_stock, category_id, first_discounts, icon, id, intro, original_price, price, returnable, title } = item;
+            const { all_stock, category_id, sales_volume, icon, id, intro, original_price, price, returnable, title } = item;
             return (
               <View
                 data-url="/pages/ShopDetail/index"
@@ -112,7 +112,8 @@ export default class mall extends Component {
                   <Text className="price">¥ {price}</Text>
                   <Text className="price2">市价:¥{original_price}</Text>
                   <View className="space" />
-                  <Text style='font-size:14px;color:#666;'>已卖：{all_stock}</Text>
+                  {sales_volume?<Text style='font-size:14px;color:#666;'>已卖：{sales_volume}</Text>:null}
+                  
                 </View>
               </View>
             )
