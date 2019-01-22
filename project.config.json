@@ -4,12 +4,13 @@
 	"description": "澳门旅行小程序",
 	"appid": "wxc48e51deb0421c5c",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
 		"newFeature": true,
-		"autoAudits": false
+		"autoAudits": false,
+		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
 	"condition": {}

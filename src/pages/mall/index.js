@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Swiper, SwiperItem, Image, ScrollView } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './index.scss';
-import { logMsg, strNotNull,urlEncode } from '../../utils/utils';
+import { logMsg, strNotNull, urlEncode } from '../../utils/utils';
 import { getMallList } from '../../service/Mall';
 import default_img from '../../images/mine/empty_ticket.png';
 
@@ -35,8 +35,8 @@ export default class mall extends Component {
   refreshLoad = (pullType) => {
     let { mall_list, page } = this.state
 
+    page = pullType === REFRESH ? 1 : page
     let params = { page, page_size: 20 }
-
 
     getMallList(params, ret => {
       Taro.stopPullDownRefresh()
@@ -72,7 +72,7 @@ export default class mall extends Component {
 
   goDetailPage(product_id, e) {
     logMsg(e, product_id)
-    let url = e.currentTarget.dataset.url + `?${urlEncode({ product_id })}`
+    let url = e.currentTarget.dataset.url + `?${urlEncode({ product_id,buyStatus:'going' })}`
     Taro.navigateTo({ url })
   }
 
@@ -85,7 +85,7 @@ export default class mall extends Component {
         <View className="home-page">
 
           {mall_list.map((item, index) => {
-            const { all_stock, category_id, first_discounts, icon, id, intro, original_price, price, returnable, title } = item;
+            const { all_stock, category_id, sales_volume, icon, id, intro, original_price, price, returnable, title } = item;
             return (
               <View
                 data-url="/pages/ShopDetail/index"
@@ -110,9 +110,10 @@ export default class mall extends Component {
                 <View className="line" />
                 <View className="info">
                   <Text className="price">¥ {price}</Text>
-                  <Text className="price2">门市价:¥{original_price}</Text>
+                  <Text className="price2">市价:¥{original_price}</Text>
                   <View className="space" />
-                  <Text style='font-size:14px;color:#666;'>销售量：{all_stock}</Text>
+                  {sales_volume?<Text style='font-size:14px;color:#666;'>已卖：{sales_volume}</Text>:null}
+                  
                 </View>
               </View>
             )

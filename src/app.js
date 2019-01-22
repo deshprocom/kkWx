@@ -1,6 +1,6 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
-import Home from './pages/home'
+import Home from './pages/mall'
 import dva from './config/dva'
 import models from './models'
 import { Provider } from '@tarojs/redux'
@@ -30,9 +30,8 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/home/index',
-      'pages/index/index',
       'pages/mall/index',
+      'pages/home/index',
       'pages/ShopDetail/index',
       'pages/Mine/index',
       'pages/OrderPay/index',
@@ -52,14 +51,14 @@ class App extends Component {
     tabBar: {
       list: [
         {
-          pagePath: "pages/home/index",
-          text: "1元购",
+          pagePath: "pages/mall/index",
+          text: "折扣",
           iconPath: "./images/tab/home.png",
           selectedIconPath: "./images/tab/home-active.png"
         },
         {
-          pagePath: "pages/mall/index",
-          text: "折扣",
+          pagePath: "pages/home/index",
+          text: "1元",
           iconPath: "./images/tab/cart.png",
           selectedIconPath: "./images/tab/cart-active.png"
         }, {

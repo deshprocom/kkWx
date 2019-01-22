@@ -55,17 +55,20 @@ export default class BindMobile extends Component {
       Taro.navigateBack({ delta: 1 })
     }, err => {
       this.handleResult('手机绑定失败，稍后再试', 'none')
-    })
+    },this.props.dispatch)
 
 
   }
 
   wxBindMobile() {
     if (this.state.disabled) return
+    const { selector, selectorValue, mobile } = this.state
+    let ext = selector[selectorValue].split('+')[1]
     let param = {
       option_type: 'bind_wx_account',
       vcode_type: 'mobile',
-      mobile: this.state.mobile
+      mobile: mobile,
+      ext
     }
     wxMobileBind(param, ret => {
       this.handleResult('已发送验证码', 'success')
